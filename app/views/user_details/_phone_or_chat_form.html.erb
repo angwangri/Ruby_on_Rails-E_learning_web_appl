@@ -1,0 +1,71 @@
+<%= form_for(:user_contact_info, :url => {:controller=> "user_details", :action=>:update_phone_info}, :html => {:method => :post, :remote => true}) do |f| %>
+    <% @contact_info = UserContactInfo.find_by_user_id(@user_detail.user_id) %>
+    <%= f.hidden_field :user_id, :value => @user_detail.user_id %>
+    <p style="text-align: left"><%= t('contact.notice') %></p>
+
+
+    <div class="wdt100">
+
+      <div class="profileLeft">
+        <label> <%= t('contact.ph_no') %>: </label>
+      </div>
+
+      <div class="profileRight2 fl_none">
+        <%= f.text_field :phone, :value => (@contact_info && @contact_info.phone) ? @contact_info.phone : nil %>
+      </div>
+
+
+    </div>
+
+    <div class="wdt100">
+
+      <div class="profileLeft">
+        <label>   <%= t('contact.qq') %>: </label>
+      </div>
+
+      <div class="profileRight2 fl_none">
+        <%= f.text_field :qq_chat_id, :value => (@contact_info && @contact_info.qq_chat_id) ? @contact_info.qq_chat_id : nil %>
+      </div>
+
+
+    </div>
+
+    <div class="wdt100">
+
+      <div class="profileLeft">
+        <label>   <%= t('contact.wechat') %>: </label>
+      </div>
+
+      <div class="profileRight2 fl_none">
+        <%= f.text_field :we_chat_id, :value => (@contact_info && @contact_info.we_chat_id) ? @contact_info.we_chat_id : nil %>
+      </div>
+
+
+    </div>
+
+    <div class="wdt100">
+
+      <div class="profileLeft">
+        <label> <%= t('contact.skype') %>: </label>
+      </div>
+
+      <div class="profileRight2 fl_none">
+        <%= f.text_field :skype_id, :value => (@contact_info && @contact_info.skype_id) ? @contact_info.skype_id : nil %>
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="profileSubmit fl_none">
+      <input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_basic_info" name="commit"/>
+    </div>
+<% end %>

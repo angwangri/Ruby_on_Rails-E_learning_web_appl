@@ -1,0 +1,101 @@
+
+<% other_user = UserMessage.where("student_id = #{params[:other_user_id]}").first %>
+  <div class="row">
+    <%= form_for(:user_messages, :url => {:controller=> "tutors",:action=>"send_message_via_ajax"}, :html => {:id=>"tutor_ajax_contact_form", :method => :post, :remote => true}) do |f| %>
+    <div style="width: 91%; margin-left: 20px;">
+        <%= f.hidden_field :user_id, :value => params[:other_user_id] %>
+        <%= f.hidden_field :student_id, :value => @user.id %>
+        <%= f.hidden_field :sender_phone, :value => (other_user.blank? ? "" : other_user.sender_phone) %>
+        <%= f.hidden_field :sender_name, :value => (other_user.blank? ? "" : other_user.sender_name) %>
+        <%= f.hidden_field :sender_email, :value => (other_user.blank? ? "" : other_user.sender_email) %>
+        <%= f.label "#{t('my_messages.enter_msg')}:"%>
+        <%= f.text_area :message, :style =>"width:100%;" %>
+        <span id="user_messages_message_error" style="color:red;"></span>
+    </div>
+    <div class="span4">
+      <div class="profilesubmit">
+        <input class="btn-orange mtop6" type="submit" value="<%= t('my_messages.post_msg') %>"  name="commit">
+      </div>
+    </div>
+    <% end%>
+  </div>          
+
+
+<br/>
+<div id="scroll_to_div" class="msg_chat_box">
+  <div id="success_box"></div>
+  <div class="table table-striped chat_list" id="tbldata">
+    <ul class="dark_bg">
+      <li class="invoice_header"><%= t('my_messages.sender') %></li>
+      <li class="invoice_header wdt70"><%= t('my_messages.message') %></li>
+      <li class="invoice_header wdt18"><%= t('my_messages.date') %></li>
+     </ul>
+
+     <div class="new_scroll_col">
+<% unless @all_msgs.blank? %>
+           <% counter = 0 %>
+    <% @all_msgs.each do |msg|%>
+         <% wht_bg = counter % 2 == 0 ? "pro_white_bg" : "" %>
+         <ul class="<%= wht_bg %>">
+          <li>
+            <%= get_msg_sender(msg) %>
+          </li>
+              <li class="wdt70">
+            <%= msg.message %>
+         </li>
+              <li class="wdt18">
+            <%= msg.created_at.strftime("%Y-%m-%d %H:%M:%S %Z") %>
+          </li>
+            </ul>
+                <% counter += 1 %>
+    <% end %>
+<% else %>
+       </div>
+
+          <div class="invoice_footer"> <%= t('student_account.no_msg')%>  </div>
+
+<% end %>    
+     </div>
+
+</div>
+
+<script type="text/javascript">
+  
+
+    $('#tutor_ajax_contact_form').validate(
+    {
+
+      rules: {
+        "user_messages[message]": {
+          required: true,
+        }
+      },
+
+      messages: {
+        "user_messages[message]":{
+          required: "Please enter a Message."
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+
+$(document).ready(function(){
+  $('#user_messages_message').autosize();
+});
+
+</script>

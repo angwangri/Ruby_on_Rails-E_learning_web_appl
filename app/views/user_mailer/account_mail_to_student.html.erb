@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>嗨/Hi <%= @student_user.first_name %></h1>
+    <p>
+        欢迎使用搜辅导网，导师将尽快与您联系。导师联系您后，我们将向您发送确认邮件。
+    </p>
+    <p>
+       登陆后，您可以收到信息回复，评价导师并管理您的账号。 
+    </p>
+    <a target="_blank" href="http://<%= @host %>/users/sign_in?locale=cn">http://<%= @host %>/users/sign_in</a>
+    <br/>
+    账号详细内容:<br/>
+    ======================<br/>
+    用户名/邮件: <%= @student_user.email %><br/>
+    密码: <%= @student_user_pass %><br/>
+    ======================<br/>    
+    <p>
+        如任何疑问，请在此处留言:<br/>
+        <a target="_blank" href="http://<%= @host %>/contact_us?locale=cn">http://<%= @host %>/contact_us</a>
+    </p>
+    <br/>
+    <br/>
+    <p>
+    Thanks for using SouFudao.com! The tutor(s) you've contacted should be getting in touch with you shortly.<br/>
+    We’ll make sure to send you an email when they do.
+    <br/>
+    <br/>
+    You can see and reply to messages, rate your tutors, and manage your account by logging in here:
+    <br/>
+    <a target="_blank" href="http://<%= @host %>/users/sign_in?locale=en">http://<%= @host %>/users/sign_in</a>
+    <br/>
+    <br/>
+
+    Account details:<br/>
+    ======================<br/>
+    Username/Email: <%= @student_user.email %><br/>
+    Password: <%= @student_user_pass %><br/>
+    ======================<br/>
+
+    Questions for us? Ask away here:<br/>
+    <a target="_blank" href="http://<%= @host %>/contact_us?locale=en">http://<%= @host %>/contact_us</a>
+    <br/>
+    <br/>
+    Jia you! 加油！
+
+    <%= render :partial => "bottom_logo" %>
+    
+    </body>
+</html>
+

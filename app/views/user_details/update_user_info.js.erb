@@ -1,0 +1,20 @@
+$('#flash_msg_info').css("display","block");
+<% if flash[:notice] %>
+$('#flash_msg_info').html("<%= escape_javascript(flash[:notice]).html_safe %>");
+<% elsif flash[:error] %>
+$('#flash_msg_info').html("<%= escape_javascript(flash[:error]).html_safe %>");
+<% end %>
+$(window).scrollTop($('#about_you_div').offset().top);
+<% flash[:notice], flash[:error] = nil, nil %>
+setTimeout(function(){$('#flash_msg_info').css("display","none");
+},3000);
+<% status = @about_you_status ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>
+$('#about_you_info_status').html('<%= status %>');
+<% if @profile_status %>
+$('#continue_btn').show();
+$('#continue_btn_alert').hide();
+<% else %>
+$('#continue_btn').hide();
+$('#continue_btn_alert').show();
+<% end %>
+$("#my_profile_2").load();

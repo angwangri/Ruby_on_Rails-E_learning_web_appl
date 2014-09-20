@@ -1,0 +1,30 @@
+en:
+  settings:
+    acc_type: "Account type"
+    free_list: "Free Listing"
+    featured_list: "Featured Listing"
+    client_rating: "Client rating"
+    invite_frend: "Invite a friend"
+    email: "Enter email address"
+    send_invite: "Send invite"
+    email_updates: "Email updates"
+    updates_txt: " It's ok to email me important updates about my account "
+    close_acc: "Close account"
+    permanant_close_acc: "Permanently close my account"
+    confirm_txt: "confirmation on next page"
+    ask_for_reviews_txt: "Ask students you work with for positive reviews!"
+
+    close_heading: "Are you sure you want to close your account?"
+    close_txt: "Once your account is cancelled, all of the information in your account will be permanently deleted including your reviews. This can not be reversed."
+    close_confirm: "I understand, cancel my account"
+    or: "Or"
+    close_cancel: "Do NOT cancel my account"
+
+    confirm_heading: "Your Account Has Been Closed"
+    txt_1:  "Thank you for using SouFudao.com - we're sorry to see you go :("
+    txt_2: "If we did something which made you mad, we are really sorry.  In fact, we may not even be aware we did it (I know, typical lame excuse...right?) so if you want you can"
+    txt_3: "send us some feedback on how to improve here"
+    txt_4: "We are really good at listening, promise!"
+
+    average: "Average"
+    stars: "stars"

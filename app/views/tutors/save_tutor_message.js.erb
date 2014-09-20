@@ -1,0 +1,41 @@
+
+<% if flash[:notice] %>
+$(window).scrollTop($('#contact_form_box').offset().top);
+$('#inner_contact_box').replaceWith('<div id="flash_tutor_msg" class="alert alert-info fade in"><%= escape_javascript(flash[:notice]).html_safe %></div>');
+<% end %>
+
+<% if flash[:error]%>
+$(window).scrollTop($('#contact_form_box').offset().top);
+	<% if @user_message.errors.any? %>
+		<% @user_message.errors.full_messages.each do |msg| %>
+			$("#flash_tutor_error_msg").css("display","block");
+			window.scrollTo(0, 0);		
+			$('#flash_tutor_error_msg').append("<%= escape_javascript(msg).html_safe %><br/>");
+			setTimeout(function(){
+				$("#flash_tutor_error_msg").css("display","none");
+			},5000);			
+        <% end %>
+	<% end %>
+<% end %>
+
+<% if flash[:captcha_err] %>
+	$("#flash_tutor_error_msg").css("display","block");
+	window.scrollTo(0, 0);
+	$("#flash_tutor_error_msg").html("Please type correct image text.");
+	setTimeout(function(){
+	$("#flash_tutor_error_msg").css("display","none");
+	},5000);
+<% end %>
+
+<% if flash[:show_sign_up] %>
+	$('#users_first_name').val("<%= params[:user_messages][:sender_name]%>");
+	$('#users_email').val("<%= params[:user_messages][:sender_email]%>");	
+    $('#myModalSignUp').modal('show');
+<% end %>
+
+<% if flash[:show_sign_in] %>
+	$('#student_sign_in').find('#user_email').val("<%= params[:user_messages][:sender_email]%>");	
+    $('#student_sign_in').modal('show');
+<% end %>
+
+<% flash[:notice],flash[:error],flash[:captcha_err]= nil, nil, nil %>

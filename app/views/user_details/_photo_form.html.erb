@@ -1,0 +1,45 @@
+<div class="degree_col">
+  <div class="degree_lft_col">
+    <%= t('photo.current_pic') %>:
+  </div>
+
+  <div class="degree_rht_col">
+    <div id="degrees_portion">
+      <div class="degree_port_left_col wdt22">
+        <%= image_tag(@user_detail.get_user_avatar) %>
+      </div>
+
+      <div class="degree_port_rht_col wdt75">
+        <b><%= t('photo.new_pic') %>:</b><br><br>
+        <button id="image_alt" style="float:left;margin-right:10px;"><%= t 'photo.Choose File' %></button>
+        <label id="file_choosen"> <%= t 'photo.No file chosen' %> </label><br/>
+        <%= form_for @user_detail, :url => {:action => "save_user_avatar", :id => @user_detail.id}, :html => {:remote=> true, :multipart => true} do |form| %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+            <%= form.file_field :avatar, :style=> "display:none;" %>
+            <%= form.submit "#{t('photo.submit')}" %>
+        <% end %>
+        <br><br><%= t('photo.or') %> <%= link_to "#{t('photo.delete_pic')}", :controller => 'user_details', :action => 'remove_user_avatar', :id => @user_detail.id %>
+      </div>
+    </div>
+  </div>
+
+  <p class="add_photo_txt"><%= t('photo.notice') %></p>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        $("#image_alt").click(function() {
+            $('#user_detail_avatar').click();
+        });
+
+        $("#user_detail_avatar").change(function() {
+            var file = $("#user_detail_avatar").val().replace(/C:\\fakepath\\/i, '')
+            $('#file_choosen').text(file);
+        });
+    });
+
+</script>

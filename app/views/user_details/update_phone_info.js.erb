@@ -1,0 +1,14 @@
+$('#flash_phone_msg').css("display","block");
+<% if flash[:notice] %>
+$('#flash_phone_msg').html("<%= escape_javascript(flash[:notice]).html_safe %>");
+<% elsif flash[:error] %>
+$('#flash_phone_msg').html("<%= escape_javascript(flash[:error]).html_safe %>");
+<% end %>
+$(window).scrollTop($('#contact_div').offset().top);
+<% flash[:notice], flash[:error] = nil, nil %>
+setTimeout(function(){$('#flash_phone_msg').css("display","none");
+},3000);
+<% status = @phone_status ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>
+$('#phone_info_status').html('<%= status %>');
+
+$("#my_profile_5").load();

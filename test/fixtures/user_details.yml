@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  is_profile_complete?: false
+  is_visible?: false
+  street_add: 
+  city: MyString
+  state: MyString
+  country: MyString
+  zip_code: 
+  gender: MyString
+
+two:
+  user_id: 1
+  is_profile_complete?: false
+  is_visible?: false
+  street_add: 
+  city: MyString
+  state: MyString
+  country: MyString
+  zip_code: 
+  gender: MyString

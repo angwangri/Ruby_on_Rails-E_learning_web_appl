@@ -1,0 +1,140 @@
+<select onchange="set_subjects(this);" name="suggest_subjects" id="suggest_subjects">
+<option value="any-subject"><%= t 'subjects.any_subject' %></option>
+	<optgroup label="<%= t 'subjects.English' %>">
+		<option value="beginner english"><%= t 'subjects.Beginner English' %></option>
+		<option value="advanced english"><%= t 'subjects.Advanced English' %></option>
+		<option value="conversational english"><%= t 'subjects.Conversational English' %></option>
+		<option value="business english"><%= t 'subjects.Business English' %></option>
+		<option value="cet"><%= t 'subjects.CET' %></option>
+		<option value="toefl"><%= t 'subjects.TOEFL' %></option>
+		<option value="ielts"><%= t 'subjects.IELTS' %></option>
+
+	</optgroup>
+
+	<optgroup label="<%= t 'subjects.Chinese' %>">
+		<option value="beginner chinese"><%= t 'subjects.Beginner Chinese' %></option>
+		<option value="advanced chinese"><%= t 'subjects.Advanced Chinese' %></option>
+		<option value="conversational chinese"><%= t 'subjects.Conversational Chinese' %></option>		
+		<option value="business chinese"><%= t 'subjects.Business Chinese' %></option>
+		<option value="HSK"><%= t 'subjects.HSK' %></option>
+	</optgroup>
+
+	<optgroup label="<%= t 'subjects.School Subjects' %>">
+		<option value="primary school english"><%= t 'subjects.Primary School English' %></option>
+		<option value="primary school chinese"><%= t 'subjects.Primary School Chinese' %></option>
+		<option value="primary school math"><%= t 'subjects.Primary School Math' %></option>
+		<option value="primary school math olympics"><%= t 'subjects.Primary School Math Olympics' %></option>
+		<option value="middle school english"><%= t 'subjects.Middle School English' %></option>
+		<option value="middle school chinese"><%= t 'subjects.Middle School Chinese' %></option>
+		<option value="middle school math"><%= t 'subjects.Middle School Math' %></option>
+		<option value="middle school math olympics"><%= t 'subjects.Middle School Math Olympics' %></option>
+		<option value="middle school chemistry"><%= t 'subjects.Middle School Chemistry' %></option>
+		<option value="middle school physics"><%= t 'subjects.Middle School Physics' %></option>
+		<option value="middle school geography"><%= t 'subjects.Middle School Geography' %></option>
+		<option value="middle school politics"><%= t 'subjects.Middle School Politics' %></option>
+		<option value="middle school history"><%= t 'subjects.Middle School History' %></option>
+		<option value="high school english"><%= t 'subjects.High School English' %></option>
+		<option value="high school chinese"><%= t 'subjects.High School Chinese' %></option>
+		<option value="high school math"><%= t 'subjects.High School Math' %></option>
+		<option value="high school math olympics"><%= t 'subjects.High School Math Olympics' %></option>
+		<option value="high school chemistry"><%= t 'subjects.High School Chemistry' %></option>
+		<option value="high school physics"><%= t 'subjects.High School Physics' %></option>
+		<option value="high school biology"><%= t 'subjects.High School Biology' %></option>
+		<option value="high school geography"><%= t 'subjects.High School Geography' %></option>
+		<option value="high school politics"><%= t 'subjects.High School Politics' %></option>
+		<option value="high school history"><%= t 'subjects.High School History' %></option>	
+	</optgroup>	
+
+
+	<optgroup label="<%= t 'subjects.University_Professional Courses' %>">
+		<option value="advanced mathematics"><%= t 'subjects.Advanced Mathematics' %></option>
+		<option value="calculus"><%= t 'subjects.Calculus' %></option>
+		<option value="biology"><%= t 'subjects.Biology' %></option>		
+		<option value="chemistry"><%= t 'subjects.Chemistry' %></option>
+		<option value="physics"><%= t 'subjects.Physics' %></option>
+		<option value="engineering"><%= t 'subjects.Engineering' %></option>
+		<option value="economics"><%= t 'subjects.Economics' %></option>
+		<option value="accounting"><%= t 'subjects.Accounting' %></option>
+		<option value="finance"><%= t 'subjects.Finance' %></option>
+		<option value="computer programming"><%= t 'subjects.Computer Programming' %></option>
+	</optgroup>
+
+
+	<optgroup label="<%= t 'subjects.additional_languages' %>">
+		<option value="arabic" ><%= t 'subjects.Arabic' %></option>
+		<option value="burmese"><%= t 'subjects.Burmese' %></option>
+		<option value="cambodian"><%= t 'subjects.Cambodian' %></option>		
+		<option value="cantonese"><%= t 'subjects.Cantonese' %></option>
+		<option value="hindi"><%= t 'subjects.Hindi' %></option>
+		<option value="french"><%= t 'subjects.French' %></option>
+		<option value="german"><%= t 'subjects.German' %></option>
+		<option value="greek"><%= t 'subjects.Greek' %></option>
+		<option value="indonesian"><%= t 'subjects.Indonesian' %></option>			
+		<option value="italian"><%= t 'subjects.Italian' %></option>
+		<option value="japanese"><%= t 'subjects.Japanese' %></option>
+		<option value="korean"><%= t 'subjects.Korean' %></option>
+		<option value="lao"><%= t 'subjects.Laotian' %></option>
+		<option value="malaysian"><%= t 'subjects.Malaysian' %></option>
+		<option value="mongolian"><%= t 'subjects.Mongolian' %></option>
+		<option value="nepali"><%= t 'subjects.Nepali' %></option>	
+		<option value="portuguese" ><%= t 'subjects.Portuguese' %></option>
+		<option value="russian"><%= t 'subjects.Russian' %></option>
+		<option value="shanghainese"><%= t 'subjects.Shanghainese' %></option>		
+		<option value="sign language"><%= t 'subjects.Sign Language' %></option>			
+		<option value="spanish"><%= t 'subjects.Spanish' %></option>
+		<option value="tagalog"><%= t 'subjects.Tagalog' %></option>
+		<option value="thai"><%= t 'subjects.Thai' %></option>
+		<option value="turkish"><%= t 'subjects.Turkish' %></option>
+		<option value="vietnamese"><%= t 'subjects.Vietnamese' %></option>			
+	</optgroup>
+
+	<optgroup label="<%= t 'subjects.Music_Arts' %>">
+		<option value="cello"><%= t 'subjects.Cello' %></option>
+		<option value="erhu"><%= t 'subjects.Erhu' %></option>
+		<option value="flute"><%= t 'subjects.Flute' %></option>
+		<option value="guitar"><%= t 'subjects.Guitar' %></option>
+		<option value="guzheng"><%= t 'subjects.Guzheng' %></option>
+		<option value="piano"><%= t 'subjects.Piano' %></option>
+		<option value="percussion"><%= t 'subjects.Percussion' %></option>
+		<option value="pipa"><%= t 'subjects.Pipa' %></option>
+		<option value="saxophone"><%= t 'subjects.Saxophone' %></option>
+		<option value="trumpet"><%= t 'subjects.Trumpet' %></option>		
+		<option value="tuba"><%= t 'subjects.Tuba' %></option>
+		<option value="violin"><%= t 'subjects.Violin' %></option>
+		<option value="dance"><%= t 'subjects.Dance' %></option>
+		<option value="chinese calligraphy"><%= t 'subjects.Chinese Calligraphy' %></option>
+		<option value="drawing and painting"><%= t 'subjects.Drawing and Painting' %></option>	
+		<option value="singing"><%= t 'subjects.Singing' %></option>
+	</optgroup>			
+
+
+	<optgroup label="<%= t 'subjects.Athletics_Fitness' %>">
+		<option value="badminton"><%= t 'subjects.Badminton' %></option>
+		<option value="basketball"><%= t 'subjects.Basketball' %></option>
+		<option value="soccer football"><%= t 'subjects.Football_Soccer' %></option>
+		<option value="golf"><%= t 'subjects.Golf' %></option>	
+		<option value="kong fu"><%= t 'subjects.Kong Fu' %></option>
+		<option value="personal training"><%= t 'subjects.Personal Training' %></option>
+		<option value="ping pong"><%= t 'subjects.Ping Pong' %></option>
+		<option value="taekwondo"><%= t 'subjects.Taekwondo' %></option>		
+		<option value="tai chi"><%= t 'subjects.Tai chi' %></option>		
+		<option value="tennis"><%= t 'subjects.Tennis' %></option>		
+		<option value="swimming"><%= t 'subjects.Swimming' %></option>
+		<option value="volleyball"><%= t 'subjects.Volleyball' %></option>
+		<option value="yoga"><%= t 'subjects.Yoga' %></option>
+	</optgroup>	
+
+	<optgroup label="<%= t 'subjects.additional_tests' %>">
+		<option value="act"><%= t 'subjects.ACT' %></option>
+		<option value="cfa"><%= t 'subjects.CFA' %></option>
+		<option value="cpa"><%= t 'subjects.CPA' %></option>
+		<option value="english iterpretation certificate"><%= t 'subjects.English Interpretation Certificate' %></option>
+		<option value="gaoKao"><%= t 'subjects.GaoKao' %></option>
+		<option value="gmat"><%= t 'subjects.GMAT' %></option>
+		<option value="gre"><%= t 'subjects.GRE' %></option>
+		<option value="isee"><%= t 'subjects.ISEE' %></option>
+		<option value="lsat"><%= t 'subjects.LSAT' %></option>
+		<option value="mcat"><%= t 'subjects.MCAT' %></option>
+		<option value="sat"><%= t 'subjects.SAT' %></option>
+	</optgroup>	
+</select> 

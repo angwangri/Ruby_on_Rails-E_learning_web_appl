@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <p><%= @tutor.first_name %> 好，</p>
+  <p>学生给您做出了评价</p>
+  <p>浏览评价： <a target="_blank" href="http://<%= @host%>/tutors/<%=@tutor.id %>?locale=cn">http://<%= @host%>/tutors/<%=@tutor.id %></a></p>
+  <br/>
+  <br/>
+  <p>Dear <%= @tutor.first_name %>,</p>
+  <p>
+  You have received a review from a student. 
+  </p>
+  <p>Click on the link to view your Reviews:<br/>
+    <a target="_blank" href="http://<%= @host%>/tutors/<%=@tutor.id %>?locale=en">http://<%= @host%>/tutors/<%=@tutor.id %></a><br/>  
+  </p>
+
+    <%= render :partial => "bottom_logo" %>
+</body>
+</html>

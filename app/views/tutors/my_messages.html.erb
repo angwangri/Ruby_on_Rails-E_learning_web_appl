@@ -1,0 +1,95 @@
+<% id = UserMessage.find(@msgs.first.id).student_id if @msgs.present? %>
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2><%= t('my_acc') %></h2>
+    <ul id="tabs" class="account">
+      <li class="">
+        <a href="/tutors/settings/<%= @user_detail.id %>"><%= t 'my_account.setting' %></a>
+      </li>
+      <li class="">
+        <a href="/tutors/upgrade/<%= @user_detail.id %>"><%= t 'my_account.upgrade' %></a>
+      </li>
+      <li class="active">
+        <a href="/tutors/my_messages/<%= @user_detail.id %>"><%= t 'my_account.my_messages' %></a>
+      </li>
+      <!--li class="">
+        <a href="/tutors/my_client/<%= @user_detail.id %>">My Clients</a>
+      </li-->
+      <li class="">
+        <a href="/user_details/my_account/<%= @user_detail.id %>"><%= t 'my_account.my_profile' %></a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <div class="full_wht_bg account_bg min_h300 msg_page">
+
+    <div class="profile wdt644 msg_pt10 msg_left_col">
+      <div class="msg_main_col">
+        <% unless @msgs.blank? %>
+            <% j = 0 %>
+            <% @msgs.each do |msg_id| %>
+                <% msg = UserMessage.find(msg_id) %>
+                <div onclick="show_msg(<%= msg.student_id%>);$(this).addClass('selected').siblings().removeClass('selected');" style="cursor:pointer;" class="<%= 'selected' if j == 0 %> pro_gry_box">
+                  <div class="msg_pro_img">
+                    <%= image_tag("#{get_sender_image_for_msgs(msg.student_id)}") %>
+                  </div>
+                  <div class="msg_pro_txt">
+                    <h3>
+                      <%= get_msg_sender(msg) %>
+                    </h3>
+
+                    <p> <%= msg.message.truncate(70, separator: ' ', omission: '...') %></p>
+
+                    <div class="last_pro_login">
+                      <% if session[:locale] == 'cn' %>
+                          <%= timeago_tag msg.created_at, :nojs => true, :limit => 10.days.ago, :lang => 'zh-CN' %>
+                      <% else %>
+                          <%= timeago_tag msg.created_at, :nojs => true, :limit => 10.days.ago %>
+                      <% end %>
+                    </div>
+
+
+                  </div>
+                </div>
+                <% j+= 1 %>
+            <% end %>
+        <% else %>
+            <tr>
+              <td colspan="6" class="invoice_footer"> <%= t('my_messages.no_msgs') %> </td>
+            </tr>
+            <%#location.href='/tutors/show_msg_conversation/<%= msg.student_id %>
+        <% end %>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="wdt100 msg_rht_col">
+      <div id="content1">
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+<script type="text/javascript">
+
+    $(function() {
+        var id = "<%= id %>";
+        show_msg(id);
+    });
+
+    function show_msg(id) {
+        $.ajax({
+            url: "/tutors/show_msg_conversation/" + id,
+            type: 'GET'
+        });
+    }
+</script>

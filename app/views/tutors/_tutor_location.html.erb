@@ -1,0 +1,259 @@
+
+    <div class="contact_tutor_col">
+
+
+      <button class="btn-orange-large" id="send_msg_btn" style="width:100%;" onclick="show_msg_form(this)">
+        <%= t 'tutor.contact_this_tutor' %></button>
+    </div>
+
+    <div class="contact_tutor_col contact-form" id="contact_form_box" style="display: none;">
+      <div class="header"><span class="with-icon contact_icon"><%= t 'tutor.contact_this_tutor' %></span></div>
+
+         <div id="contact_form" class="tutor_loc_map_body">
+            <div id="flash_tutor_error_msg" class="alert alert-info fade in" style="display:none;"></div>
+
+        <div id="inner_contact_box">
+<%= form_for(:user_messages, :url => {:controller=> "tutors",:action=>"save_tutor_message"}, :html => {:id=>"tutor_contact_form", :method => :post, :remote => true}) do |f| %>
+<%= f.hidden_field :user_id, :value => @tutor.id %>
+            <%= t 'tutor.complete_this_form.html' %>
+
+              <div class="cont_tut_col">
+                <div class="cont_tut_field">
+                    <label><b><%= f.label t('name'), :class => "contactLeft"%></b></label>
+                    <div class="tut_inp_col">
+                    <% if (user_signed_in? && !current_user.is_tutor?)%>
+                      <%= f.text_field :sender_name, :readonly => true  %><br/>
+                    <% else %>
+                      <%= f.text_field :sender_name %><br/>
+                    <% end %>
+                      <span id="user_messages_sender_name_error" class="err_msg"></span>
+                    </div>
+                </div>
+
+                <div class="cont_tut_field">
+                    <label><b><%= f.label t('email'), :class => "contactLeft"%></b></label>
+                    <div class="tut_inp_col">
+                    <% if (user_signed_in? && !current_user.is_tutor?)%>
+                      <%=f.text_field :sender_email, :readonly => true %><br/>
+                    <% else %>
+                      <%= f.text_field :sender_email %><br/>
+                    <% end %>
+                      <span id="user_messages_sender_email_error" class="err_msg"></span>
+                    </div>
+                </div>
+
+                <div class="cont_tut_field">
+                   <div class="mes_tut_txt"> <b><%= f.label t('tutor.message_to_tutor') , :class => "contactLeft"%></b> <span class="tip"><%= t 'tutor.include_subject' %></span>  </div>
+                     <%= f.text_area :message%>
+                    <span id="user_messages_message_error" class="err_msg"></span>
+                </div>
+
+
+                <div class="cont_tut_field">
+                   <div class="mes_tut_txt"><label class="contactLeft" for="message2_name"><%= t 'tutor.type_letters_in_image' %>:</label> </div>
+                    <div id='capcha'>
+                    <%= render :partial => 'capcha'%>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+            <div class="profilesubmit" style="text-align:center; width:100%">
+                <input type="submit" id="ClockOutBtn" name="commit" value="<%= t 'tutor.send_this_message' %>" class="btn-orange"/>
+            </div>
+              <div class="clear">
+
+            <div style="text-align:center;">
+                <%= t('photo.or') %>
+                <a href="javascript:hide_msg_form(this)" id="cancel_msg_btn"><%= t('tutor.cancel')%></a>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+
+
+    </div>
+    <div class="contact_tutor_col"  style="margin-bottom:20px; margin-top: 10px">
+      <div class="header"><span class="with-icon user-location"><%= t 'tutor.location_and_availability' %></span></div>
+      <div class="tutor_loc_map_body">
+      <div style="position: relative; width:100%; height: 234px; margin-bottom: 11px; background-color: rgb(229, 227, 223); overflow: hidden;" id="map"></div>
+
+
+        <div class="location-and-availability">
+
+           <div class="availabily_main_col">
+
+             <div class="availabily_lft_col"><%= t 'tutor.location' %>:</div>
+             <div class="availabily_rht_col">
+               <% if session[:locale] == 'cn' %>
+                   <%= @tutor.user_detail.country %> <%= @tutor.user_detail.city %> <%= @tutor.user_detail.street_add %>
+               <% else %>
+                    <%= @tutor.full_address %>
+               <% end %>
+             </div>
+           </div>
+
+          <div class="availabily_main_col">
+             <div class="availabily_lft_col"><%= t 'tutor.rate' %>:</div>
+             <div class="availabily_rht_col" style="color:green;">
+              <span class="cur_fl">
+                 <span style="float: left"><%= t 'availability.one_student' %>:</span>
+                 <span style="float: left">&nbsp;<%= t "rate_sym.#{@tutor.currency}" %>  </span>
+                 <span style="float: left">&nbsp;<%= @tutor.price %> </span>
+                 <span style="float: left">&nbsp;<%= t "rate_short.#{@tutor.currency}" %> <%= t 'rate.per hr' %></span>
+              </span>
+
+              <% if (@tutor.availability.two_students && @tutor.availability.two_students.first['price'].to_i != 0) %>
+               <span class="cur_fl">
+                 <span style="float: left"><%= t 'availability.two_student' %>:</span>
+                 <span style="float: left">&nbsp;<%= t "rate_sym.#{@tutor.availability.two_students.first['currency']}" %> </span>
+                 <span style="float: left">&nbsp;<%= @tutor.availability.two_students.first['price'].to_i %>       </span>
+                 <span style="float: left">&nbsp;<%= t "rate_short.#{@tutor.availability.two_students.first['currency']}" %> <%= t 'rate.per hr' %></span>
+               </span>
+
+              <% end %>
+              <% if (@tutor.availability.three_plus_students && @tutor.availability.three_plus_students.first['price'].to_i != 0) %>
+               <span class="cur_fl">
+                <span style="float: left"><%= t 'availability.three_student' %>:</span>
+                <span style="float: left">&nbsp;<%= t "rate_sym.#{@tutor.availability.three_plus_students.first['currency']}" %>  </span>
+                <span style="float: left">&nbsp;<%= @tutor.availability.three_plus_students.first['price'].to_i %>  </span>
+                <span style="float: left">&nbsp;<%= t "rate_short.#{@tutor.availability.three_plus_students.first['currency']}" %> <%= t 'rate.per hr' %></span>
+               </span>
+
+              <% end %>
+              <% if @tutor.availability.is_first_session_free&& @tutor.availability.is_first_session_free %>
+              <span style="font-size: 12px; margin-left: 3px; float:left; font-weight: bold;color:#00457F;font-family: arial;">
+               <%= t('tutor.first_sess_free') %>
+              </span>
+              <% end %>
+             </div>
+           </div>
+
+          <div class="availabily_main_col">
+             <div class="availabily_lft_col"><%= t 'tutor.availability' %>:</div>
+             <div class="availabily_rht_col"><%= @tutor.available_days %></div>
+           </div>
+
+          <div class="availabily_main_col">
+             <div class="availabily_lft_col"><%= t 'tutor.distance' %>:</div>
+             <div class="availabily_rht_col"><%= @tutor.available_distance %></div>
+           </div>
+
+
+
+
+            <!--tr><td class="profile-label">Lives Near:</td><td><%= @tutor.zip_code %></td></tr-->
+
+
+        </div>
+      </div>
+      </div>
+    
+<%= render :partial => 'sign_up_form' %>
+
+<%= render :partial => 'sign_in_form' %>
+
+
+
+<script type="text/javascript">
+    $(document).on('submit', '#sign_in_form', function(e) {
+                //do stuff here
+    }).on('ajax:success', '#sign_in_form', function(e, data, status, xhr) {
+            //do stuff here             
+              $.ajax( "send_saved_message" )
+              .done(function() {
+                $('#student_sign_in').modal('hide');
+                location.reload();
+              })
+              .fail(function() {
+                
+              });        
+    }).on('ajax:error', '#sign_in_form', function(e, data, status, xhr) {
+            //do stuff here
+            $('#sign_in_password_error').text("<%= t('sign_in.password_error')%>")
+    });
+
+  function show_msg_form(sel){
+    $('#'+sel.id).css('display','none');
+    $('#contact_form_box').css('display','block');
+    <%if user_signed_in?%>
+        $("#user_messages_sender_name").val("<%=current_user.first_name%>");
+       $("#user_messages_sender_email").val("<%=current_user.email%>");
+     <%else%>
+       $("#user_messages_sender_name").val("");
+       $("#user_messages_sender_email").val("");
+     <%end%>  
+    }
+
+  function hide_msg_form(sel){
+    $('#send_msg_btn').css('display','block');
+    $('#contact_form_box').css('display','none');
+    }
+
+    function submit_inner_form(obj){
+      console.log(obj);
+      $('#user_messages_password').val(obj[3]["value"]);
+      $('#tutor_contact_form').submit();
+      $('#myModal').modal('hide');
+    }
+
+    $(function(){
+    $("#user_messages_sender_name").val("");
+    $("#user_messages_sender_email").val("");
+    $("#user_messages_sender_phone").val("");
+    $("#user_messages_message").val("");
+    });
+
+    
+    $('#student_login_form').validate(
+    {
+
+      rules: {
+        "users[email_confiramation]": {
+          equalTo: "#users_email"
+        },
+        "users[password]":{
+          required: true,
+          minlength: 6
+        },
+        "agree":{
+          required: true
+        }
+      },
+
+      messages: {
+        "users[email_confiramation]": {
+          equalTo: "<%= t('student_sign_up.confirm_email_msg')%>"
+        },
+        "users[password]": {
+          required: "<%= t('signup.password')%>",
+          minlength: "<%= t('signup.password_min_length')%>"
+        },
+        "agree":{
+          required: "<%= t('signup.agree')%>"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+
+
+
+</script>

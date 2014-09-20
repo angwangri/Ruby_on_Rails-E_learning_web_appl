@@ -1,0 +1,53 @@
+en:
+ tutor:
+   review: "review"
+   reviews: "reviews"
+   no_review: "No reviews yet"
+   back_to_search: "Back to search"
+   member_since: "Member Since"
+   last_sign_in_at: "Last Login"
+   subjects_taught: "Subjects Taught"
+   education: "Education"
+   experience: "Experience"
+   hobbies: "Hobbies"
+   spoken_languages: "Spoken languages"
+   english_ability: "English language ability"
+   chinese_ability: "Chinese language ability"
+   client_review: "Client Reviews"
+   average_rating: "Average Rating : "
+
+   contact_this_tutor: "Contact this tutor"
+   complete_this_form: 
+     html: "Complete this form to contact the tutor directly for a meeting or interview.<br>The tutor will respond if they are available/interested."
+   message_to_tutor: "Message to Tutor:"
+   include_subject: "(include subject, grade level, preferred time/location, etc)"
+   type_letters_in_image: "Type the letters in the image"
+   human_authentication: "human authentication"
+   reload: "reload"
+   send_this_message: "Send this Message"
+
+   location_and_availability: "Location & Availability"
+   location: "Location"
+   rate: "Rate"
+   availability: "Availability"
+   distance: "Distance"   
+
+   male: "Male"
+   female: "Female"   
+
+
+   first_sess_free: "First session free!"    
+   none_yet: "None yet"
+   no_reviews_posted: "There aren't any reviews posted for this tutor yet."
+   cancel: "Cancel"
+
+   phone_err: "Phone can't be blank"
+   name_err: "Name can't be blank"
+   email_reqd_err: "Please enter an email address"
+   email_format_err: "Please provide correct email address!"
+   message_err: "Message can't be blank"
+
+   Posted: "Posted"
+   by: "by"
+   not_found_title: "The page you were looking for doesn't exist."
+   not_found_msg: "You may have mistyped the address or the page may have moved."

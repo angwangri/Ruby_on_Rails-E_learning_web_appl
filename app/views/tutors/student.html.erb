@@ -1,0 +1,119 @@
+<%= render :partial => "after_login_student_header"%>
+
+<div class="wrapper">
+  <div class="profile fullscreen">
+    <center>
+
+            <% @msgs.each do |msg_id| %>
+            <% msg = UserMessage.find(msg_id)%>
+              <% tutor = User.where(:id => msg.user_id) %>              
+              <div class="client-review" id="tutor_<%= tutor[0].id %>">
+                <h2 class="bor_bot" ><%= t('student_account.rate_n_review') %></h2>
+              <%= form_for(:tutor_review, :url => {:controller => "tutors", :action=>"save_rate_reviews", :tutor_id => tutor[0].id}, :html=>{:class=>"edit_rating", :id=>"edit_rating_#{tutor[0].id}"}) do |f|%>
+              <%= f.hidden_field :user_id, :value => tutor[0].id %>
+              <%= f.hidden_field :rater_id, :value => @user.id %>              
+              <div class="wdt100" >
+
+                   <div  class="tutor_list">
+
+                        <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label>   <%= t('student_account.tutor') %>: </label>
+                          </div>
+
+                          <div class="profileRight2">
+                            <div class="studnt_pro_img">
+                              <a target="_blank" href="http://<%= request.host_with_port %>/tutors/<%= tutor[0].id %>">
+                                                    <%= image_tag("/assets/unknown_thumb.gif")%>
+                                                  </a>
+
+                            </div>
+                            <div class="studnt_nam_link"><a target="_blank" href="http://<%= request.host_with_port %>/tutors/<%= tutor[0].id %>"><%= tutor[0].fullname%></a></div>
+                          </div>
+
+
+                         </div>
+
+
+
+                      <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label> <%= t('student_account.rating') %>: </label>
+                          </div>
+
+                          <div class="profileRight2">
+
+                              <% if tutor[0].tutor_review.blank? %>
+                                  <select name="tutor_review[rate]" id="tutor_review_rate" class="student_select">
+                                    <option value="-1"><%= t('student_account.no_rating')%></option>
+                                    <option value="-2"><%= t('student_account.never_heard')%></option>
+                                    <option value="1"><%= t('student_account.1_star')%></option>
+                                    <option value="2"><%= t('student_account.2_star')%></option>
+                                    <option value="3"><%= t('student_account.3_star')%></option>
+                                    <option value="4"><%= t('student_account.4_star')%></option>
+                                    <option value="5"><%= t('student_account.5_star')%></option>
+                                  </select>
+                              <% else %>
+                              <div class="star-ratings-block-small">
+                                  <ul class="star-rating-small">
+                                    <li class="current-rating stars_<%= get_rating_class(tutor[0].tutor_review[0].rate) %>" >
+                                      Currently <span class="rating">4.0</span>/4 Stars.
+                                    </li>
+                                  </ul>
+                              </div>
+                              <% end %>
+                          </div>
+                      </div>
+
+
+
+                       <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label> <%= t('student_account.comment') %>:</label>
+                          </div>
+
+                          <div class="profileRight2">
+
+                             <% if tutor[0].tutor_review.blank? %>
+                                <textarea style="width:100%;" rows="5" name="tutor_review[review]" id="tutor_review_review" cols="40"></textarea>
+                              <% else %>
+                                <%= tutor[0].tutor_review[0].review %>
+                              <% end %>
+                          </div>
+                      </div>
+
+                        <div class="wdt100">
+
+                        <% if tutor[0].tutor_review.blank? %>
+                          <tr>
+                            <td class="bottom2"></td>
+                            <td style="text-align:right;vertical-align:middle;" class="bottom2">
+                              <input type="submit" value="<%= t('student_account.post_btn') %>" name="commit" class="btn-orange  ">
+                            </td>
+                          </tr>
+                        <% end %>
+                        </div>
+
+                   </div>
+
+
+
+
+
+
+                </div>
+                <% end %>
+              </div>
+          <% end %>
+    </center>
+</div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+$("#tab_2").parent().addClass("active"); 
+});
+</script>

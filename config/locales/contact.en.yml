@@ -1,0 +1,7 @@
+en:
+  question_comment_porblem: "Questions/Comments/Problems? We'd love to hear from you."
+  name: 'Name'
+  email: 'Email'
+  message: 'Message'
+  send_message_button: 
+    html: "<input type='submit' value='Send Message' name='commit' class='btn-orange'>" 

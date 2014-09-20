@@ -1,0 +1,49 @@
+<div id="degrees_portion">
+  <div class="wdt100">
+     <div class="degree_port_left_col">
+        <%= t('about_you.degree') %>:
+     </div>
+
+     <div class="degree_port_rht_col">
+           <select id="user_details_[education][][degree]" name="user_details[education][][degree]" >
+              <option value="associates"><%= t 'about_you.associates' %></option>
+              <option value="bachelors"><%= t 'about_you.bachelors' %></option>
+              <option value="masters"><%= t 'about_you.masters' %></option>
+              <option value="doctorate"><%= t 'about_you.doctorate' %></option>
+              <option value="certificate"><%= t 'about_you.certificate' %></option>
+            </select>
+     </div>
+  </div>
+
+  <div class="wdt100">
+   <div class="degree_port_left_col">
+      <%= t('about_you.university') %>:<br/>
+          <p style="font-size:x-small;">(<%= t('optional') %>)</p>
+   </div>
+
+   <div class="degree_port_rht_col">
+        <%= text_field 'user_details','[education][][university]' %>
+   </div>
+ </div>
+
+<div class="wdt100">
+  <div class="degree_port_left_col">
+     <%= t('about_you.title') %>:
+          <br/>
+          <p style="font-size:x-small;">
+            <%= t('about_you.example') %>: "<%= t('about_you.sub_ex_txt_chem') %>" <%= t('about_you.sub_ex_txt_or') %>   "<%= t('about_you.sub_ex_txt_tosel') %>"
+          </p>
+   </div>
+
+   <div class="degree_port_rht_col">
+        <%= text_field 'user_details','[education][][title]' %>
+   </div>
+ </div>
+
+    <div class="degree_port_rht_col">
+        <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();$('#add_deg').show();"><%= t('remove') %></a>
+   </div>
+
+
+</div>
+

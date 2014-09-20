@@ -1,0 +1,6 @@
+
+      <% if session[:locale] == 'cn' %>
+      	 <%= t'search.Results' %>: <%= @user_details.current_page %>-<%= (@user_details.current_page * 10 > @user_details.total_count) ? @user_details.total_count : @user_details.current_page * 10 %>名  共找到 <%= @user_details.total_count %>名 在 <a href="#"><%= params[:location] %></a> <a href="#"><%= t('subjects.'+params[:subject].titleize) unless params[:subject] == '' || params[:subject].nil? %></a> 老师<br/>
+      <% else %>
+          <%= t'search.Results' %>: <%= @user_details.current_page %>-<%= (@user_details.current_page * 10 > @user_details.total_count) ? @user_details.total_count : @user_details.current_page * 10 %> of <%= @user_details.total_count %> for <a href="#"><%= t('subjects.'+params[:subject]) unless params[:subject] == '' || params[:subject].nil? %> tutor <%= params[:location] %></a><br/>
+      <% end %>

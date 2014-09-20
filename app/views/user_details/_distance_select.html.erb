@@ -1,0 +1,19 @@
+<div class="location">
+
+        <select name="user[distance][][location]" id="user_location_attributes__location">
+            <% @availability_location.each do |key, val| %>
+              <option <%= 'selected' if @availability && @availability.currency == key %> value="<%= key%>"><%= t "distance_location.#{val}" %>
+              </option>
+            <% end %>                  
+        </select>
+              
+        <select name="user[distance][][rate]" id="user_location_attributes__rate">
+            <% @availability_rate.each do |key, val| %>
+              <option <%= 'selected' if @availability && @availability.currency == key %> value="<%= key%>"><%= t "distance_rate.#{val}" %>
+              </option>
+            <% end %>  
+        </select>
+   
+    
+    <a href="javascript:void(0);" onclick="$(this).parent().remove();$('#add_location').show();"><%= t('remove') %></a>
+</div>

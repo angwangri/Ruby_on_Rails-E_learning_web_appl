@@ -1,0 +1,44 @@
+cn:
+  home: '主页'
+  about: '关于'
+  contact_us: '联系我们'
+  tutoring_jobs: '老师注册'
+  login: '登陆'
+  title_txt: '搜辅导：就近找家教 ｜ 教学工作'
+  search_headline: '成就未来，从搜辅导开始！ 搜索您附近的老师：'
+
+  subject: '科目'
+  location: '区域'
+  search_button: '搜索'
+
+  find_teachers: '在您所在区域寻找老师。'
+  check_rates: '浏览价格，上课时间，导师经验，学生评价，语言能力及其他。'
+  contact_teachers_directly:
+   html: '不用通过中介或者学校，<span>直接联系老师。</span>'
+  contact_teachers_break: '直接联系老师。'
+  txt_default: "中国上海"
+  txt_location: '例如：城市，地区，街道'
+  near_you: 'VIP老师'
+
+  want_to_signup: '老师免费注册！'
+  here: '请点击这里'
+
+  my_account_link: "我的帐户"
+  logout: "退出"
+  featured_tutors: "您附近的"
+  view_all: "查看全部"
+  review: "条评论"
+  reviews: "条评论"
+
+  privacy_policy: "隐私政策"
+  terms_of_use: "规则条款"
+  member_since: "注册时间"
+  last_login: "上次登录"
+  vip:
+    html: '有 <span class="featured"><img src="/assets/vip.png"></span> 徽章的辅导老师支付为了先出现在搜索结果中。 他们可能会更注重自己的账户。</br></br> 先联系 VIP 辅导老师的学生或家长可能会有更好的结果 。'
+  feature_heading: "VIP 是什么意思?"
+  footer:
+    International Social Media: "国际社交媒体"
+    Chinese Social Media: "中国社会化媒体"
+    wechat_account: "微信公众号"
+

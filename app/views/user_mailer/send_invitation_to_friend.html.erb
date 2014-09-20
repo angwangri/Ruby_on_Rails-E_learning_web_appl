@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <p>
+  	<%= @user_detail.user.first_name %> <%= @user_detail.user.last_name %> 邀请您来看看 <a target="_blank" href="http://<%= @host %>?locale=cn">http://<%= @host %></a>。
+  </p>
+
+  <p>
+  	搜辅导不仅为您提供辅导与教学的平台，还可以通过它赚取额外收入
+  </p>
+
+
+  <p><%= @user_detail.user.first_name %> <%= @user_detail.user.last_name %> has invited you to check out <a target="_blank" href="http://<%= @host %>?locale=en">http://<%= @host %></a></p>
+
+  <p>SouFudao.com is a website where you can find tutoring jobs, and is a great way to earn some extra money part-time.</p>
+
+
+  <p>To read more check out <a target="_blank" href="http://<%= @host %>/tutoring_jobs?locale=en">http://<%= @host %>/tutoring_jobs</a></p>
+    
+    <%= render :partial => "bottom_logo" %>    
+  </body>
+</html>

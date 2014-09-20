@@ -1,0 +1,160 @@
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2><%= t('my_acc') %></h2>
+    <ul id="tabs" class="account">
+      <li class="active">
+        <a href="/tutors/settings/<%= @user_detail.id %>"><%= t 'my_account.setting' %></a>
+      </li>
+      <li class="">
+        <a href="/tutors/upgrade/<%= @user_detail.id %>"><%= t 'my_account.upgrade' %></a>
+      </li>
+      <li class="">
+        <a href="/tutors/my_messages/<%= @user_detail.id %>"><%= t 'my_account.my_messages' %></a>
+      </li>
+      <!--li class="">
+        <a href="/tutors/my_client/<%= @user_detail.id %>">My Clients</a>
+      </li-->
+      <li class="">
+        <a href="/user_details/my_account/<%= @user_detail.id %>"><%= t 'my_account.my_profile' %></a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="full_wht_bg account_bg min_h300">
+
+    <div class="profile wdt644 msg_pt10">
+
+      <div class="wdt100 setting_col">
+        <div class="profileLeft">
+          <label> <%= t('settings.acc_type') %>: </label>
+        </div>
+
+        <div class="profileRight2 fl_none">
+          <%= @user_detail.listing_type ? t('settings.free_list') : t('settings.featured_list') %>
+        </div>
+
+      </div>
+
+      <div class="wdt100 setting_col">
+        <div class="profileLeft">
+          <label><%= t('settings.client_rating') %>: </label>
+        </div>
+
+        <div class="profileRight2 wdt_auto fl_none">
+          <% unless @user_detail.user.tutor_review.blank? %>
+              <div class="star-ratings-block-small">
+                <ul class="star-rating-small">
+                  <li class="current-rating stars_<%= average_rating(@user_detail.user.id) %>">
+                    <span class="rating">.</span>
+                  </li>
+                </ul>
+              </div>
+          <% else %>
+              <div class="star-ratings-block-small">
+                <ul class="star-rating-small">
+                  <li class="current-rating stars_no_star" style="display:block;">
+                    <span class="rating">.</span>
+                  </li>
+                </ul>
+              </div>
+          <% end %>
+        </div>
+        <% unless @user_detail.user.tutor_review.blank? %>
+            &nbsp;&nbsp;<%= @tutor.tutor_review.count %>  <%= (@tutor.tutor_review.count == 1) ? "#{t('review')}" : "#{t('reviews')}" %>&nbsp;
+        <% else %>
+            <div class="ask_revie">  (<%= t('settings.ask_for_reviews_txt') %>)</div>
+        <% end %>
+      </div>
+
+      <div class="wdt100 setting_col">
+        <div class="profileLeft">
+          <label><%= t('settings.invite_frend') %>:</label>
+        </div>
+
+        <div class="profileRight2 fl_none">
+          <%= form_for(:user_details, :url => {:controller => 'user_details', :action => 'invite_a_friend', :id => @user_detail.id}, :method => :post, :html => {:id=>"invite_a_friend", :style =>'margin-bottom:0px;'}) do |f| %>
+              <%= f.text_field :email, :placeholder => "#{t('settings.email')}" %>
+              <input type="submit" value="<%= t('settings.send_invite') %>" name="commit" class="btn-orange setting_invite">
+              <br/><span id="user_details_email_error" class="err_msg"></span>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div class="wdt100 setting_col">
+        <div class="profileLeft">
+          <label><%= t('settings.email_updates') %>: </label>
+        </div>
+
+        <div class="profileRight2 fl_none">
+          <%= form_for(@user_detail.user, :url => {:controller => "user_details", :action => 'email_updates_flag', :id => @user_detail.user.id}, :method => :put, :html => {:id => 'email_updates_form', :style =>'margin-bottom:0px;'}) do |f| %>
+              <%= f.check_box :email_updates, :onclick => "$('#email_updates_form').submit()" %> <%= t('settings.updates_txt') %>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div class="wdt100 setting_col">
+        <div class="profileLeft">
+          <label><%= t('settings.close_acc') %>: </label>
+        </div>
+
+        <div class="profileRight2 fl_none">
+          <a href="/tutors/close_account/<%= @user_detail.id %>"><%= t('settings.permanant_close_acc') %></a>
+          (<%= t('settings.confirm_txt') %>)
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.validator.addMethod("CustomEmailFormat", function(value, element) {
+            return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+        }, "Please provide correct email address!");
+
+        $('#invite_a_friend').validate(
+                {
+
+                    rules: {
+                        "user_details[email]": {
+                            required: true,
+                            CustomEmailFormat: true
+                        }
+                    },
+
+                    messages: {
+                        "user_details[email]":{
+                            required: "Please enter a email address",
+                            email: "Please provide correct email address!"
+                        }
+                    },
+
+                    showErrors: function (errorMap, errorList) {
+
+                        $.each(this.successList, function (index, value) {
+                            //console.log(value.id)
+                            $("#" + value.id + "_error").html(" ");
+                            $("#" + value.id).css("border", "1px solid #CCCCCC");
+
+                        });
+
+
+                        $.each(errorList, function (index, value) {
+                            //console.log(value.element.id);
+                            //console.log(value.message);
+                            $("#" + value.element.id + "_error").html(value.message);
+                            $("#" + value.element.id).css("border", "1px solid red");
+                        });
+
+                    }
+                });
+    });
+</script>

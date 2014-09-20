@@ -1,0 +1,5 @@
+if($('.location').length < 2){
+	$('#locations').append("<%= escape_javascript(render :partial => 'distance_select').html_safe %>")	
+} else {
+	$('#add_location').hide();
+}

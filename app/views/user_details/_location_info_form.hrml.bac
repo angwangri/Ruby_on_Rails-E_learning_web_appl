@@ -1,0 +1,180 @@
+<%= form_for(:user_details, :url => {:action=>:update_location_details}, :html => {:id=>"location_info_form", :method => :post, :remote => true}) do |f| %>
+  <% if @user_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_detail.errors.count, "error") %> prohibited this user_detail from being saved:</h2>
+        <ul>
+          <% @user_detail.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+     </div>
+  <% end %>
+
+    <div class="account_col">
+
+      <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+            <%= f.label "#{t('your_location.country')}" %>
+            </div>
+
+            <div class="profileRight2 fl_left">
+             <%= f.text_field :country, :value => @user_detail.country ?  @user_detail.country : nil , :required => true %>
+            <span id="user_details_country_error" class="err_msg"></span>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft ">
+              <%= f.label "#{t('your_location.state')}" %>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                  <%= f.text_field :state, :value => @user_detail.state ?  @user_detail.state : nil , :required => true %>
+             <span id="user_details_state_error" class="err_msg"></span>                  
+              </div>
+        </div>
+
+      </div>
+
+
+       <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+            <%= f.label "#{t('your_location.city')}" %>
+            </div>
+
+            <div class="profileRight2 fl_left">
+            <%= f.text_field :city, :value => @user_detail.city ?   @user_detail.city : nil , :required => true %>
+             <span id="user_details_city_error" class="err_msg"></span>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft">
+               <%= f.label "#{t('your_location.district')}", :style => "margin-bottom:0px;" %>
+          <p style="font-size:x-small;">(<%= t('optional')%>)</p>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                  <%= f.text_field :district, :value => @user_detail.district ?  @user_detail.district : nil %>
+              </div>
+        </div>
+
+      </div>
+
+
+        <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+            <%= f.label "#{t('your_location.zip')}", :style => "margin-bottom:0px;"  %>
+          <p style="font-size:x-small;">(<%= t('optional')%>)</p>
+            </div>
+
+            <div class="profileRight2 fl_left">
+           <%= f.text_field :zip_code, :value => @user_detail.zip_code ?  @user_detail.zip_code : nil %>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft">
+              <%= f.label "#{t('your_location.street')}", :style => "margin-bottom:0px;"  %>
+          <p style="font-size:x-small;">(<%= t('optional')%>)</p>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                 <%= f.text_field :street_add, :value => @user_detail.street_add ?  @user_detail.street_add : nil %>
+              </div>
+        </div>
+
+      </div>
+
+
+        <div class="account_fild_col mb10">
+
+          <div class="location_txt">
+            <h4><%= t('your_location.your_location_txt')%>:</h4>
+          <p>
+          <%= t('your_location.your_location_txt1')%>
+          <br/><br/>
+          <%= t('your_location.your_location_txt2')%>
+          <br/><br/>
+          <%= t('your_location.your_location_txt3')%>
+          </p>
+
+          </div>
+          <div class="location_map" id="map">
+
+
+          </div>
+
+        </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <div class="profilesubmit fl_none">
+    <input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_location_info" name="commit"/>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#location_info_form').validate(
+    {
+
+      rules: {
+        "user_details[country]":{
+          required: true
+        },
+        "user_details[state]":{
+          required: true
+        },
+        "user_details[city]": {
+          required: true
+        }
+      },
+
+      messages: {
+        "user_details[country]":{
+          required: "<%= t('signup.enter_value')%>",
+        },
+        "user_details[state]":{
+          required: "<%= t('signup.enter_value')%>",
+        },
+        "user_details[city]":{
+          required: "<%= t('signup.enter_value')%>"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");                      
+        });
+
+      }      
+    });
+  }); // end document.ready
+</script>

@@ -1,0 +1,62 @@
+<div id="homepage">
+
+
+    <div class="banner">
+        <div class="banner_search_area">
+          <div class="main_con">
+             <div id="place_flash"></div>
+            <h3 style=<%="" unless session[:locale] == 'cn'%>><%= t('search_headline') %></h3>
+            <div class="search_col">
+               <img alt="Start-your-search"  src="/assets/curve_arrow.png" class="curve_arrow">
+             <form method="post" action="tutors/search">
+                    <div class="search_field_col" >
+                     <label><%= t('subject') %></label>
+                     <div class="styled-select hgt33">
+                         <%= render 'select_list_subjects' %>
+                     </div>
+                    </div>
+
+          <div class="search_field_col" >
+            <label >
+              <%= t 'search.City' %>
+            </label> 
+              <div class="styled-select hgt33">
+                <select name="city" id="city_select">                
+                  <%= render :partial => 'user_details/cities'%>
+                </select>               
+              </div>
+          </div>
+
+        <input class="btn-orange ml21" type="submit" value="<%= t('search.search_btn') %>"/>
+
+    </form>
+  </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <%= render :partial => "site_features" %>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<%= render :partial => "featured_tutors_corosal" %>
+
+
+
+  <div class="sign_up_col">
+  <%= t('want_to_signup') %> <a href="/users/sign_up"> <%= t('here') %></a>
+  </div>
+
+
+</div>

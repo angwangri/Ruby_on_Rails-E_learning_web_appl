@@ -1,0 +1,43 @@
+<h1>Listing user_details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Is profile complete?</th>
+      <th>Is visible?</th>
+      <th>Street add</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Zip code</th>
+      <th>Gender</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_details.each do |user_detail| %>
+      <tr>
+        <td><%= user_detail.user_id %></td>
+        <td><%= user_detail.is_profile_complete? %></td>
+        <td><%= user_detail.is_visible? %></td>
+        <td><%= user_detail.street_add %></td>
+        <td><%= user_detail.city %></td>
+        <td><%= user_detail.state %></td>
+        <td><%= user_detail.country %></td>
+        <td><%= user_detail.zip_code %></td>
+        <td><%= user_detail.gender %></td>
+        <td><%= link_to 'Show', user_detail %></td>
+        <td><%= link_to 'Edit', edit_user_detail_path(user_detail) %></td>
+        <td><%= link_to 'Destroy', user_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User detail', new_user_detail_path %>

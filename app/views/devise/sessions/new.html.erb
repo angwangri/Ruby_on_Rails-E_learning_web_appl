@@ -1,0 +1,97 @@
+<div class="wrapper" >
+  <div class="full_wht_bg wdth40">
+<div class="login_box_1" id="login">
+  <div class="login_header">
+    
+    <h2><%= t 'sign_in.box_header' %></h2>
+  </div>
+  <div class="body">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html=>{:id=>"sign_in_form"}) do |f| %>
+          <div><label><%= t 'sign_in.email' %></label>
+            <%= f.email_field :email, :autofocus => true, :class => "text-field" %></div>
+
+          <div><label style = "float:left;"><%= t 'sign_in.password'%></label>
+           <a style="float:right;" href="/users/password/new"><%= t 'sign_in.forget_pass' %></a>
+            <%= f.password_field :password, :class => "text-field" %></div>
+
+          <div class="login_sig_btn">
+          <input class="btn-orange" type="submit" value="<%= t 'sign_in.login_btn_txt' %>"  name="commit">
+        </div>
+          <% if devise_mapping.rememberable? -%>
+            <div class="rember_check">
+              <label class="checkbox">
+                <%= f.check_box :remember_me %><%= t 'sign_in.remember' %>
+              </label>
+            </div>
+          <% end -%>          
+        <% end %>
+        <br/>
+       
+  </div>
+</div>
+ <div class="regsiter_txt_col">
+  <%= t('sign_in.tutor_txt')%> <a href="/users/sign_up"> <%= t('sign_in.tutor_txt_here')%></a><br/><br/><br/>
+  <%= t('sign_in.student_search_1')%> <a href="/tutors/search"><%= t('sign_in.search_here')%></a> <br/>
+  <%= t('sign_in.student_acc_txt')%>
+  </div>
+</div>
+  </div>
+
+<%#= render "devise/shared/links" %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+
+    $('#sign_in_form').validate(
+    {
+
+      rules: {
+        "user[email]": {
+          required: true,
+          email: true
+        },
+        "user[password]":{
+          required: true,
+          minlength: 6
+        }
+      },
+
+      messages: {
+        "user[password]": {
+          required: "<%= t('signup.password')%>",
+          minlength: "<%= t('signup.password_min_length')%>"
+        },
+        "user[email]":{
+          required: "<%= t('signup.email')%>",
+          email: "<%= t('signup.email_format')%>"
+        }
+
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          $(value).popover('hide');
+        });
+
+
+        $.each(errorList, function (index, value) {
+
+          console.log(value.message);
+
+          var _popover = $(value.element).popover({
+            trigger: 'manual',
+            placement: 'right',
+            content: value.message
+          });
+
+          _popover.data('popover').options.content = value.message;
+          $(value.element).popover('show');
+
+        });
+
+      }      
+    });
+  }); // end document.ready
+</script>

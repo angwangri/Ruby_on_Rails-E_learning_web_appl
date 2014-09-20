@@ -1,0 +1,63 @@
+<div class="map" id="search_results" style="margin-bottom: 0">
+  <div id="search-results-border" class="lht_bg">
+    <div class="wdt100 map_loc_tutor">
+
+      <% i = 1 %>
+      <% pointer = ('A'..'J').to_a %>
+      <% @user_details.each do |user_detail| %>
+          <% color_class = (i == 1) ? "odd top" : (i%2 == 0) ? "even" : "odd" %>
+          <div class="<%= color_class %>">
+            <div class="marker">
+              <a href="javascript:void(0);"><img width="20" height="34" src="/assets/marker<%= pointer[i-1] %>.png" alt="Markera" class="pointer-<%= pointer[i-1] %>"></a>
+            </div>
+            <div class="profile-photo">
+              <a class="pointer-<%= pointer[i-1] %>" href="javascript:void(0);">
+                <%= image_tag(user_detail.get_user_avatar, :height => '50', :width => '50', :class => "photo") %></a>
+            </div>
+            <div class="map_tut_name">
+
+              <span class="name"><a class="pointer-<%= pointer[i-1] %>" href="javascript:void(0);">
+                <% tutor = user_detail.user %>
+                  <% if session[:locale] == 'cn' %>
+                      <%= tutor.last_name if tutor %> <%= tutor.first_name if tutor %>
+                  <% else %>
+                      <%= tutor.abbreviated_name if tutor %>
+                  <% end %>
+              </a></span>
+              <span class="price" style="color: green"><%= user_detail.user.price %> <%= t "rate_short.#{user_detail.user.currency}" %> <%= t 'rate.per hr' %></span>
+
+              <% unless user_detail.listing_type %>
+                  <a class="featured tutor-index" title="Featured Tutor" rel="featured" href="#myModal" data-toggle="modal" data-target="#myModal">
+                    <img src="/assets/vip.png"></a>
+              <% end %>
+              <% unless user_detail.user.tutor_review.blank? %>
+              <span class="rating_star_tut">
+                   <div class="search-result-tutor-rating">
+                     <div class="star-ratings-block-small">
+                       <ul class="star-rating-small">
+                         <li class="current-rating stars_<%= average_rating(user_detail.user.id) %>">
+                           Currently <span class="rating">4.0</span>/4 Stars.
+                         </li>
+                       </ul>
+                     </div>
+                   </div>
+
+               </span>
+              <% else %>
+                  <div class="search-result-tutor-rating" style="padding-left: 5px;"></div>
+              <% end %>
+              <div><%= user_detail.experience.truncate(70, separator: ' ', omission: '...') if user_detail.experience %></div>
+
+            </div>
+          </div>
+          <% i= i+1 %>
+      <% end %>
+
+
+    </div>
+
+  </div>
+</div>
+<div class="wdt100">
+  <%= render :partial => "/home/featured" %>
+</div>

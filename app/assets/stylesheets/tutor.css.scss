@@ -1,0 +1,566 @@
+// Place all the styles related to the tutor controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#top2 {
+/* background-image: url("/assets/topbg.jpg"); */
+background: #f5f5f5;
+background-repeat: repeat-x;
+border-bottom: 1px solid #f26722;
+min-height: 123px;
+padding-top: 1px;
+margin-top: -20px;
+}
+
+.map_wrapper {
+	height: 100%;
+}
+
+.map_wrapper {
+	border: medium none;
+clear: both;
+margin: 0 auto;
+position: relative;
+max-width: 950px;
+}
+
+#top2 h1 {
+color: #383838;
+font-size: 29px;
+font-weight: normal;
+float: left;
+margin: 3px 0px 0px 0px;
+}
+
+
+.map_wrapper ul#tabs {
+	width: 100%;
+float: right;
+position: static;
+margin: 0;
+}
+
+
+#main_table {
+	margin-top: 23px;
+	margin-right: 2px;
+}
+
+#main_table #left_column #left_search_column {
+    font-size: 12px;
+    margin: 0 10px;
+    min-width: 362px;
+    overflow: auto;
+    position: relative;
+    width: 362px;
+}
+
+ul#tabs {
+	clear: both;
+	list-style-type: none;
+	padding: 0;
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+}
+
+ul#tabs li {
+height: 32px;
+float: left;
+font-weight: normal;
+color: #3b3b3b;
+border: 1px solid #c9c9c9;
+background: #ebf2ff;
+margin-right: 5px;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+font-family: 'MyriadProRegular';
+font-size: 15px;
+background: #d5d5d5;
+}
+ ul#tabs li a:hover{color:#f26722}
+ul#tabs li a, ul#tabs li span {
+display: block;
+padding: 7px 23px;
+color: #3b3b3b;
+}
+
+ul#tabs li.active {
+	background: #ffffff;
+border-bottom: 1px solid #ffffff !important;
+height: 33px;
+border: 1px solid #f26722;
+}
+ul#tabs li.active a{ color:#f26722}
+
+.list-view {
+	padding-left: 30px !important;
+	background:url(list_view_icon.png) 2px 4px no-repeat;
+}
+
+.map-view {
+	padding-left: 30px !important;
+	background: url(map_view_icon.png) 2px 4px no-repeat;
+}
+
+a.button.find-a-tutor {
+	background-image: url(find-a-tutor-button.png);
+	height: 29px;
+	width: 102px;
+}
+
+
+#map img {
+    max-width: none;
+}
+
+
+#map_search_controls {
+   font-size: 15px;
+color: #7c7974;
+line-height: 21px;
+}
+#map_search_controls a{ color:#3b3b3b;}
+#map_search_controls a:hover{color: #f26722;
+text-decoration: underline;}
+#search_result_container .pagination {
+    font-size: 11px;
+    margin: 6px 0 10px;
+}
+
+.pagination {
+    font-size: 12px;
+    text-align: center;
+}
+
+#search_results.map {
+    float: none;
+    width: auto;
+}
+
+#search_results {
+    float: left;
+    margin-bottom: 15px;
+    width: 98%;
+}
+
+
+#search-results-border {
+border: 1px solid #D1D1D1;
+border-radius: 5px 5px 5px 5px;
+float: left;
+width: 100%;
+background: #F5F5F5;
+overflow:hidden;
+}
+
+
+#search_results table {
+    border-collapse: collapse;
+}
+
+
+#search_results table tr.odd {
+    background: none repeat scroll 0 0 #F5FAFF;
+}
+#search_results table tr.top {
+    border: medium none;
+}
+#search_results table tr {
+    border-top: 1px solid #DCE8F2;
+}
+   #search_result_container .marker{float: left;
+width: 27px;}
+#search_result_container .profile-photo {
+    width: 10%;
+border: 0;
+padding:0
+}
+.map_tut_name{float: left; width: 77%;
+font-size: 14px;}
+#search_results table tr td {
+    font-size: 11px;
+    padding: 9px;
+}
+ .map_tut_name a:hover{ color:#f26722;}
+#search_results.map table tr td span.name {
+    font-size: 13px;
+}
+#search_results table tr td span.name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#search_results.map table tr td span.price {
+    color: #107100;
+    font-size: 13px;
+    padding-left: 4px;
+}
+  .rating_star_tut{padding-left: 0;
+/* float: none; */
+width: auto;
+display: inline-block;
+float:right;
+position: relative;
+top: 0;}
+#top2 .wrapper, #top2 .map_wrapper {
+    height: 100%;
+}
+
+
+#share_this_page {
+   float: right;
+font-size: 14px;
+padding: 15px 0 0px 0px;
+width: 17%;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+
+#share_this_page table td {
+    white-space: nowrap;
+}
+
+#share_this_page table td div {
+    float: right;
+}
+
+
+#search_controls {
+    font-size: 14px;
+padding: 15px 0 15px 10px;
+width: 99%;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+float: left;
+}
+
+.right {
+    float: right;
+}
+
+
+#search_results table tr td img {
+    border: 1px solid #DCE8F2;
+}
+
+#search_results table tr td.description {
+    vertical-align: top;
+}
+
+#search_results table tr td .search-result-tutor-rating {
+    float: right;
+    font-size: 12px;
+}
+#search_results table tr td .search-result-tutor-rating.rating_mar_bot{padding-left: 0;
+float: left;
+margin-bottom: 6px;}
+
+#search_results table {
+    border-collapse: collapse;
+}
+
+#search_results table tr td .search-result-tutor-rating tr {
+    border: medium none;
+}
+
+#search_results table tr td .search-result-tutor-rating td {
+    font-size: 12px;
+    padding: 0;
+}
+
+
+.featured.tutor-index {
+    left: 4px;
+    position: relative;
+    top: -2px;
+}
+
+
+#search_results table tr.odd td.rate {
+    background: none repeat scroll 0 0 #FAFDFF;
+}
+#search_results table tr td.rate, #search_results table tr td.location {
+    color: #555555;
+    text-align: center;
+    width: 85px;
+}
+
+
+#search_results table tr td.rate span, #search_results table tr td.location span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+#search_sidebar {
+    float: right;
+    width: 160px;
+    display:none;
+}
+
+#email_alert {
+    width: 100%;
+}
+
+#email_alert_header {
+    background-image: url("email-alert-header.png");
+    background-repeat: repeat-x;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 25px;
+    padding: 10px 0 0 10px;
+}
+
+
+#email_alert_header span {
+    background: url("/images/email.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 30px;
+    text-shadow: 1px 1px 1px #333333;
+    text-transform: uppercase;
+}
+
+#email_alert_body {
+    border: 1px solid #DADADA;
+    padding: 10px;
+}
+
+#email_alert_body table {
+    margin-top: 10px;
+}
+
+#email_alert_body input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #ABABAB -moz-use-text-color #ABABAB #ABABAB;
+    border-image: none;
+    border-style: solid none solid solid;
+    border-width: 1px medium 1px 1px;
+    color: #777777;
+    font-size: 12px;
+    height: 24px;
+    padding: 0 5px;
+    width: 95px;
+    margin: 0px;
+}
+
+
+a.button.enter-email {
+    background-image: url("enter-email-button.png");
+    height: 26px;
+    width: 27px;
+}
+
+
+#map_search_controls p a {
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+map_search_controls .unlink, #map_search_controls.unlink:visited {
+    text-decoration: none;
+    color: #333;
+    cursor: default;
+}
+ .list_container{width: 100%;  font-size: 14px;}
+.list_cont_top{width: 100%; float: left;}
+.search_control_col{width: 100%; float: left;}
+.search_lft_col{ width:60%; float:left}
+.search_rht_col  { width: auto;
+float: right;}
+.tut_list_li{ width:100%; float:left;}
+.tut_list_li:first-child{border-radius: 5px 5px 0px 0px;}
+.tut_list_li a:hover{color: #f26722;}
+.tut_list_li ul{margin:0px; padding:0px;}
+.tut_list_li ul li{width: 11%;
+float: left;
+padding: 5px;
+list-style:none;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;}
+.tut_list_li ul li.li_frst{width: 10%;
+margin-right: 12px;}
+.tut_list_li ul li.li_sec{width: 55%; position:relative;}
+
+.search-result-tutor-rating.list_search{position: absolute;
+right: 0;
+border: 0;}
+.search-result-tutor-rating.list_search table tr {
+border-top:0px !important;
+}
+.search-result-tutor-rating.list_search table tr td {padding:0px !important; font-size: 14px !important;}
+
+
+@media only screen and (min-width:760px) and (max-width:1000px) {
+
+   ul#tabs li a, ul#tabs li span {
+padding: 7px 10px;
+}
+.inner_search_field {
+width: 36%;}
+  .inner_Search_btn .btn-orange {
+padding: 10px 20px;
+}
+#map_search_controls a {
+
+width: 100%;
+float: left;
+}
+
+#top2{padding: 1px 10px;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+height: auto;
+float: left;}
+
+#search_results {
+
+width: 100%;
+}
+
+.map_tut_name{width: 71%;}
+.name{width: 100%;
+float: left;}
+
+.tut_list_li ul li.li_sec .name{width:auto}
+}
+@media only screen and (min-width:460px) and (max-width:759px) {
+#top2{float: left;
+padding: 1px 10px 0; -webkit-box-sizing: border-box;
+box-sizing: border-box;
+-moz-box-sizing: border-box;}
+
+ ul#tabs li a, ul#tabs li span {
+
+        padding: 7px 36px;
+    }
+
+    #top2 h1 {
+font-size: 25px;
+}
+.inner_search_field {
+width: 46%;
+}
+.list_container {
+
+font-size: 14px;
+}
+#search_results {
+
+width: 100%;
+}
+ #search_controls {
+width: 100%;
+}
+.tut_list_li {
+width: 100%;
+
+}
+.search_rht_col {
+   float: left;
+margin-top: 10px;
+margin-bottom: 0;
+}
+#share_this_page {
+
+padding: 0px 0 0px 9px;
+margin-bottom: 10px;
+float: left;
+}
+.tut_list_li ul li.li_frst {
+width: 14%;
+
+}
+.tut_list_li ul li.li_sec {
+width: 80%;
+
+}
+.tut_list_li ul li {
+width: 27%;
+}
+.rating_star_tut{float:none; margin-left:10px;}
+
+}
+
+ @media only screen and (min-width:260px) and (max-width:459px) {
+  ul#tabs li a, ul#tabs li span {
+
+        padding: 7px 18px;
+font-size: 15px;
+    }
+
+    ul#tabs.account li a{ padding: 7px 5px;
+font-size: 12px;}
+    #top2{float: left;
+padding: 1px 10px 0; -webkit-box-sizing: border-box;
+box-sizing: border-box;
+-moz-box-sizing: border-box;}
+    #top2 h1 {
+font-size: 19px;
+}
+.inner_search_col {
+width: 100%;}
+
+.inner_search_field {
+width: 100%; padding-right: 0;
+margin: 0 0 10px 0px;}
+
+.inner_search_field label {
+     margin-bottom: 5px;
+font-size: 16px;
+}
+  .list_container {
+
+font-size: 14px;
+}
+#search_results {
+
+width: 100%;
+}
+ #search_controls {
+width: 100%;
+}
+.tut_list_li {
+width: 100%;
+
+}
+.search_rht_col {
+   float: left;
+margin-top: 10px;
+margin-bottom: 0;
+}
+#share_this_page {
+
+padding: 0px 0 0px 9px;
+margin-bottom: 10px;
+float: left;
+}
+.tut_list_li ul li.li_frst {
+width: 14%;
+
+}
+.tut_list_li ul li.li_sec {
+width: 78%;
+
+}
+.tut_list_li ul li {
+width: 33%;
+}
+.tut_list_li ul li.clear_lft{clear: left;}
+.rating_star_tut{float:none; margin-left:10px;}
+    }

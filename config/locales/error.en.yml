@@ -1,0 +1,17 @@
+en: 
+  signup:
+    first_name: "Please enter first name"
+    first_name_min_length: "First name is too short (minimum is 1 characters)"
+    first_name_max_length: "First name is too long (maximum is 20 characters)"
+    last_name: "Please enter last name"
+    last_name_min_length: "Last name is too short (minimum is 1 characters)"
+    last_name_max_length: "Last name is too long (maximum is 20 characters)"
+    password: "Please provide a password"
+    password_min_length: "Your password must be at least 6 characters long"
+    email: "Please enter a email address"
+    email_format: "Please provide correct email address!"
+    agree: "Please accept terms and conditions"
+    message: "Please enter a message"
+    msg_name: "Please enter a name"
+    enter_value: "Please fill out this field"
+

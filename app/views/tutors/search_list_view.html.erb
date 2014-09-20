@@ -1,0 +1,273 @@
+<div id="top2">
+  <div class="map_wrapper">
+    <h1>
+      <% if session[:locale] == 'cn' %>
+          在 <b><%= params[:city].blank? ? t('search.Anywhere') : params[:city] %> <%= t 'search.Tutors' %></b> <%= t 'search.near' %>
+          <b><%= (params[:subject] == '' || params[:subject].nil?) ? t('subjects.Any Subject') : t('subjects.'+params[:subject].titleize) %> </b>
+          老师
+      <% else %>
+          <b><%= params[:subject] ? params[:subject] : t('subjects.Any Subject') %> <%= t 'search.Tutors' %></b> <%= t 'search.near' %>  <b> <%= params[:city].blank? ? t('search.Anywhere') : params[:city] %></b>
+      <% end %>
+    </h1>
+
+    <div class="inner_search_col">
+      <form action="/tutors/search_list_view" method="post">
+
+        <div class="inner_search">
+          <div class="inner_search_field" style="width:25%;">
+            <label class="subhead">
+              <%= t 'search.subject' %>
+            </label>
+
+            <div class="styled-select">
+              <%= render 'home/select_list_subjects' %>
+            </div>
+          </div>
+
+          <div class="inner_search_field" style="width:23%;">
+            <label class="subhead">
+              <%= t 'search.City' %>
+            </label> 
+              <div class="styled-select">
+                <select name="city" id="city_select">                
+                  <%= render :partial => 'user_details/cities'%>
+                </select>               
+              </div>
+          </div>
+
+          <div class="inner_search_field" style="width:25%;">
+            <label class="subhead">
+              <%= t 'search.District' %>
+            </label>        
+              <div class="styled-select">
+                <select name="district" id="district_select">                 
+                  <%= render :partial => 'user_details/districts'%>
+                </select>
+              </div>
+            <%#= text_field_tag :location, params[:location], :class => 'text_field', :placeholder => 'eg. city,state,zip' %>
+          </div>
+
+          <div class="inner_Search_btn">
+            <button type="submit" class="btn-orange find-a-tutor" id="submit_link"><%= t('search.search_btn') %></button>
+          </div>
+
+          <div style="width:16px;padding-left:7px;">
+            <img alt="Spinner2" id="spinner" src="http://www.universitytutor.com/images/spinner2.gif?1385110395" style="display: none;">
+          </div>
+
+
+        </div>
+      </form>
+
+    </div>
+    <div class="search_tab_col">
+      <ul id="tabs">
+        <li class="active"><span class="list-view"><%= t 'search.list_view' %></span></li>
+        <li>
+          <a class="map-view" href="/tutors/search?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>"><%= t 'search.map_view' %></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper list_container">
+  <div class="list_cont_top">
+    <div id="search_controls" class="search_control_col">
+      <div class="search_lft_col">
+        <% if session[:locale] == 'cn' %>
+            <%= t 'search.Results' %>: <%= @user_details.current_page %>
+            -<%= (@user_details.current_page * 10 > @user_details.total_count) ? @user_details.total_count : @user_details.current_page * 10 %>名
+             共找到<%= @user_details.total_count %>名 在 <a href="#"><%= params[:city] %></a>的
+             <a href="#"><%= t('subjects.'+params[:subject].titleize) unless params[:subject] == 'any-subject' || params[:subject] == '' || params[:subject].nil? %></a>老师
+        <% else %>
+            <%= t 'search.Results' %>: <%= @user_details.current_page %>
+            -<%= (@user_details.current_page * 10 > @user_details.total_count) ? @user_details.total_count : @user_details.current_page * 10 %>
+            of <%= @user_details.total_count %> for
+            <a href="#"><%= t('subjects.'+params[:subject]) unless params[:subject] == 'any-subject' || params[:subject] == '' || params[:subject].nil? %>
+              tutor <%= params[:city] %></a>
+        <% end %>
+      </div>
+
+      <div class="search_rht_col">
+        <ul class="map_dis list_map">
+          <li><%= t('search.sort_by') %>:</li>
+          <li>
+            <a href="/tutors/search_list_view?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=distance"><%= t 'search.distance' %></a>
+          </li>
+          <li>
+            <a href="/tutors/search_list_view?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=rating"><%= t 'search.rating' %></a>
+          </li>
+          <li>
+            <a href="/tutors/search_list_view?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=price"><%= t 'search.price' %></a>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+
+    <!--  <div id="share_this_page">
+       <table>
+         <tbody><tr>
+           <td>Share page:</td>
+           <td>
+
+             <div class="addthis_toolbox addthis_default_style ">
+
+
+             <div class="atclear"></div></div>
+
+
+           </td>
+         </tr>
+       </tbody></table>
+     </div>
+    -->
+    <div class="clear"></div>
+
+    <div id="search_results">
+
+      <div id="search-results-border">
+        <div class="list_view_col">
+          <% if @user_details.empty? %>
+              <%= t 'search.no_result' %>
+          <% end %>
+          <% i = 1 %>
+          <% pointer = ('A'..'J').to_a %>
+          <% @user_details.each do |user_detail| %>
+              <% color_class = (i == 1) ? "odd top" : (i%2 == 0) ? "even" : "odd" %>
+
+              <div class="<%= color_class %> tut_list_li">
+                <ul>
+                  <li class="li_frst">
+                    <a href="/tutors/<%= user_detail.user_id %>"><%= image_tag(user_detail.get_user_avatar, :height => '75', :width => '75', :class => "profile") %></a>
+                  </li>
+                  <li class="description li_sec">
+
+
+                    <span class="name"><a href="/tutors/<%= user_detail.user_id %>">
+                    <% @tutor = user_detail.user %>           
+                      <% if session[:locale] == 'cn' %>
+                          <%= @tutor.last_name if @tutor %> <%= @tutor.first_name if @tutor%>
+                      <% else %>
+                          <%= @tutor.abbreviated_name if @tutor %>
+                      <% end %>
+                    </a></span>
+                    <% unless user_detail.listing_type %>
+
+                        <a class="featured tutor-index" rel="featured" href="#myModal" data-toggle="modal" data-target="#myModal">
+                          <img src="/assets/vip.png"></a>
+                    <% end %>
+                    <br>
+
+                    <%= user_detail.experience.truncate(70, separator: ' ', omission: '...') if user_detail.experience %>
+
+                  </li>
+                  <li class="clear_lft">
+                    <div class="search-result-tutor-rating list_search" style="position: relative;">
+
+                      <table>
+                        <tbody>
+                        <tr>
+
+                          <td class="star_rating_lft" style="height: 20px;">
+
+                            <% unless user_detail.user.tutor_review.blank? %>
+                                <div class="search-result-tutor-rating rating_mar_bot">
+                                  <div class="star-ratings-block-small">
+                                    <ul class="star-rating-small">
+                                      <li class="current-rating stars_<%= average_rating(user_detail.user.id) %>">
+                                        Currently <span class="rating">4.0</span>/4 Stars.
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                            <% else %>
+                                <div class="search-result-tutor-rating" style="padding-left: 5px;"></div>
+                            <% end %>
+                          </td>
+                          <td class="star_rating_lft">
+                            <a href="/tutors/<%= user_detail.user.id %>#ratings"><%= user_detail.user.tutor_review.count %> <%= (user_detail.user.tutor_review.count == 1) ? "#{t('review')}" : "#{t('reviews')}" %></a> &nbsp;
+
+                          </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </li>
+
+                  <li class="rate">
+                    <span style="color: green"><%= user_detail.user.price %> <%= t "rate_short.#{user_detail.user.currency}" %> <%= t 'rate.per hr' %></span><br>
+                    <a href="/tutors/<%= user_detail.user_id %>"><%= t "map.Availability" %></a>
+                  </li>
+
+                  <li class="location">
+                    <span><%= user_detail.district ?  t("districts.#{user_detail.district}") : t("cities.#{user_detail.city}") %></span><br>
+                    <a href="/tutors/<%= user_detail.user_id %>"><%= t "map.View map" %></a>
+                  </li>
+
+                </ul>
+              </div>
+
+              <% i+= 1 %>
+          <% end %>
+
+
+        </div>
+
+
+      </div>
+      <div class="pagination">
+        <%= paginate @user_details %>
+      </div>
+
+
+    </div>
+
+    <div id="search_sidebar">
+
+      <div id="email_alert">
+        <div id="email_alert_header">
+          <span>Email Alerts</span>
+        </div>
+        <div id="email_alert_body">
+          Get notified when any new <b><%= params[:subject] %></b> tutors become available in
+          <b><%= params[:city] %></b>.
+
+          <form onsubmit="new Ajax.Request('/tutors/notification', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" method="post" action="/tutors/notification">
+
+            <input type="hidden" value="Algebra" name="notification[search]" id="notification_search">
+            <input type="hidden" value="79278" name="notification[region_id]" id="notification_region_id">
+            <input type="hidden" value="Saved Search" name="notification[category]" id="notification_category">
+
+            <table>
+              <tbody>
+              <tr>
+                <td>
+
+                  <input type="text" value="Enter email..." size="30" onclick="if($(this).getValue()=='Enter email...'){$(this).clear();$(this).style.color = '#000';}" onblur="if($(this).getValue()==''){$(this).setValue('Enter email...');$(this).style.color = '#777';}" name="notification[email]" id="notification_email">
+                </td>
+                <td>
+                  <a onclick="$(this).addClassName('clicked');$(this).up('form').onsubmit(); return false;" href="#" class="button enter-email">Enter
+                    Email</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="wdt100">
+    <%= render :partial => "/home/featured" %>
+  </div>

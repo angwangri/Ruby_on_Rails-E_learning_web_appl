@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>嗨/Hi <%= @student.first_name %></h1>
+    <p>
+      导师通过www.SouFudao.com给您留言，请尽快联系他。
+    </p>
+    <p>
+    <a target="_blank" href="http://<%= @host %>/tutors/student_messages/<%= @student.id %>?locale=cn">点击此处浏览信息</a>
+    </p>
+    <br/>
+    <br/>
+    <p>
+    You have a new message from a Tutor on www.SouFudao.com!<br/>
+    Please get in touch with them as soon as you can.
+    </p>
+    <p>
+        Click <a target="_blank" href="http://<%= @host %>/tutors/student_messages/<%= @student.id %>?locale=en">here</a> to view your messages.
+    </p>
+    <%= render :partial => "bottom_logo" %>    
+    </body>
+</html>

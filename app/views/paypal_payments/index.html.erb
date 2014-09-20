@@ -1,0 +1,33 @@
+<h1>Listing paypal_payments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Payer</th>
+      <th>Token</th>
+      <th>Profile</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @paypal_payments.each do |paypal_payment| %>
+      <tr>
+        <td><%= paypal_payment.user_id %></td>
+        <td><%= paypal_payment.payer_id %></td>
+        <td><%= paypal_payment.token %></td>
+        <td><%= paypal_payment.profile_id %></td>
+        <td><%= link_to 'Show', paypal_payment %></td>
+        <td><%= link_to 'Edit', edit_paypal_payment_path(paypal_payment) %></td>
+        <td><%= link_to 'Destroy', paypal_payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Paypal payment', new_paypal_payment_path %>

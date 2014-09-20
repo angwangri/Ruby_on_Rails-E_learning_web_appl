@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_detail.user_id %>
+</p>
+
+<p>
+  <strong>Is profile complete?:</strong>
+  <%= @user_detail.is_profile_complete? %>
+</p>
+
+<p>
+  <strong>Is visible?:</strong>
+  <%= @user_detail.is_visible? %>
+</p>
+
+<p>
+  <strong>Street add:</strong>
+  <%= @user_detail.street_add %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @user_detail.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @user_detail.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @user_detail.country %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @user_detail.zip_code %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user_detail.gender %>
+</p>
+
+<%= link_to 'Edit', edit_user_detail_path(@user_detail) %> |
+<%= link_to 'Back', user_details_path %>

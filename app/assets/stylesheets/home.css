@@ -1,0 +1,150 @@
+#homepage_tutors {
+    border-top: 1px solid #ECECEC;
+    padding-top: 15px;
+}
+
+#homepage_tutors table {
+    margin-top: 10px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+#homepage_tutors table td {
+    color: #2E2F2F;
+    font-size: 11px;
+    line-height: 18px;
+    padding: 0 20px 20px 0;
+    position: relative;
+}
+
+#homepage_tutors table td img {
+    border: 1px solid #C1C1C1;
+    float: left;
+    margin: 2px 5px 0 0;
+}
+
+#homepage_tutors table td a.tutor {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#homepage_tutors table td span.location {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Phase 2 Css*/
+
+.servicepanel {
+    background: url("/assets/service-panel-back.jpg") no-repeat scroll 0 0 transparent;
+    height: 227px;
+    padding: 10px 13px 13px 9px;
+    width: 689px;
+}
+
+#servicepanelstudents {
+    background: url("/assets/service-panel-students.jpg") no-repeat scroll 0 0 transparent;
+    float: left;
+    font-size: 11px;
+    height: 226px;
+    width: 337px;
+}
+
+#servicepanelstudents h2, #servicepaneltutors h2 {
+    color: #294D87;
+    font-size: 17px;
+    margin-bottom: 0;
+    margin-left: 114px;
+    margin-top: 0px;
+    padding-bottom: 0;
+}
+
+#servicepanelstudents h3, #servicepaneltutors h3 {
+    color: #AAAAAA;
+    font-size: 13px;
+    margin-left: 114px;
+    margin-top: -20px;
+}
+
+#servicepanelstudents ul, #servicepaneltutors ul {
+    clear: both;
+    height: 90px;
+    margin: 0 0 11px 118px;
+    padding: 10px;
+}
+
+#servicepanelstudents li, #servicepaneltutors li {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style: none outside url("/assets/list-point02.gif");
+    padding-bottom: 3px;
+}
+
+.servicepanelbutton {
+    margin-left: 230px;
+    position: relative;
+    top: -20px;
+}
+
+.servicepanelbutton a {
+    background: url("/assets/button-joinnow.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 35px;
+    width: 97px;
+}
+
+#servicepaneltutors {
+    background: url("/assets/service-panel-tutors.jpg") no-repeat scroll 0 0 transparent;
+    float: left;
+    font-size: 11px;
+    height: 226px;
+    margin-left: 6px;
+    width: 337px;
+}
+
+#maincontent {
+    clear: both;
+    margin: 20px auto 0;
+    padding: 5px;
+    max-width: 966px;
+}
+
+#maincontent h1 {
+    color: #6084B8;
+    font-family: arial;
+    font-size: 145%;
+    font-weight: normal;
+    margin-bottom: 11px;
+    margin-top: 1px;
+}
+
+.blue-box-round {
+    border: 1px solid #69AAA8;
+    border-radius: 15px;
+    padding: 10px;
+    height: 115px;
+    background: none repeat scroll 0 0 #D8E6F1;
+}
+
+.blue-box {
+    border: 1px solid #69AAA8;
+    padding: 10px;
+    height: 115px;
+    background: none repeat scroll 0 0 #D8E6F1;
+}
+
+.heading-pop {
+    border: 1px solid #69AAA8;
+    background-color: #D8E6F1;
+    border-radius: 5px;
+    width: 700px;
+    float: left;
+    margin-top: 0px;
+    padding: 5px;
+    margin-left: -10px;
+}
+
+.active_link {
+    text-decoration: underline;
+}
+

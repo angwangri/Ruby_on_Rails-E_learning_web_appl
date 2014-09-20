@@ -1,0 +1,34 @@
+$('#flash_basic_msg').css("display","block");
+$('#flash_basic_msg').html("");
+<% if flash[:notice] %>
+$('#flash_basic_msg').html("<%= escape_javascript(flash[:notice]).html_safe %>");
+<% elsif flash[:error] %>
+<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |msg| %>
+			$('#flash_basic_msg').append("<%= escape_javascript(msg).html_safe %><br/>");
+        <% end %>
+<% end %>
+
+<% if @user_detail.errors.any? %>
+	<% @user_detail.errors.full_messages.each do|msg|%>
+			$('#flash_basic_msg').html("<%= escape_javascript(msg).html_safe %><br/>");
+    <% end %>
+<% end %>
+
+<% else %>
+$('#flash_basic_msg').css("display","none");
+<% end %>
+$(window).scrollTop($('#basic_info_div').offset().top);
+<% flash[:notice],flash[:error] = nil, nil %>
+setTimeout(function(){$('#flash_basic_msg').css("display","none");
+},3000);
+<% status = @basic_info_status ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>
+$('#basic_info_status').html('<%= status %>');
+<% if @profile_status %>
+$('#continue_btn').show();
+$('#continue_btn_alert').hide();
+<% else %>
+$('#continue_btn').hide();
+$('#continue_btn_alert').show();
+<% end %>
+$("#my_profile_0").load();

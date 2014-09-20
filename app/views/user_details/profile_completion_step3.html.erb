@@ -1,0 +1,86 @@
+<div class="wrapper">
+    <div id="content fullscreen">
+        <div id="signup_steps">
+
+
+             <ul>
+                   <li>
+                      <%= image_tag("/assets/step1_inactive.png", :class => "step1", :alt=> "Step1_inactive")%>
+                     <span class="done"><%= t('profile_completion_2.create_acc')%></span>
+                   </li>
+
+                    <li>
+                       <%= image_tag("/assets/step2_inactive.png", :class => "step2", :alt=> "step2_inactive")%>
+                     <span class="done"><%= t('profile_completion_2.fill_prof')%></span>
+                   </li>
+
+                    <li>
+                     <%= image_tag("/assets/step3_active.png", :class => "step3", :alt=> "Step3")%>
+                     <span class="active"><%= t('profile_completion_2.choose_listing')%></span>
+                   </li>
+                 </ul>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <div id="content fullscreen">
+    <div id="choose_listing_container">
+        <div class="featured-vs-free">
+
+          <div class="fst_featurd_box" >
+            <%= render :partial => "/tutors/premium_payment"%>
+          </div>
+
+          <div class="free scd_featurd_box">
+            <div class="callout gray">
+              <h2 style="text-align:center;"><%= t('upgrade.free_basic_acc')%></h2>
+              <%= t('upgrade.evryone')%>
+              <p>             
+              <ul>
+                <li>
+                  <%= t('upgrade.time_limit')%>.
+                </li>
+                <li>
+                  <%= t('upgrade.later_upgrade')%>.
+                </li>
+              </ul>
+              </p>
+              <div style="text-align:center;">
+               <%= link_to "#{t('upgrade.continue_free_btn')}", { :action => "save_listing_type" ,:id => @user_detail.id}, :class=> "btn" %>
+              </div>
+            </div>
+          </div>
+
+      </div>
+<!--
+      <table class="upgrade-faqs">
+        <tbody><tr>
+          <td>
+            <h3>Can I cancel at any time?</h3>
+            <p>
+              Yes.  All payments are month-to-month and handled securely through Paypal.com, so you can cancel at any time.
+            </p>
+
+            <h3>What does "top placement in search results" mean?</h3>
+            <p>
+              Featured listings are shown <em>above free listings</em> in search results in the most common searches (by distance and subject).  This means they are viewed more often by students and parents.  Featured listings receive four times as many job requests as free listings on average.
+            </p>
+          </td>
+          <td class="paypal">
+            <img width="100" height="100" src="http://www.paypal.com/en_US/i/icon/verification_seal.gif" alt="Verification_seal"><br>
+            <small>All payments handled securely<br>through Paypal.com.<br></small>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+-->
+    </div>
+    <br>
+  </div>
+</div>

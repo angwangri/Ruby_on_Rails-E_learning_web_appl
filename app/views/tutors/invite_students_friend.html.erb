@@ -1,0 +1,108 @@
+<%= render :partial => "after_login_student_header"%>
+
+<div class="wrapper">
+  <center>
+    <div class="client-review">
+<h2 class="bor_bot"><%= t('student_account.frend_heading')%></h2>
+ <p style="margin-bottom: 10px;">
+  <%= t('student_account.frend_sub_heading_1')%><br>
+  <%= t('student_account.frend_sub_heading_2')%>
+ </p>
+
+
+
+  <form method="post" action="/tutors/tell_a_friend/<%= @user.id %>" id="tell_frnd_form">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.frends_email')%>: </label>
+                          </div>
+
+                          <div class="profileRight2 fl_none">
+                              <input type="text" name="email" id="email">
+                              <span id="email_error" class="err_msg"></span>
+                          </div>
+                      </div>
+
+
+                    <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.subject')%>: </label>
+                          </div>
+
+                          <div class="profileRight2 fl_none">
+                              <input type="text" value="<%= t('student_account.subject_inner_txt') %>" size="50" name="subject" id="subject">
+                          </div>
+                      </div>
+
+                       <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.message')%>:  </label>
+                          </div>
+
+                          <div class="profileRight2 fl_none wdth74">
+                              <% value = "#{t('student_account.msg_hi')}\n\n#{t('student_account.msg_line_1')}\n\n#{t('student_account.msg_line_2')}\n\n#{t('student_account.msg_line_3')}\n\n#{t('student_account.msg_thnks')}\n#{@user.first_name}"  %>
+		  	      <%= text_area_tag 'message', value, rows: '17', cols: '48', style: "width:100%;height:225px;" %>
+                          </div>
+                      </div>
+
+       <div class="profileSubmit">
+   <input class="btn-orange" type="submit" value="<%= t('student_account.msg_send_btn')%>" style="width:160px;" name="commit">
+  </div>
+
+
+  </form>
+     </div>
+                </center>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#tab_4").parent().addClass("active");
+
+    $.validator.addMethod("CustomEmailFormat", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+    },"Please provide correct email address!");
+
+    $('#tell_frnd_form').validate(
+    {
+
+      rules: {
+        "email": {
+          required: true,
+          CustomEmailFormat: true
+        }
+      },
+
+      messages: {
+        "email":{
+          required: "Please enter a email address",
+          email: "Please provide correct email address!"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+  });
+  </script>

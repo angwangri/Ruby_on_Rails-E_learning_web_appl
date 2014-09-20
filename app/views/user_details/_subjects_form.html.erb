@@ -1,0 +1,106 @@
+<%= form_for(:user_details, :url => {:action=>:update_user_subjects}, :html => {:id=> "subject_form",:method => :post, :remote => true}) do |f| %>
+
+
+  <div class="account_col chose_sub_col">
+
+      <div class="account_fild_col">
+       
+        
+
+        <div class="account_lft_col">
+          <p> <%= t('subjects.select_sub') %> :</p>
+          <%= render :partial => 'choose_subjects' %>
+          <span id="suggest_subjects_error" class="err_msg"></span>
+        </div>
+	
+	<div class="account_rht_col">
+	  <ul id='subjects_list' class='list-panel subject-list'>
+	    <%if @user_detail.subject.present?%>
+	      <%- @user_detail.subject.split(',').each do |item| -%>
+	        <%unless item.strip.blank? %>
+		  <li>
+		    <%= t("subjects.#{item.strip}") %>
+		    <a href="javascript:void(0)" onclick="removeItem(this)" data-text='<%=t("subjects.#{item.strip}")%>'  data-remove-text='<%=item.strip %>'>X</a>
+		  </li>
+		<%end%>
+	      <%end %>
+	    <%end%>  
+	  </ul>
+          <%= f.text_area :subject, :value => @user_detail.subject ?  @user_detail.subject : nil,  :style => "  word-wrap: break-word; resize: none; overflow:hidden;display:none;" %>
+        </div>
+      </div>
+  </div>
+
+
+	<div class="profilesubmit fl_none">
+    	<input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_basic_info" name="commit"/>
+  	</div>
+<% end %>
+<script type="text/javascript">
+function set_subjects(sel){
+	var d = sel.options[sel.selectedIndex].text; 
+	var text_data = $("#user_details_subject").val();
+	if(text_data.indexOf(d) == -1)
+	{
+	  if($("#user_details_subject").val() == ""){
+	    $("#user_details_subject").val(d);
+	    $("#subjects_list").append('<li>'+d+'<a href="javascript:void(0)" onclick="removeItem(this)" data-text="'+ d+' data-remove-text='+d+'">X</a></li>');
+	  }else{
+	    var updated_data = text_data + ", " + d;
+	    $("#user_details_subject").val(updated_data).trigger('autosize.resize');
+	    $("#subjects_list").append('<li>'+d+'<a href="javascript:void(0)" onclick="removeItem(this)" data-text="'+ d+' data-remove-text='+d+'">X</a></li>');
+	  }  
+	}
+	
+}
+
+$(document).ready(function(){
+  $('#user_details_subject').autosize();
+
+ // add the rule here
+ $.validator.addMethod("valueNotEquals", function(value, element, arg){
+  return arg != value;
+ }, "Value must not equal arg.");
+
+  $("#subject_form").validate({
+  rules: {
+   "suggest_subjects": { valueNotEquals: "any-subject" }
+  },
+  messages: {
+   "suggest_subjects": { valueNotEquals: "<%= t('signup.enter_value')%>" }
+  },  
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");                      
+        });
+
+      }      
+
+ });
+});
+
+function removeItem(item)
+{
+  
+  remove_text = $(item).attr('data-remove-text');
+  if($('#user_details_subject').val().indexOf(remove_text+',') != -1)
+  {
+    remove_text= remove_text+','
+  }
+  
+  $(item).parent().remove()
+  $("#user_details_subject").val( $('#user_details_subject').val().replace(remove_text ,'') )
+}
+</script>

@@ -1,0 +1,87 @@
+<% title = content_for?(:title) ? yield(:title) : "SouFudao" %>
+<% data_to_share_to_twitter = "#{title} #{request.original_url} Check it out!"%>
+
+<div class="fotter_rht">
+  <div class="social_icon">
+    <!--<h6> <%#= t 'footer.Chinese Social Media' %>:</h6>
+      <img src="/assets/wechat_icon.png"  />
+     <img src="/assets/qq_icon.png"  />
+     <img src="/assets/sina_icon.png"  />
+     <img src="/assets/renren_icon.png"  />
+  </div>-->
+   <!--<div class="social_icon">
+    <h6> <%#= t 'footer.International Social Media' %>:</h6>
+    <a href="https://www.facebook.com/soufudao" target="_blank"> <img src="/assets/fb_icon.png"  />   </a>
+    <a href="https://twitter.com/Soufudao" target="_blank">  <img src="/assets/twiter_icon.png"  />   </a>
+    <a href="https://plus.google.com/115859555925092649781/posts" target="_blank"> <img src="/assets/google_icon.png"  />   </a>-->
+     <!--<img src="/assets/linked_icon.png"  />-->
+    <a href="javascript:void(0);" onclick="$('#wechat_model_footer').modal();"> <img src="/assets/wechat_icon.png"  width="37"/>   </a>
+    <a href="http://weibo.com/u/5135883018" target="_blank"> <img src="/assets/sina_icon.png"  />   </a>
+    <a href="http://t.qq.com/soufudaojiajiao" target="_blank"> <img src="/assets/weibo_icon.png"  />   </a>
+    <a href="https://www.facebook.com/soufudao" target="_blank"> <img src="/assets/fb_icon.png"  />   </a>
+    <a href="https://twitter.com/Soufudao" target="_blank">  <img src="/assets/twiter_icon.png"  />   </a>
+    <a href="https://plus.google.com/115859555925092649781/posts" target="_blank"> <img src="/assets/google_icon.png"  />   </a>
+	
+  </div>
+	
+</div>
+
+
+<div class="modal hide" id="wechat_model_footer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel1" style="text-align:center">
+	  <b><%= t 'footer.wechat_account' %>:
+	    <span style='color:#84CCF5'> SouFudao </span>
+	  </b>
+	</h3>
+      </div>
+      <div class="modal-body wechat-panel" >
+	<img src='/assets/WeChat_QR_code.jpg' class='QR-image'>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal hide" id="terms_model_footer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel1" style="text-align:center"><b>Sou Fudao Terms of Use</b></h3>
+      </div>
+      <div class="modal-body" style="font-weight:normal;">
+      <%= render :partial => "/home/terms_of_use"%>  
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal hide" id="privacy_model_footer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel2" style="text-align:center"><b>Sou Fudao Privacy Policy</b></h3>
+      </div>
+      <div class="modal-body" style="font-weight:normal;">
+      <%= render :partial => "/home/privacy_policy"%>  
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+  $(window).bind("load", function() {
+    $('.twitter-share-button').css("width","76px")
+  });
+</script>

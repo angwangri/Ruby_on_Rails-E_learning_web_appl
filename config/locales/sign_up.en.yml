@@ -1,0 +1,28 @@
+en:
+
+  sign_up:
+    create_profile: "Create a free tutor profile in seconds to start getting tutoring jobs!"
+    first_name: "First name"
+    last_name: "Last name"
+    email: "Email"
+    password: "Password"
+    confirm_email: "Email does not  Match"
+    i_agree: " I agree to the"
+    terms_and_conditions: "terms and conditions."
+    submit:
+      html: "<input type='submit' value='Sign up' class='btn-orange'>"
+    already_sign_in: "Already have an account?"
+    already_sign_in_here: "Sign in here."
+    teacher_search_txt: "Are you a student looking for a teacher?"
+    teacher_search_txt_here: "Start your search."
+    create_acc_txt: "We’ll help you create an account when you’re ready to contact a teacher."
+    5_sections_warning: "Please complete at least the first five sections before continuing."
+    
+  profile_completion_2:
+    create_acc: "Create an account" 
+    fill_prof: "Fill out your profile"
+    choose_listing: "Choose listing type"
+    acc_notice_1: "Your account has been created!  Now on to the next step..."
+    acc_notice_2: "Fill out each section below and click 'Save Changes' as you make your way through.  When at least the first five sections are complete, click 'Continue' at the bottom to move to the final step!"
+    continue: "Continue"
+    5_sections_warning: "Please complete at least the first five sections before continuing."

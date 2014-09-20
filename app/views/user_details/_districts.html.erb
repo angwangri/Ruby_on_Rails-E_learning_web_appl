@@ -1,0 +1,11 @@
+<% if params[:district] 
+    district_param = params[:district] 
+else
+	district_param = @user_detail ? @user_detail.district : ' '
+end %>
+<% unless @account_select %>
+	<option value=""><%= session[:locale] == 'cn' ? '所有地区' : 'All' %></option>
+<% end %>
+<% @districts.each do |district| %>
+	<option value="<%= district %>" <%= "selected" if district_param == district %> ><%= t("districts.#{district}") %></option>
+<% end %>

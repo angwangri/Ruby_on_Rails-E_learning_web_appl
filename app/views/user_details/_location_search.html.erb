@@ -1,0 +1,18 @@
+<div id="searchBox"></div>
+<div style="display:none;" id="map_container"></div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4&ak=VXA9UYtvEo8gS6fgCGNNPw0y"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchControl/1.4/src/SearchControl_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchControl/1.4/src/SearchControl_min.css" />
+<script type="text/javascript">
+  var mp = new BMap.Map("map_container");
+  var point = new BMap.Point(116.404, 39.915);
+  mp.centerAndZoom(point, 14);
+  mp.enableInertialDragging();
+
+  var searchControl = new BMapLib.SearchControl({
+      container : "searchBox" 
+      , map     : mp  
+      , type    : LOCAL_SEARCH  
+  });
+
+</script>

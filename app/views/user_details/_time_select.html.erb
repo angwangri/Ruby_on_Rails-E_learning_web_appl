@@ -1,0 +1,17 @@
+  <div class="available_time">
+
+  <select name="user[time][][day]" id="user_available_time_attributes__day">
+      <% @available_day.each do |key, val| %>
+        <option value="<%= key%>"><%= t "days.#{val}" %>
+        </option>
+      <% end %>  
+  </select>
+       
+  <select name="user[time][][time]" id="user_available_time_attributes__time">
+      <% @available_time.each do |key, val| %>
+        <option value="<%= key%>"><%= t "times.#{val}" %>
+        </option>
+      <% end %>  
+  </select>
+   <a href="javascript:void(0);" onclick="$(this).parent().remove();"><%= t('remove') %></a>
+  </div>

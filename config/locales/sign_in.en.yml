@@ -1,0 +1,15 @@
+en:
+  sign_in:
+    box_header: "SIGN IN TO YOUR ACCOUNT"
+    email: "Email"
+    password: "Password"
+    forget_pass: "Forgot your Password?"
+    remember: "Remember me on this computer"
+    login_btn_txt: "Login"
+    tutor_txt: "Want to register as a Tutor?"
+    tutor_txt_here: "Click here"
+    student_search_1: "Are you a student looking for a teacher? "
+    search_here: "Start your search here"    
+    student_acc_txt: "We’ll help you create an account when you’re ready to contact a teacher."
+    please_sign_in: "Please sign in first"
+    password_error: "Invalid password."

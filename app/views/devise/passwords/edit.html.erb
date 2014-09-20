@@ -1,0 +1,75 @@
+<div class="wrapper" >
+  <div class="box " id="login">
+    <div class="header">
+
+      <h2><%= t('change_pass.headline')%></h2>
+    </div>
+    <div class="body">
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :id=>"pass_change_form" }) do |f| %>
+  		<%= devise_error_messages! %>
+  		<%= f.hidden_field :reset_password_token %>
+		  	<div><%= f.label :password, "#{t('change_pass.new_pass')}" %>
+		  	<%= f.password_field :password, :autofocus => true %></div>
+  <div><%= f.label :password_confirmation, "#{t('change_pass.confirm_pass')}" %>
+  <%= f.password_field :password_confirmation %></div>
+<br/>
+  <div><%= f.submit "#{t('change_pass.btn_text')}",:class => "btn btn-medium btn-success"  %></div>		  	<% end %>
+    </div>
+  </div>
+</div>
+<%#= render "devise/shared/links" %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#pass_change_form').validate(
+    {
+      rules: {
+        "user[password]": {
+          required: true
+         },
+        "user[password_confirmation]": {
+          required: true,
+          equalTo: "#user_password"
+         }         
+      },
+
+      messages: {
+        "user[password]":{
+          required: "Please enter a password"
+        },
+        "user[password_confirmation]": {
+          required: "Please enter password confirmation",
+          equalTo: "Password doesn't match"
+         }         
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          $(value).popover('hide');
+        });
+
+
+        $.each(errorList, function (index, value) {
+
+          console.log(value.message);
+
+          var _popover = $(value.element).popover({
+            trigger: 'manual',
+            placement: 'right',
+            content: value.message
+          });
+
+          _popover.data('popover').options.content = value.message;
+          $(value.element).popover('show');
+
+        });
+
+      }
+    });
+  }); // end document.ready
+</script>
+
+
+
+

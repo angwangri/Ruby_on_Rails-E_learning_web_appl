@@ -1,0 +1,32 @@
+en:
+
+  sou_fudao_heading: 'What is Sou Fudao?'
+  what_sou_fudao:
+    html: "Sou Fudao is an online service for teachers and students.  Teachers can post their profiles and market their specific skills completely for free. Students can search for teachers that are nearby and meet their individual educational needs. Through this method we can optimize the way teachers and students connect. </br> </br>Our aim is simple: to provide a convenient and transparent platform that facilitates teacher and student connections that are nearby and long lasting."
+
+  for_student_heading: 'For Students'
+  for_student:
+    html: "Our objective is to provide you with access to a wide range of professional teachers that are near to you and specifically meet your educational needs. We aim to build your trust by providing you with transparent teacher profiles and honest reviews from the teacher's past students.</br> </br>
+ With a detailed account of the teacher's background and credentials we are confident you can find the most suitable teacher without paying costly fees to agencies and middle men. We strive to give you an unmatched database of teachers, guaranteeing you can find the absolute best teacher."
+
+  for_teachers_heading: 'For Teachers'
+  for_teachers:
+    html: "Our goal is to provide you with a free platform that allows you to promote yourself and find students close to you without out using costly middlemen and agencies. </br> </br>
+We want to create long lasting and mutually beneficial student teacher relationships, based on nearby student teacher connections and transparent teacher profiles and teaching fees. Students can contact you and you can select students that are the most convenient for you."
+
+
+
+
+
+  students: 'Students'
+  teachers: 'Teachers'
+  click: 'click'  
+  get_started_with_search: 
+    html: "<a href='%{href}'>Get started with your search.</a>"
+  sign_up_profile_free: 
+    html: "<a href='%{href}'>Sign up for a profile for free.</a>"
+  questions_comments: 
+    html: "Questions/Comments? <a href='%{href}'>We'd love to hear from you. Contact us.</a>"
+  
+  title:
+    tutor: 'Tutor'

@@ -1,0 +1,36 @@
+            <div class="callout">
+              <h2 style="text-align:center;"><%= t('upgrade.premium_list') %></h2>
+                <table class="featured-benefits">
+                  <tbody>
+                  <tr>
+                    <td><%= t('upgrade.listed_on_homepage') %></td>
+                    <td><%= t('upgrade.top_of_search') %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('upgrade.ads_removed') %></td>
+                    <td><span class="featured"><a class="featured tutor-index" title="Featured Tutor" rel="featured" href="#myModal" data-toggle="modal" data-target="#myModal">
+                    <img src="/assets/vip.png"></a></span> &nbsp; <%= t('upgrade.badge_prof') %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><%= t('upgrade.premium_listing') %></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div style="width:100%;">
+
+                      <div class="alupay_col">
+                        <form accept-charset="UTF-8" action="/subscriptions/request_to_yoopay" method="post">
+                          <input type="hidden" name="id" value="<%= @user_detail.user_id%>">
+                          <%= t('upgrade.start_today') %>:<br/>
+                          <input type="radio" name="payment_type" value="monthly" checked/>&nbsp;&nbsp;<%= t('upgrade.alipay_month_rate') %></br>
+                          <input type="radio" name="payment_type" value="yearly"/>&nbsp;&nbsp;<%= t('upgrade.alipay_year_rate') %></br>
+                          <%= image_tag 'payment_methods.png', :style => "padding-bottom:20px;padding-top:20px;width:80%" %><br/>
+                          <input type="submit" value="<%= t('upgrade.continue_premiurm') %>" class="clean-green" style="width:auto;padding-left:5px;padding-right:5px;"/> 
+                          <%#= link_to "#{t('upgrade.continue_premiurm')}", {:controller=> "subscriptions", :action=>"request_to_yoopay", :id=> @user_detail.user_id}, :class=> "clean-green", :style => "width:auto;padding-left:5px;padding-right:5px;" %>                        
+                        </form>
+                      </div>
+                </div>
+                <br/>
+                <p class="bragging"><%= t('upgrade.notice')%>
+                 </p>
+            </div>

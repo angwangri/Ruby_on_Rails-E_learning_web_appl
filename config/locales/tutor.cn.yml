@@ -1,0 +1,52 @@
+cn:
+ tutor:
+   review: "条学生评价"
+   reviews: "条学生评价"
+   no_review: "暂时没有评价"
+   back_to_search: "返回至搜索页"
+   member_since: "注册时间"
+   subjects_taught: "擅长科目"
+   education: "教育背景"
+   experience: "教学经历"
+   hobbies: "兴趣爱好"
+   spoken_languages: "常用语言"
+   english_ability: "英语能力"
+   chinese_ability: "中文能力"
+   client_review: "学生反馈"
+   average_rating: "平均等级:"
+
+   contact_this_tutor: "联系老师"
+   complete_this_form: 
+     html: "完成以下表格 ，直接和老师联系。<br>
+            如有意向，老师将尽快回复您。"
+   message_to_tutor: "给老师留言:"
+   include_subject: "（包括科目，年级，上课时间、地点等。）"
+   type_letters_in_image: "输入图中的验证码"
+   human_authentication: "人工认证"
+   reload: "看不清，换一张"
+   send_this_message: "发送留言"
+
+   location_and_availability: "位置和可用性"
+   location: "位置"
+   rate: "收费"
+   availability: "上课时间 "
+   distance: "距离"
+
+   male: "男"
+   female: "女"
+
+   first_sess_free: "免费试听一课！"       
+   none_yet: "暂时没有人评价"   
+   no_reviews_posted: "暂时没有人评价"
+   cancel: "取消"
+
+   phone_err: "输入电话"
+   name_err: "输入您的名字"
+   email_reqd_err: "输入您的电子邮件"
+   email_format_err: "请提供有效的邮箱地址！" 
+   message_err: "输入信息"
+
+   Posted: "张贴"
+   by: "由"
+   not_found_title: "您访问的网页不存在"
+   not_found_msg: "网址出错或此网页已被删除"

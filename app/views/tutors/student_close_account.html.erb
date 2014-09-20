@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="nice-box close-account" id="login">
+    <div class="header">
+      <h2><%= t('settings.close_heading') %></h2>
+    </div>
+    <div class="body">
+      <%= t('settings.close_txt') %>
+      <br><br>
+      
+      <form method="post" action="/tutors/<%= @user.id%>/student_confirm_close_account">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+        <input type="hidden" value="yes" name="confirm" id="confirm">
+        <input type="submit" value="<%= t('settings.close_confirm') %>" name="commit">
+        <%= t('settings.or') %>
+        <a class="cancel" href="/tutors/student_setting/<%= @user.id%>"><%= t('settings.close_cancel') %></a>
+      </form>
+    </div>
+  </div>
+</div>

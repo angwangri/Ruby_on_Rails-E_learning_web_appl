@@ -1,0 +1,325 @@
+<%= form_for(:user_details, :url => {:action=>:update_availability_info}, :html => {:id=> "availability_form",:method => :post, :remote => true}) do |f| %>
+
+    <div class="degree_col mt15">
+      <div class="degree_lft_col">
+        <%= t('availability.hourly_rate') %>:
+      </div>
+
+      <div class="degree_rht_col">
+        <div class="wdt100">
+          <div class="degree_port_left_col wdt22">
+            <%= t('availability.one_student') %>
+          </div>
+
+          <div class="degree_port_rht_col wdt75">
+            <%= text_field 'user', 'price', :value => (@availability && @availability.price) ? "%.2f" % @availability.price : "%.2f" % 0.0, :style => "width:50px;padding:1px;", :required => true %>
+            <%= t('availability.per_hour_in') %>
+             <span id="user_price_error" class="err_msg"></span>
+
+            <select name="user[currency]" id="user_currency">
+              <% Availability::CURRENCY.each do |key, val| %>
+                  <option <%= 'selected' if @availability && @availability.currency == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                  </option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="wdt100">
+          <div class="degree_port_left_col wdt22">
+            <%= t('availability.two_student') %>
+            <br/>(<%= t('optional') %>)
+          </div>
+
+          <div class="degree_port_rht_col wdt75">
+            <% if (@availability && @availability.two_students && @availability.two_students[0]['price'].to_i != 0) %>
+                
+                <div id="add_2_stud_link" style="display:none;">
+                  <%= link_to "#{t('availability.add_rate_for_2')}", "javascript:show_div('2_stud_div');" %></a>
+                </div>
+
+                <div id="2_stud_div" style="display:none;">
+                  <%= text_field 'user', '[two_students][][price]', :value => (@availability && @availability.two_students && @availability.two_students[0]['price']) ? "%.2f" % @availability.two_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;" %>
+                  <%= t('availability.per_hour_in') %>
+                  <select name="user[two_students][][currency]" id="user_currency">
+                    <% Availability::CURRENCY.each do |key, val| %>
+                        <option <%= 'selected' if @availability && @availability.two_students && @availability.two_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                        </option>
+                    <% end %>
+                  </select>
+                  <a href="javascript:void(0);" onclick="$(this).parent().hide();$('#add_2_stud_link').show();"><%= t('remove') %></a>
+                </div>
+
+                <div>
+                <%= text_field 'user', '[two_students][][price]', :value => (@availability && @availability.two_students && @availability.two_students[0]['price']) ? "%.2f" % @availability.two_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;", :class => "2_stud_price" %>
+                <%= t('availability.per_hour_in') %>
+                <select name="user[two_students][][currency]" id="user_currency">
+                  <% Availability::CURRENCY.each do |key, val| %>
+                      <option <%= 'selected' if @availability && @availability.two_students && @availability.two_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                      </option>
+                  <% end %>
+                </select>
+                <a href="javascript:void(0);" onclick="$('.2_stud_price').val('0.00');$(this).parent().hide();$('#add_2_stud_link').show();"><%= t('remove') %></a>
+                </div>
+            <% else %>
+                <div id="add_2_stud_link" >
+                  <%= link_to "#{t('availability.add_rate_for_2')}", "javascript:show_div('2_stud_div');" %></a>
+                </div>
+                <div id="2_stud_div" style="display:none;">
+                  <%= text_field 'user', '[two_students][][price]', :value => (@availability && @availability.two_students && @availability.two_students[0]['price']) ? "%.2f" % @availability.two_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;" %>
+                  <%= t('availability.per_hour_in') %>
+                  <select name="user[two_students][][currency]" id="user_currency">
+                    <% Availability::CURRENCY.each do |key, val| %>
+                        <option <%= 'selected' if @availability && @availability.two_students && @availability.two_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                        </option>
+                    <% end %>
+                  </select>
+                  <a href="javascript:void(0);" onclick="$(this).parent().hide();$('#add_2_stud_link').show();"><%= t('remove') %></a>
+                </div>
+            <% end %>
+          </div>
+        </div>
+
+
+        <div class="wdt100">
+          <div class="degree_port_left_col wdt22">
+            <%= t('availability.three_student') %>
+            <br/>(<%= t('optional') %>)
+          </div>
+
+          <div class="degree_port_rht_col wdt75">
+            <% if (@availability && @availability.three_plus_students && @availability.three_plus_students[0]['price'].to_i != 0) %>
+
+                <div id="add_3_stud_link" style="display:none;">
+                  <%= link_to "#{t('availability.add_rate_for_3')}", "javascript:show_div_3_stud('3_stud_div');" %></a>
+                </div>
+
+                <div id="3_stud_div" style="display:none;">
+                  <%= text_field 'user', '[three_plus_students][][price]', :value => (@availability && @availability.three_plus_students && @availability.three_plus_students[0]['price']) ? "%.2f" % @availability.three_plus_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;" %>
+                  <%= t('availability.per_hour_in') %>
+                  <select name="user[three_plus_students][][currency]" id="user_currency">
+                    <% Availability::CURRENCY.each do |key, val| %>
+                        <option <%= 'selected' if @availability && @availability.three_plus_students && @availability.three_plus_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                        </option>
+                    <% end %>
+                  </select>
+                  <a href="javascript:void(0);" onclick="$(this).parent().hide();$('#add_3_stud_link').show();"><%= t('remove') %></a>
+                </div>
+
+                <div>
+                <%= text_field 'user', '[three_plus_students][][price]', :value => (@availability && @availability.three_plus_students && @availability.three_plus_students[0]['price']) ? "%.2f" % @availability.three_plus_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;", :class => "3_stud_price"  %>
+                <%= t('availability.per_hour_in') %>
+                <select name="user[three_plus_students][][currency]" id="user_currency">
+                  <% Availability::CURRENCY.each do |key, val| %>
+                      <option <%= 'selected' if @availability && @availability.three_plus_students && @availability.three_plus_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                      </option>
+                  <% end %>
+                </select>
+                <a href="javascript:void(0);" onclick="$('.3_stud_price').val('0.00');$(this).parent().hide();$('#add_3_stud_link').show();"><%= t('remove') %></a>
+                </div>
+                
+            <% else %>
+                <div id="add_3_stud_link">
+                  <%= link_to "#{t('availability.add_rate_for_3')}", "javascript:show_div_3_stud('3_stud_div');" %></a>
+                </div>
+                <div id="3_stud_div" style="display:none;">
+                  <%= text_field 'user', '[three_plus_students][][price]', :value => (@availability && @availability.three_plus_students && @availability.three_plus_students[0]['price']) ? "%.2f" % @availability.three_plus_students[0]['price'].to_f : "%.2f" % 0.0, :style => "width:50px;padding:1px;" %>
+                  <%= t('availability.per_hour_in') %>
+                  <select name="user[three_plus_students][][currency]" id="user_currency">
+                    <% Availability::CURRENCY.each do |key, val| %>
+                        <option <%= 'selected' if @availability && @availability.three_plus_students && @availability.three_plus_students[0]['currency'] == key %> value="<%= key %>"><%= t "rate.#{key}" %>
+                        </option>
+                    <% end %>
+                  </select>
+                  <a href="javascript:void(0);" onclick="$(this).parent().hide();$('#add_3_stud_link').show();"><%= t('remove') %></a>
+                </div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('availability.first_session') %>:
+      </div>
+
+      <div class="degree_rht_col">
+        <%= check_box 'user', 'is_first_session_free', :checked => (@availability && @availability.is_first_session_free) ? true : false %>
+        <span style="padding-left:5px;vertical-align:sub;"><%= t('availability.first_session_yes') %></span>
+      </div>
+    </div>
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('availability.times_avail') %>:
+      </div>
+
+      <div class="degree_rht_col deg_selec">
+        <div id="available_times">
+          <input type="hidden" name="reset_available_times[true]" id="reset_available_times_true">
+
+          <% if @availability && @availability.time %>
+              <% @availability.time.each_with_index do |key_val_pair, index| %>
+                  <div class="available_time">
+
+                    <select name="user[time][][day]" id="user_available_time_attributes__day">
+                      <% Availability::TIME_DAY.each do |key, val| %>
+                          <option <%= 'selected' if key_val_pair['day'] == key %> value="<%= key %>"><%= t "days.#{val}" %>
+                          </option>
+                      <% end %>
+                    </select>
+
+                    <select name="user[time][][time]" id="user_available_time_attributes__time">
+                      <% Availability::TIME_TIME.each do |key, val| %>
+                          <option <%= 'selected' if key_val_pair['time'] == key %> value="<%= key %>"><%= t "times.#{val}" %>
+                          </option>
+                      <% end %>
+                    </select>
+                    <% unless (index == 0) %>
+                    <a href="javascript:void(0);" onclick="$(this).parent().remove();"><%= t('remove') %></a>
+                    <% end %>
+                  </div>
+              <% end %>
+
+          <% else %>
+            <div class="available_time">
+  <select name="user[time][][day]" id="user_available_time_attributes__day">
+      <% @available_day.each do |key, val| %>
+        <option value="<%= key%>"><%= t "days.#{val}" %>
+        </option>
+      <% end %>  
+  </select>
+       
+  <select name="user[time][][time]" id="user_available_time_attributes__time">
+      <% @available_time.each do |key, val| %>
+        <option value="<%= key%>"><%= t "times.#{val}" %>
+        </option>
+      <% end %>  
+  </select>
+  </div>    
+          <% end %>
+        </div>
+        <%= link_to "#{t('availability.add_time')}", :controller =>'user_details', :action=> 'add_time_select', :remote => true %></a>
+      </div>
+    </div>
+
+
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('availability.meet_students') %>:
+      </div>
+
+      <div class="degree_rht_col deg_selec">
+        <div id="locations">
+
+          <input type="hidden" name="reset_locations[true]" id="reset_locations_true">
+          <% if @availability && @availability.distance %>
+              <% @availability.distance.each_with_index do |key_val_pair, index| %>
+                  <div class="location">
+
+                    <select name="user[distance][][location]" id="user_location_attributes__location">
+                      <% Availability::DISTANCE_LOCATION.each do |key, val| %>
+                          <option <%= 'selected' if key_val_pair['location'] == key %> value="<%= key %>"><%= t "distance_location.#{val}" %>
+                          </option>
+                      <% end %>
+                    </select>
+
+                    <select name="user[distance][][rate]" id="user_location_attributes__rate">
+                      <% Availability::DISTANCE_RATE.each do |key, val| %>
+                          <option <%= 'selected' if key_val_pair['rate'] == key %> value="<%= key %>"><%= t "distance_rate.#{val}" %>
+                          </option>
+                      <% end %>
+                    </select>
+                    <% unless(index == 0)%>
+                    <a href="javascript:void(0);" onclick="$(this).parent().remove();$('#add_location').show();"><%= t('remove') %></a>
+                    <% end %>
+                  </div>
+              <% end %>
+            <% else %>
+        <div class="location">
+        <select name="user[distance][][location]" id="user_location_attributes__location">
+            <% @availability_location.each do |key, val| %>
+              <option <%= 'selected' if @availability && @availability.currency == key %> value="<%= key%>"><%= t "distance_location.#{val}" %>
+              </option>
+            <% end %>                  
+        </select>
+              
+        <select name="user[distance][][rate]" id="user_location_attributes__rate">
+            <% @availability_rate.each do |key, val| %>
+              <option <%= 'selected' if @availability && @availability.currency == key %> value="<%= key%>"><%= t "distance_rate.#{val}" %>
+              </option>
+            <% end %>  
+        </select>
+        </div>            
+            <% end %>
+        </div>
+        <% visibility = (!@availability.distance || (@availability.distance && @availability.distance.length < 2)) ? 'block' : 'none' %>
+        <%= link_to "#{t('availability.add_location')}", {:controller =>'user_details', :action=> 'add_distance_select'}, :remote => true, :id => 'add_location', :style => "display:#{visibility};" %>
+
+      </div>
+    </div>
+
+
+
+    <div class="profileSubmit">
+      <input type="submit" value="<%= t('save_changes_btn_txt') %>" onclick="" name="commit">
+
+
+    </div>
+
+<% end %>
+<script type="text/javascript">
+    function show_div(id) {
+        $('#add_2_stud_link').hide();
+        $('#' + id).toggle();
+    }
+    function show_div_3_stud(id) {
+        $('#add_3_stud_link').hide();
+        $('#' + id).toggle();
+    }
+
+ $(document).ready(function() {
+  $('#availability_form').validate(
+    {
+
+      rules: {
+        "user[price]":{
+          required: true
+        }
+      },
+
+      messages: {
+        "user[price]":{
+          required: "<%= t('signup.enter_value')%>",
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");                      
+        });
+
+      }      
+    });        
+    });
+    
+
+</script>

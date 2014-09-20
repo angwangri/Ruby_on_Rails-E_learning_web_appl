@@ -1,0 +1,23 @@
+$('#flash_location_msg').css("display","block");
+<% if flash[:notice] %>
+$('#flash_location_msg').html("<%= escape_javascript(flash[:notice]).html_safe %>");
+<% elsif flash[:error] %>
+$('#flash_location_msg').html("<%= escape_javascript(flash[:error]).html_safe %>");
+<% end %>
+$(window).scrollTop($('#your_location_div').offset().top);
+<% flash[:notice], flash[:error] = nil, nil %>
+setTimeout(function(){$('#flash_location_msg').css("display","none");
+},3000);
+<% status = @location_info_status ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>
+$('#your_location_status').html('<%= status %>');
+<% if @profile_status %>
+$('#continue_btn').show();
+$('#continue_btn_alert').hide();
+<% else %>
+$('#continue_btn').hide();
+$('#continue_btn_alert').show();
+<% end %>
+$("#my_profile_6").load();
+
+initMap(<%= current_user.user_detail.longitude %>,<%= current_user.user_detail.latitude %>)
+addMarker(<%= current_user.user_detail.longitude %>, <%= current_user.user_detail.latitude%>,"<%= current_user.abbreviated_name %>", "<%= current_user.available_distance_first %>", "<%= current_user.price %>","<%= current_user.currency %>" ,"<%= current_user.user_detail.get_user_avatar %>", "<%= current_user.id %>","<%= t 'map.Availability' %>","<%= t 'map.Price' %>", "<%= t 'map.Read More or Contact This Tutor' %>","<%= current_user.user_detail.listing_type %>")

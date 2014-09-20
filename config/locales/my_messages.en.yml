@@ -1,0 +1,9 @@
+en:
+  my_messages:
+    enter_msg: "Enter message below"
+    post_msg: "Post message"
+    sender: "Sender"
+    date: "Date/Time"
+    message: "Message"
+    no_msgs: "No messages yet."
+    please_enter: "Please enter a message."

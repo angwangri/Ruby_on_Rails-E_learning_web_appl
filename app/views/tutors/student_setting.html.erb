@@ -1,0 +1,146 @@
+<%= render :partial => "after_login_student_header"%>
+
+<div class="wrapper">
+  <center>
+
+    <%= form_for(:tutors, :url => {:controller => 'tutors',:action => 'update_student_data', :id => @user.id}, :method => :post, :html => {:id=>"student_setting_form"}) do |f| %>  
+
+         <div class="client-review">
+
+                      <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.member')%>: </label>
+                          </div>
+
+                          <div class="profileRight2">
+
+                               <%= @user.created_at.strftime("%m")%>/<%= @user.created_at.strftime("%Y")%>
+                          </div>
+                      </div>
+
+                      <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.first_name') %></label>
+                          </div>
+
+                          <div class="profileRight2">
+                              <%= f.text_field :first_name, :value => @user.first_name ?  @user.first_name : nil %>
+                              <span id="tutors_first_name_error" class="err_msg"></span>
+                          </div>
+                      </div>
+
+
+                       <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.email')%></label>
+                          </div>
+
+                          <div class="profileRight2">
+                               <%= f.text_field :email, :value => @user.email ?  @user.email : nil %>
+                               <span id="tutors_email_error" class="err_msg"></span>
+                          </div>
+                      </div>
+
+                      <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.password')%>:</label>
+                          </div>
+
+                          <div class="profileRight2">
+                               <%= link_to "#{t('student_account.change_ur_pass')}", edit_user_registration_path %>
+                          </div>
+                      </div>
+
+           <div class="wdt100">
+
+                          <div class="profileLeft">
+                            <label><%= t('student_account.close_acc')%>:</label>
+                          </div>
+
+                          <div class="profileRight2">
+                              <a href="/tutors/student_close_account/<%= @user.id%>" ><%= t('student_account.permanant_close_acc')%></a> (<%= t('student_account.confirm_txt')%>)
+                          </div>
+                      </div>
+
+
+            <div class="profileSubmit">
+  <input type="submit" value="<%= t('save_changes_btn_txt')%>" name="commit" class="btn-orange">
+  </div>
+
+         </div>
+
+
+
+
+
+
+
+
+<% end %>
+
+</center>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+$("#tab_3").parent().addClass("active");
+
+    $.validator.addMethod("CustomEmailFormat", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+    },"Please provide correct email address!");
+
+    $('#student_setting_form').validate(
+    {
+
+      rules: {
+        "tutors[first_name]":{
+          required: true,
+          minlength: 1,
+          maxlength: 20
+        },
+        "tutors[email]": {
+          required: true,
+          CustomEmailFormat: true
+        },
+      },
+
+      messages: {
+        "tutors[first_name]":{
+          required: "Please enter first name",
+          minlength: "First name is too short (minimum is 1 characters)",
+          maxlength: "First name is too long (maximum is 20 characters)"
+        },
+        "tutors[email]":{
+          required: "Please enter a email address",
+          email: "Please provide correct email address!"
+        },
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+  }); // end document.ready
+
+</script>

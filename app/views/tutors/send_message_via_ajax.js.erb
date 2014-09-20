@@ -1,0 +1,22 @@
+<% if flash[:success] %>
+    $("#user_messages_message").val("");
+
+    //$('#success_box').replaceWith('<div id="flash_tutor_msg1" class="alert alert-info fade in"><%= escape_javascript(flash[:success]).html_safe %><button class="close" data-dismiss="alert" type="button">×</button></div>');
+    //$("#tbldata tr:first").after("<tr>"+"<td><%= User.find(@user_message.student_id).first_name %></td>"+"<td><%= @user_message.message %></td>"+"<td><%= @user_message.created_at %></td>"+"</tr>");
+
+    var pro_white_bg = $(".new_scroll_col ul:first").attr("class") != "pro_white_bg"? "pro_white_bg": "";
+
+    var msgHtml =  "<ul class="+pro_white_bg+">"+
+                      "<li><%= User.find(@user_message.student_id).first_name %></li>"+
+                      "<li class='wdt70'><%= @user_message.message %></li>" +
+                      "<li class='wdt18'><%= @user_message.created_at %></li>"+
+                    "</ul>";
+
+    $(".new_scroll_col").prepend(msgHtml);
+
+    setTimeout(function(){
+	    $("#success_box").css("display","none");
+	},5000)
+
+    <% flash[:success],flash[:error] = nil,nil %>
+<% end %>

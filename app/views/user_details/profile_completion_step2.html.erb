@@ -1,0 +1,233 @@
+<div class="wrapper">
+
+<div id="content fullscreen">
+  <div id="signup_steps">
+    <ul>
+      <li>
+        <%= image_tag("/assets/step1_inactive.png", :class => "step_img", :alt=> "Step1_inactive") %>
+        <span class="done"><%= t('profile_completion_2.create_acc') %></span>
+      </li>
+
+      <li>
+        <%= image_tag("/assets/step2_active.png", :class => "step_img", :alt=> "step2") %>
+        <span class="active"><%= t('profile_completion_2.fill_prof') %></span>
+      </li>
+
+      <li>
+        <%= image_tag("/assets/step3_inactive.png", :class => "step_img", :alt=> "Step3_inactive") %>
+        <span class=""><%= t('profile_completion_2.choose_listing') %></span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="content fullscreen">
+<div id="signup_container">
+  <h3><%= t('profile_completion_2.acc_notice_1') %></h3>
+  <%= t('profile_completion_2.acc_notice_2') %>
+  <br><br>
+
+  <div class="signupRight" id="basic_info_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+          <tr>
+            <td>
+              <div id="basic_section_img">
+                <a id="edit_link_0" href="#my_profile_0" data-toggle="collapse" class="collapsed_link collapsed"><%= t('basic_info.basic_info_txt') %></a>
+              </div>
+            </td>
+            <td style="text-align:right;">
+              <div id="basic_info_status">
+                <%= @user_detail.is_basic_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>&nbsp;
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+  <div id="my_profile_0" class="collapse">
+    <div id="flash_basic_msg" class="alert alert-info fade in" style="display:none"></div>
+        <center>
+          <%= render :partial => "basic_info_form", :locals => {:user_detail => @user_detail} %>
+        </center>
+  </div>
+
+  <div class="signupRight" id="your_location_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <div id="basic_section_img1">
+            <a id="edit_link_6" href="#my_profile_6" data-toggle="collapse" class="collapsed_link collapsed"><%= t('your_location.your_location_txt') %></a>
+          </div>
+        </td>
+        <td style="text-align:right;">
+          <div id="your_location_status">
+            <%= @user_detail.is_location_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>&nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+
+  <div id="my_profile_6" class="collapse">
+    <div id="flash_location_msg" class="alert alert-info fade in" style="display:none"></div>
+    <center>
+      <%= render :partial => "location_info_form", :locals => {:user_detail => @user_detail} %>
+    </center>
+  </div>
+
+
+  <div class="signupRight" id="subjects_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <a id="edit_link_1" href="#my_profile_1" data-toggle="collapse" class="collapsed_link collapsed"><%= t('subjects.subject_txt') %></a>
+        </td>
+        <td style="text-align:right;">
+          <div id="subject_info_status">
+            <%= @user_detail.is_subject_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>&nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+
+  <div id="my_profile_1" class="collapse">
+    <div id="flash_msg" class="alert alert-info fade in" style="display:none"></div>
+    <center>
+      <%= render :partial => "subjects_form", :locals => {:user_detail => @user_detail} %>
+    </center>
+  </div>
+
+
+  <div class="signupRight" id="about_you_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <a id="edit_link_2" href="#my_profile_2" data-toggle="collapse" class="collapsed_link collapsed"><%= t('about_you.about_you_txt') %></a>
+        </td>
+        <td style="text-align:right;">
+          <div id="about_you_info_status">
+            <%= @user_detail.is_about_you_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}" %>&nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+
+  <div id="my_profile_2" class="collapse">
+    <div id="flash_msg_info" class="alert alert-info fade in" style="display:none"></div>
+    <center>
+      <%= render :partial => "about_you_form", :locals => {:user_detail => @user_detail} %>
+    </center>
+  </div>
+
+
+  <div class="signupRight" id="availability_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <a id="edit_link_3" href="#my_profile_3" data-toggle="collapse" class="collapsed_link collapsed"><%= t('availability.headline') %></a>
+        </td>
+        <td style="text-align:right;">
+          <div id="availability_info_status">
+            <%= @user_detail.is_availability_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}"%>&nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="my_profile_3" class="collapse">
+    <div id="flash_msg_availability" class="alert alert-info fade in" style="display:none"></div>
+    <center>
+      <% @availability = @user_detail.user.availability %>
+      <%= render :partial => "availability_form", :locals => {:availability => @availability} %>
+    </center>
+  </div>
+
+  <br/>
+
+
+  <div class="signupRight" id="photo_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <a id="edit_link_4" href="#my_profile_4" data-toggle="collapse" class="collapsed_link collapsed"><%= t('photo.headline') %></a>
+        </td>
+        <td style="text-align:right;">
+          <div id="photo_info_status">
+            <%= @user_detail.is_photo_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}"%>&nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+
+  <div id="my_profile_4" class="collapse">
+    <center>
+      <%= render :partial => "photo_form", :locals => {:user_detail => @user_detail} %>
+    </center>
+  </div>
+
+
+  <div class="signupRight" id="contact_div">
+    <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+      <tbody>
+      <tr>
+        <td>
+          <a id="edit_link_5" href="#my_profile_5" data-toggle="collapse" class="collapsed_link collapsed"><%= t('contact.headline') %></a>
+        </td>
+        <td style="text-align:right;">
+          <div id="phone_info_status">
+            <%= @user_detail.is_phone_chat_info_complete? ? "#{t('complete')} #{image_tag('/assets/check-mark.gif')}".html_safe : "#{t('incomplete')}"%>&nbsp;
+          </div>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+
+  <div id="my_profile_5" class="collapse">
+    <div id="flash_phone_msg" class="alert alert-info fade in" style="display:none"></div>
+    <center>
+      <%= render :partial => "phone_or_chat_form", :locals => {:user_detail => @user_detail} %>
+    </center>
+  </div>
+
+
+</div>
+</div>
+<div class="txt_cent_btn">
+  <% if @user_detail.is_user_profile_done? %>
+      <div class="btn_wdt_col">
+        <a href="/user_details/<%= @user_detail.user_id %>/profile_completion_step3" style="display:block;" class="btn-orange-large btn_wdth" id="continue_btn"><%= t "profile_completion_2.continue" %></a>
+
+        <a onclick="alert('<%= t('sign_up.5_sections_warning')%>');return false;" href="#" style="display:none;" id="continue_btn_alert" class="btn-orange-large btn_wdth"><%= t "profile_completion_2.continue" %></a>
+      </div>
+  <% else %>
+      <div class="btn_wdt_col">
+        <a href="/user_details/<%= @user_detail.user_id %>/profile_completion_step3" style="display:none;" class="btn-orange-large btn_wdth" id="continue_btn"><%= t "profile_completion_2.continue" %></a>
+        <a onclick="alert('<%= t('sign_up.5_sections_warning')%>');return false;" href="#" style="display:block;" id="continue_btn_alert" class="btn-orange-large btn_wdth"><%= t "profile_completion_2.continue" %></a>
+      </div>
+  <% end %>
+</div>
+</div>
+
+</div>

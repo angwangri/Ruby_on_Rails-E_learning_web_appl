@@ -1,0 +1,12 @@
+ var markers = <%=raw(@hash.to_json)%>
+ 
+ initializeMap(markers);
+
+ $('#search_result_container').html('<%= escape_javascript(render "map_view_list") %>');
+ $('.pagination').html('<%=  escape_javascript(paginate(@user_details, :remote => true)) %>');
+ $('#page_numbers').html('<%= escape_javascript(render "page_numbers") %>');
+
+
+  
+
+

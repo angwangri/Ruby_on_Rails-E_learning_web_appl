@@ -1,0 +1,110 @@
+
+    <div class="profile_cont_col">
+      <div class="header"><span class="with-icon user-male"><%= t 'about' %> <%= @tutor.first_name %></span></div>
+      <div class="profile_body tr_border">
+        <table>
+          <tbody>
+
+          <!--<tr><td class="profile-label"><%#= t 'tutor.member_since' %>:</td><td><%#= @tutor.member_since %></td></tr>-->
+          <!--tr><td class="profile-label">Gender:</td><td><%#= @tutor.gender %></td></tr-->
+          <tr><td class="profile-label"><%= t 'tutor.subjects_taught' %>:</td><td>
+            <%= @tutor.subjects.map{|sub| I18n.t("subjects.#{sub.strip}", :default => sub.strip) unless sub.blank?}.join(', ')%>
+          </td></tr>
+
+          <tr>
+            <td class="profile-label"><%= t 'tutor.education' %>:</td>
+              <% if @tutor.education.class == String %>
+                  <td><%= @tutor.education %></td>
+              <% else %>
+                <td>
+                  <table>
+                    <% if @tutor.education.present? %>
+                        <% @tutor.education.each do |ed| %>
+                        <tr>
+                          <td class="profile-label"><%= t "about_you.#{ed['degree']}" %>:</td>
+                          <td style="padding-left:10px;"><%= ed['university'] %></td>
+                          <td style="padding-left:10px;"><%= ed['title'] %></td>
+                        </tr>
+                        <% end %>
+                    <% end %>
+                   </table>
+                 </td>
+               <% end %>
+          </tr>
+
+          <tr><td class="profile-label"><%= t 'tutor.experience' %>:</td><td><%= @tutor.experience %></td></tr>
+          <tr><td class="profile-label"><%= t 'tutor.hobbies' %>:</td><td><%= @tutor.hobbies %></td></tr>
+          <!--tr><td class="profile-label">Nationality:</td><td><%= @tutor.user_language.nationality.capitalize if @tutor.user_language %></td></tr-->
+          <tr><td class="profile-label"><%= t 'tutor.spoken_languages' %>:</td><td>
+            <%= @tutor.user_language.lang_spoken.split(',').map{|lan| I18n.t("languages.#{lan.strip}", :default => lan.strip) unless lan.blank?}.join(', ') if @tutor.user_language %></td></tr>
+          <tr><td class="profile-label"><%= t 'tutor.english_ability' %>:</td><td>
+              <%= t "about_you.#{show_lang_ability(@tutor.user_language.english_rate).downcase}" if @tutor.user_language %></td></tr>
+          <tr><td class="profile-label"><%= t 'tutor.chinese_ability' %>:</td><td>
+              <%= t "about_you.#{show_lang_ability(@tutor.user_language.chinese_rate).downcase}" if @tutor.user_language %></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    
+      <div class="ad-container">
+      </div>
+  <div id="reviews_section" class="profile_cont_col">
+    <div class="header">
+      <div class="hReview-aggregate">
+        <span class="with-icon user-reviews"><%= t 'tutor.client_review' %>  <a name="ratings"></a></span>
+        <span class="user_rateing_col"> <table id="tutor_rate_and_ratings">
+          <tbody><tr>
+            <td class="label2"><%= t 'tutor.average_rating' %></td>
+            <td class="data">
+            <% unless @tutor.tutor_review.blank? %>
+                <div class="star-ratings-block-small">
+                  <ul class="star-rating-small">
+                    <li class="current-rating stars_<%= get_rating_class(average_rating(@tutor.id)) %>">
+                      Currently <span class="rating">4.0</span>/4 Stars.
+                    </li>
+                  </ul>
+                </div>
+              <% else %>
+                <span class="no-rating"><%= t('tutor.none_yet')%></span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody></table> </span>
+
+      </div>
+
+    </div>
+     <div class="profile_body">
+        <% unless @tutor.tutor_review.blank? %>
+        <% @tutor.tutor_review.each do |revw| %>
+        <% rater = User.find(revw.rater_id)%>
+          <table class="tutor-profile-reviews">
+              <tbody><tr class="odd hreview">
+                <td>
+                  <span class="description"><%= revw.review %></span><br>
+                  <span class="byline"><%= t 'tutor.Posted' %> <span class="dtreviewed">
+                    <% if session[:locale] == 'cn'%>
+                       <%= timeago_tag revw.created_at, :nojs => true, :limit => 10.days.ago, :lang => 'zh-CN' %>
+                    <% else %>
+                      <%= timeago_tag revw.created_at, :nojs => true, :limit => 10.days.ago %>
+                    <% end %>
+                      <span title="2013-12-21T18:53:55+00:00" class="value-title"></span> <%= t 'tutor.by' %> <span class="reviewer"><%= rater.first_name %></span></span>
+                </span></td>
+                <td>
+                <div class="star-ratings-block-small">
+                  <ul class="star-rating-small">
+                    <li class="current-rating stars_<%= get_rating_class(revw.rate) %>" >
+                      Currently <span class="rating">4.0</span>/5 Stars.
+                    </li>
+                  </ul>
+                </div>
+             </td>
+          </tr>
+          </tbody>
+        </table>
+        <% end %>
+        <% else %>
+          <div class="no-reviews-yet"><%= t('tutor.no_reviews_posted') %></div>
+        <% end %>
+      </div>
+</div>

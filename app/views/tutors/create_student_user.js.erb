@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+$('#myModalSignUp').modal('hide');
+$(window).scrollTop($('#contact_form_box').offset().top);
+$('#inner_contact_box').replaceWith('<div id="flash_tutor_msg" class="alert alert-info fade in"><%= escape_javascript(flash[:notice]).html_safe %></div>');
+<% end %>
+
+<% if flash[:error] %>
+$('#myModalSignUp').modal('hide');
+$(window).scrollTop($('#contact_form_box').offset().top);
+$('#inner_contact_box').replaceWith('<div id="flash_tutor_msg" class="alert alert-error fade in"><%= escape_javascript(flash[:error]).html_safe %></div>');
+<% end %>
+
+<% flash[:notice], flash[:error] = nil, nil %>

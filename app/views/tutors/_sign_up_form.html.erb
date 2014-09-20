@@ -1,0 +1,53 @@
+<div id="myModalSignUp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><%= t('student_sign_up.heading')%></h3>
+  </div>
+  <%= form_for(:users, :url => {:controller=> "tutors",:action=>"create_student_user"}, :html => {:id=>"student_login_form", :method => :post, :remote => true}) do |f| %>
+    <div class="modal-body">
+      <div>
+        <%= f.label "#{t('student_sign_up.stud_name')}" %>
+        <%= f.text_field :first_name, :readonly => true, :class => "text-field" %>
+      </div>
+      <div>
+        <%= f.label "#{t('student_sign_up.stud_email')}" %>
+        <%= f.email_field :email,:readonly => true, :class => "text-field" %>
+      </div>
+      
+      <div>
+        <%= f.label "#{t('student_sign_up.stud_confirm_email')}" %>
+        <%= f.text_field :email_confiramation, :class => "text-field"%>
+        <span id="users_email_confiramation_error" style="color:red;"></span>
+      </div>
+      
+      <div>
+        <%= f.label "#{t('student_sign_up.password')}"  ,:style => "float:left;"%>
+        <%= f.password_field :password, :class => "text-field" %>
+        <span id="users_password_error" style="color:red;"></span>
+      </div>
+      <div>
+                  <input type="checkbox" style="margin-left:25px;float:left;" id="agree" name="agree" />
+                  <label for="agree">&nbsp; <%= t 'sign_up.i_agree' %><% unless session[:locale] == 'cn'%>&nbsp;<% end %><a href="javascript:void(0);" onclick="$('#terms_model').modal();"><%= t 'sign_up.terms_and_conditions' %></a></label>
+                  <span id="agree_error" style="color:red;"></span>        
+      </div>
+    </div>
+    <div class="modal-footer"> 
+      <input class="btn btn-medium btn-success" type="submit" value="<%= t('student_sign_up.create_btn')%>" style="float:left;width:125px;" name="commit">
+    </div>
+  <% end %>
+</div>
+
+
+<div class="modal hide" id="terms_model">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel"><b>Sou Fudao Terms of Use</b></h3>
+      </div>
+      <div class="modal-body">
+      <%= render :partial => "terms_of_use_for_student"%>  
+      </div>
+    </div>
+  </div>
+</div>

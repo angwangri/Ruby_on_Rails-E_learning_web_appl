@@ -1,0 +1,182 @@
+
+<% title "#{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}" %>
+<% data_to_share_to_fb = "#{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}"%>
+<% data_to_share_to_twitter = "Found a great #{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}!"%>
+<% share_title = "#{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}"%>
+
+<div id="tutor_top">
+  <div class="wrapper">
+
+    <table id="tutor_top_table">
+      <tbody><tr>
+        <td class="profile-photo" style="padding-top:10px;">
+          <%= image_tag(@tutor.user_detail.get_user_avatar)%>
+        </td>
+
+        <td class="border-right" style="padding-top:15px;">
+          <h2 class="fn"><%= @tutor.abbreviated_name %></h2>
+          <% if !@tutor.user_detail.listing_type %>
+          <a class="lbOn featured" title="Featured Tutor" style="position: relative; top: -4px; left: 4px;" rel="featured" href="#myModal" data-toggle="modal" data-target="#myModal">Featured</a>
+          <% end %>
+          <table id="tutor_summary">
+            <tbody><tr><td class="label2">Location</td><td class="data"><a href="/" class="adr"><%= @tutor.location %></a></td></tr>
+            <tr><td class="label2">postal</td><td class="data"><span class="postal-code"><%= @tutor.zip_code %></span></td></tr>
+            <tr><td class="label2">Member Since</td><td class="data"><%= @tutor.member_since %></td></tr>
+          </tbody></table>
+        </td>
+        
+        <td class="border-right border-left" style="padding-top:10px;">
+          <p class="label2">Preferred Subjects</p>
+          <table id="tutor_subjects">
+              <tbody>
+              <% for i in 0..3 %>  
+              <tr>
+                
+                  <td><a href="#"><%= @tutor.subjects[i + i] %></a></td>
+                
+                  <td><a href="#"><%= @tutor.subjects[i + i +1] %></a></td>
+                
+              </tr>   
+              <% end %>         
+          </tbody></table>
+        </td>
+        <td class="border-left" style="padding-top:5px;">
+          <table id="tutor_rate_and_ratings">
+            <tbody>
+            <tr>
+              <td class="label2">Hourly Rate:</td>
+              <td class="data price">
+              1 Student: <%= @tutor.rate %> <span class="per-hour">/hour</span> 
+              <% if @tutor.availability.is_first_session_free %>      
+              <br/>
+              <span style="font-size:10px;font-weight:bold;color:#00457F;">
+               First session free!
+              </span>
+              <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="label2">Average Rating</td>
+              <td class="data">
+              <% unless @tutor.tutor_review.blank? %>
+                <div class="star-ratings-block-small">
+                  <ul class="star-rating-small">
+                    <li class="current-rating stars_<%= get_rating_class(@tutor.tutor_review[0].rate) %>">
+                      Currently <span class="rating">4.0</span>/4 Stars.
+                    </li>
+                  </ul>
+                </div>
+              <% else %>
+                <span class="no-rating">None yet</span>
+              <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="label2">Response Rate</td>
+              <td class="data price"><%= (@tutor.response_rate == 0) ? 100 : @tutor.response_rate %><span class="per-hour"> %</span>
+              </td>
+            </tr>            
+            <tr>
+              <td class="label2">Share This Page</td>
+                <td class="data">
+                  <span class='st_facebook' st_url="<%= request.original_url %>"></span>
+                  <span class='st_twitter' st_title="<%= data_to_share_to_twitter %>" st_url="<%= request.original_url %>" st_via="<%= request.host_with_port %>"></span>
+                  <span class='st_linkedin' st_title="<%= share_title %>" st_url="<%= request.original_url %>"></span>
+                  <span class='st_googleplus' st_url="<%= request.original_url %>"></span>
+                  <a href="mailto:?subject=<%= data_to_share_to_fb %>&body=<%= request.url%>"><%= image_tag("/assets/email.png")%></a>
+                </td>
+            </tr>
+          </tbody></table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+  
+  
+<div class="wrapper">
+  <p id="back_to_search_results">
+    <a href="/">« Search other tutors</a>
+  </p>
+</div>
+
+
+<div class="wrapper">
+    <div id="content" class="tutor-profile">
+    <%= render :partial => "tutor_profile" %>
+    </div>
+    <div id="sidebar" class="tutor-profile">
+    <%= render :partial => "tutor_location" %>
+    </div>
+</div>
+<div>
+  <%= render :partial => "/home/featured"%>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    initializeMiniMap(<%=raw @hash.to_json %>);
+
+
+    $.validator.addMethod("CustomEmailFormat", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+    },"Please provide correct email address!");
+
+    $('#tutor_contact_form').validate(
+    {
+
+      rules: {
+        "user_messages[sender_phone]":{
+          required: true,
+        },
+        "user_messages[sender_name]":{
+          required: true,
+        },
+        "user_messages[sender_email]": {
+          required: true,
+          CustomEmailFormat: true
+        },
+        "user_messages[message]": {
+          required: true,
+        }
+      },
+
+      messages: {
+        "user_messages[sender_phone]":{
+          required: "Phone can't be blank",
+        },
+        "user_messages[sender_name]":{
+          required: "Name can't be blank",
+        },
+        "user_messages[sender_email]":{
+          required: "Please enter a email address",
+          email: "Please provide correct email address!"
+        },
+        "user_messages[message]":{
+          required: "Message can't be blank"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+
+  });
+</script>

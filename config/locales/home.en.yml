@@ -1,0 +1,42 @@
+en:
+  home: 'Home'
+  about: 'About'
+  contact_us: 'Contact Us'
+  tutoring_jobs: 'Teacher Sign Up'
+  login: 'Login'
+  title_txt: 'Sou Fudao: Find a tutor in China | Teaching jobs in China'
+  search_headline: 'Search for a tutor near you:'
+  subject: 'Subject'
+  location: 'Location'
+  search_button: 'Search'
+
+  find_teachers: 'Find teachers in your area'
+  check_rates: 'Check out rates, availability, experience, student reviews, language ability, and more'
+  contact_teachers_directly:
+   html: 'Contact teachers directly, not through an agency or school'
+  txt_location: 'eg. City, state, zip'
+  txt_default: "Shanghai, China"
+  want_to_signup: 'Want to sign up as a tutor? It’s free! '
+  here: 'Just click here'
+
+  my_account_link: "My Account"
+  logout: "Logout"
+  featured_tutors: "Featured Tutors"
+  near_you: "near you"
+  view_all: "View All"
+  review: "review"
+  reviews: "reviews"
+
+  privacy_policy: "Privacy Policy"
+  terms_of_use: "Terms of Service"
+  member_since: "Member Since"
+  last_login: "Last login"
+  vip:
+    html: 'Tutors with the <span class="featured"><img src="/assets/vip.png"></span> badge next to their name have paid to appear first in search results and may be more responsive to messages.    </br></br> As a student or parent, you may have the best results contacting VIP tutors first.'
+  feature_heading: "What does “VIP” mean?"
+  footer:
+    International Social Media: "International Social Media"
+    Chinese Social Media: "Chinese Social Media"
+    wechat_account: "Official WeChat account"
+
+

@@ -1,0 +1,9 @@
+cn:
+  my_messages:
+    enter_msg: "填写留言"
+    post_msg: "发送留言"
+    sender: "发送人"
+    date: "日期/时间"
+    message: "留言内容"
+    no_msgs: "还没有消息"
+    please_enter: "不能发送空留言！"

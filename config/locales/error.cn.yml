@@ -1,0 +1,19 @@
+cn: 
+  signup:
+    first_name: "请输入您的名字"
+    first_name_min_length: "名字太短（最小为1个字符）"
+    first_name_max_length: "名字太长（最长为20个字符）"
+    last_name: "请输入您的姓氏"
+    last_name_min_length: "姓过短（最短为1个字符）"
+    last_name_max_length: "姓太长（最长为20个字符）"
+    password: "请输入您的密码"
+    password_min_length: "您的密码必须至少6个字符长"
+    email: "请输入您的邮件"
+    email_format: "请提供有效的邮箱地址"
+    agree: "同意并遵守网站规则条款"
+    message: "请输入您的留言"
+    msg_name: "请输入您的姓名"
+    enter_value: "请填写"
+    
+    
+

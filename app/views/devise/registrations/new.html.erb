@@ -1,0 +1,209 @@
+<!--div id="top">
+  <div class="wrapper">
+    <h2>Tutoring Jobs</h2>
+  </div>
+</div-->
+
+<div class="wrapper ">
+  <div class="full_wht_bg wdth40">
+  <div class="teachers_page">
+
+      <p><%= t 'sign_up.create_profile' %></p>
+
+      <div class="row" style="margin-left: 0">
+        <div class="well">
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <% if (devise_error_messages! == "Email has already been taken") %>
+             <div style="margin-bottom:10px;">“Sure this is you? <a href="/users/password/new"><%= t 'sign_in.forget_pass' %></a>”</div>
+          <% end %>
+              <table>
+                <tr>
+                  <th><label><%= t 'sign_up.first_name' %></label>
+                  </th>
+                  <td><%= f.text_field :first_name, :autofocus => true %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label><%= t 'sign_up.last_name' %></label>
+                  </th>
+                  <td><%= f.text_field :last_name %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label><%= t 'sign_up.email' %></label>
+                  </th>
+                  <td><%= f.email_field :email %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label><%= t 'sign_up.password' %></label>
+                  </th>
+                  <td><%= f.password_field :password %>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <input type="checkbox" style="float:left;" id="agree" name="agree"/>
+                    <label for="agree">&nbsp; <%= t 'sign_up.i_agree' %><% unless session[:locale] == 'cn'%>&nbsp;<% end %><a href="javascript:void(0);" onclick="$('#terms_model').modal();"><%= t 'sign_up.terms_and_conditions' %>
+                        </a></label>
+                  </td>
+                </tr>
+                 <tr>
+                   <td colspan="2">
+                <div class="submit_btn_box">
+                      <%= t 'sign_up.submit.html' %>
+                    </div>
+                   </td>
+                 </tr>
+              </table>
+          <% end %>
+        </div>
+      </div>
+      <div class="form_bot_txt">
+        <%= t('sign_up.already_sign_in') %>
+        <a href="/users/sign_in"> <%= t('sign_up.already_sign_in_here') %></a><br/><br/><br/>
+        <%= t('sign_up.teacher_search_txt') %>
+        <a href="/tutors/search"> <%= t('sign_up.teacher_search_txt_here') %></a><br/>
+        <%= t('sign_up.create_acc_txt') %>
+      </div>
+
+
+
+    <!--
+   <div class="span4">
+     <div class="well">
+       Over
+       <b>47,199</b>
+       tutors have signed-up in
+       <b>5,825</b>
+       cities around the world. Here's what they've told us...
+       <br>
+       <br>
+       <span class="quote">Thanks for this service. Of all the tutoring web sites I'm on, this one has been the most fruitful.</span>
+       <br>
+       <span class="cite">- Lindsey L. New York, NY</span>
+       <br>
+       <br>
+       <span class="quote">The site has been great so far and I have increased my client base substantially by having a profile. On average, I get about one new contact a week, and on average work about 2 hours each week. An extra $100/week just for reciting knowledge is a great deal to me.</span>
+       <br>
+       <span class="cite">- Michael Donaghy Philadelphia, PA</span>
+       <br>
+       <br>
+       <span class="quote">Thank you for creating this tutoring website. I think it is absolutely great and can be very helpful to students, counselors, and parents. I've forwarded it to our Director of Guidance & Counseling.</span>
+       <br>
+       <span class="cite">- Dianna G. Austin, TX</span>
+       <br>
+       <br>
+       <span class="quote">I have been here for about 15 days. I have started with one student and they have given me a review too. Personally, I feel good about your website. The structure of your homepage is excellant where students can easily take a look at the list of tutors available.</span>
+       <br>
+       <span class="cite">- Tara B. Boston, MA</span>
+       <br>
+       <br>
+       <span class="quote">Thank you so much. I love your website. I've already got a couple clients. You rock!</span>
+       <br>
+       <span class="cite">- Kenneth E. Austin, TX</span>
+       <br style="clear:both;">
+     </div>
+   </div>
+    -->
+  </div>
+    </div>
+</div>
+
+<div class="modal hide" id="terms_model">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel"><b>Sou Fudao Terms of Use</b></h3>
+      </div>
+      <div class="modal-body">
+        <%= render :partial => "terms_of_use" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.validator.addMethod("CustomEmailFormat", function(value, element) {
+            return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+        }, "Please provide correct email address!");
+
+        $('#new_user').validate(
+                {
+
+                    rules: {
+                        "user[first_name]":{
+                            required: true,
+                            minlength: 1,
+                            maxlength: 20
+                        },
+                        "user[last_name]":{
+                            required: true,
+                            minlength: 1,
+                            maxlength: 20
+                        },
+                        "user[email]": {
+                            required: true,
+                            CustomEmailFormat: true
+                        },
+                        "user[password]":{
+                            required: true,
+                            minlength: 6
+                        },
+                        "agree":{
+                            required: true
+                        }
+                    },
+
+                    messages: {
+                        "user[first_name]":{
+                            required: "<%= t('signup.first_name')%>",
+                            minlength: "<%= t('signup.first_name_min_length') %>",
+                            maxlength: "<%= t('signup.first_name_max_length') %>"
+                        },
+                        "user[last_name]":{
+                            required: "<%= t('signup.last_name')%>",
+                            minlength: "<%= t('signup.last_name_min_length')%>",
+                            maxlength: "<%= t('signup.last_name_max_length')%>"
+                        },
+                        "user[password]": {
+                            required: "<%= t('signup.password')%>",
+                            minlength: "<%= t('signup.password_min_length')%>"
+                        },
+                        "user[email]":{
+                            required: "<%= t('signup.email')%>",
+                            email: "<%= t('signup.email_format')%>"
+                        },
+                        "agree":{
+                            required: "<%= t('signup.agree')%>"
+                        }
+                    },
+
+                    showErrors: function (errorMap, errorList) {
+
+                        $.each(this.successList, function (index, value) {
+                            $(value).popover('hide');
+                        });
+
+
+                        $.each(errorList, function (index, value) {
+
+                            console.log(value.message);
+
+                            var _popover = $(value.element).popover({
+                                trigger: 'manual',
+                                placement: 'right',
+                                content: value.message
+                            });
+
+                            _popover.data('popover').options.content = value.message;
+                            $(value.element).popover('show');
+
+                        });
+
+                    }
+                });
+    }); // end document.ready
+</script>

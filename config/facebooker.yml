@@ -1,0 +1,16 @@
+## YAML Template.
+---
+development:
+  app_id: 186729934864705
+  api_key: 186729934864705
+  secret_key: 9e3defb5d16041ebeed2a9d6940cd75d
+
+production:
+  app_id: 186729934864705
+  api_key: 186729934864705
+  secret_key: 9e3defb5d16041ebeed2a9d6940cd75d
+
+test:
+  app_id: 186729934864705
+  api_key: 186729934864705
+  secret_key: 9e3defb5d16041ebeed2a9d6940cd75d

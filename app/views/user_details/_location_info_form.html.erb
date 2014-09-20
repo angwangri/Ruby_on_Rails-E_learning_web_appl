@@ -1,0 +1,195 @@
+<h4><%=t('your_location.detailed_add')%>:</h4>
+<%= render 'location_search' %>
+<br><br><br>
+<%= form_for(:user_details, :url => {:action=>:update_location_details}, :html => {:id=>"location_info_form", :method => :post, :remote => true}) do |f| %>
+  <% if @user_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_detail.errors.count, "error") %> prohibited this user_detail from being saved:</h2>
+        <ul>
+          <% @user_detail.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+     </div>
+  <% end %>
+
+    <div class="account_col">
+
+      <div class="account_fild_col">
+        <div class="row">
+
+           <div class="span2" style="text-align:left;padding-top:10px;">
+            <%= f.label "#{t('your_location.country')}" %>
+            </div>
+
+            <div class="span4">
+              <%= f.select(:country, [["#{t('your_location.china_country')}", 'China']]) %>
+            <span id="user_details_country_error" class="err_msg"></span>
+            </div>
+
+        </div>
+      </div>
+
+
+       <div class="account_fild_col">
+        <div class="row">
+
+           <div class="span2" style="text-align:left;padding-top:10px;">
+            <%= f.label "#{t('your_location.city')}" %>
+            </div>
+
+            <div class="span4">
+              <select name="user_details[city]" id="city_select">
+                <%= render :partial => 'cities'%>
+              </select>
+             <span id="user_details_city_error" class="err_msg"></span>
+            </div>
+
+        </div>
+      </div>
+
+
+        <div class="account_fild_col">
+        <div class="row">
+            <div class="span2" style="text-align:left;padding-top:10px;">
+               <%= f.label "#{t('your_location.district')}", :style => "margin-bottom:0px;" %>
+             </div>
+
+              <div class="span4">
+                <select name="user_details[district]" id="district_select">
+                <% @account_select = true %>
+                  <%= render :partial => 'districts', :locals => { :account_select => @account_select } %>
+                </select>
+              </div>
+        </div>
+      </div>
+        <div class="account_fild_col mb10">
+
+          <div class="location_txt">
+            
+          <p>
+          <%= t('your_location.note_line3')%>
+          </p>
+
+        </div>
+
+      <div class="location_txt">
+        <div class="row">
+          <div class="span4">
+          <%= f.hidden_field :street_add, :value => @user_detail.street_add ? @user_detail.street_add : nil  %>
+          </div>
+        </div>
+      
+
+      </div>
+
+        <div class="account_fild_col mb10">
+
+          <div class="location_txt">
+            <h4><%= t('your_location.your_location_txt')%>:</h4>
+          <p>
+          <%= t('your_location.your_location_txt1')%>
+          <br/><br/>
+          <%= t('your_location.your_location_txt2')%>
+          <br/><br/>
+          <%= t('your_location.your_location_txt3')%>
+          </p>
+
+        </div>
+
+          <div class="location_map" id="map">
+
+
+          </div>
+
+        </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <div class="profilesubmit fl_none">
+    <input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_location_info" name="commit"/>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#location_info_form').submit(function() {
+      $('#user_details_street_add').val($('input[type=search]').val());
+    });
+
+    $('#location_info_form').validate(
+    {
+
+      rules: {
+        "user_details[country]":{
+          required: true
+        },
+        "user_details[state]":{
+          required: true
+        },
+        "user_details[city]": {
+          required: true
+        }
+      },
+
+      messages: {
+        "user_details[country]":{
+          required: "<%= t('signup.enter_value')%>",
+        },
+        "user_details[state]":{
+          required: "<%= t('signup.enter_value')%>",
+        },
+        "user_details[city]":{
+          required: "<%= t('signup.enter_value')%>"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }
+    });
+
+    $("#city_select").change(function(){
+      var obj = this;
+      $.ajax({
+        type: "GET",
+        url: "/user_details/get_districts",
+        data: { city: obj.value, id:  <%= @user_detail.id %>}
+      })
+      .done(function( msg ) { });
+    });
+
+    $('#BMapLib_sc_b0').hide();
+    $('#BMapLib_cityTab').hide();
+
+    initMap();
+    <%= longitude = (current_user.user_detail.longitude == 0 ? 121.47370 : current_user.user_detail.longitude ) %>
+    <%= latitude = (current_user.user_detail.latitude == 0 ? 31.23041 : current_user.user_detail.longitude ) %>
+    addMarker(<%= longitude %>, <%=latitude %>,"<%= current_user.abbreviated_name rescue "" %>", "<%= current_user.available_distance_first rescue "" %>", "<%= current_user.price rescue "" %>","<%= current_user.currency rescue "" %>" ,"<%= current_user.user_detail.get_user_avatar %>", "<%= current_user.id %>")
+
+
+  }); // end document.ready
+</script>

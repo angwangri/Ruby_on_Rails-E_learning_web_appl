@@ -1,0 +1,30 @@
+cn:
+  settings:
+    acc_type: "账户类型"
+    free_list: "基本账户"
+    featured_list: "星级账户"
+    client_rating: "客户评价"
+    invite_frend: "邀请朋友"
+    email: "朋友邮件地址"
+    send_invite: "发送邀请"
+    email_updates: "新信息邮件提醒："
+    updates_txt: "关于账户问题及新信息，请邮件通知我。"
+    close_acc: "注销账户"
+    permanant_close_acc: "永久注销账户"
+    confirm_txt: "下一页确认"
+    ask_for_reviews_txt: "学生给予的评价"
+
+    close_heading: "您确定要注销您的账户？"
+    close_txt: "一旦您的账户被注销，账户中所有信息将被永久删除。"
+    close_confirm: "确定注销"
+    or: "或者"
+    close_cancel: "暂不注销"
+
+    confirm_heading: "您的账户已被关闭"
+    txt_1: "感谢您使用SouFudao.com - 我们遗憾地看到你走"
+    txt_2: "请让我们知道我们可以做什么更好。"
+    txt_3: "在这里留下反馈"
+    txt_4: " 我们承诺倾听！"
+
+    average: "平均"
+    stars: "评价"

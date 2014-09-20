@@ -1,0 +1,322 @@
+<%= form_for(:user_details, :url => {:action=>:update_user_info}, :html => {:id=> "about_you_form",:method => :post, :remote => true}) do |f| %>
+    <div class="degree_col">
+      <%= t 'about_you.note' %>
+    </div>
+
+    <div class="degree_col">
+
+      <div class="degree_lft_col">
+        <b><%= t('about_you.education') %>:</b><br>
+        (<%= t('optional') %>)
+      </div>
+
+      <div class="degree_rht_col">
+        <% if @user_detail.education && (@user_detail.education.class.to_s == 'Array') %>
+            <% @user_detail.education.each do |record| %>
+                <div id="degrees_portion">
+
+                  <div class="wdt100">
+                    <div class="degree_port_left_col">
+                      <%= t('about_you.degree') %>:
+                    </div>
+
+                    <div class="degree_port_rht_col">
+                      <select id="user_details_[education][][degree]" name="user_details[education][][degree]">
+                        <option <%= 'selected' if record['degree'] == "associates" %> value="associates"><%= t 'about_you.associates' %></option>
+                        <option <%= 'selected' if record['degree'] == "bachelors" %> value="bachelors"><%= t 'about_you.bachelors' %></option>
+                        <option <%= 'selected' if record['degree'] == "masters" %> value="masters"><%= t 'about_you.masters' %></option>
+                        <option <%= 'selected' if record['degree'] == "doctorate" %> value="doctorate"><%= t 'about_you.doctorate' %></option>
+                        <option <%= 'selected' if record['degree'] == "certificate" %> value="certificate"><%= t 'about_you.certificate' %></option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="wdt100">
+
+                    <div class="degree_port_left_col">
+                      <%= t('about_you.university') %>:<br/>
+
+                      <p style="font-size:x-small;">(<%= t('optional') %>)</p>
+                    </div>
+
+                    <div class="degree_port_rht_col">
+                      <%= text_field 'user_details', '[education][][university]', :value => record["university"].blank? ? nil : record["university"] %>
+                    </div>
+
+                  </div>
+
+
+                  <div class="wdt100">
+
+                    <div class="degree_port_left_col">
+                      <%= t('about_you.title') %>:
+                      <br/>
+
+                      <p style="font-size:x-small;"><%= t('about_you.example') %>:
+                        "<%= t('about_you.sub_ex_txt_chem') %>" <%= t('about_you.sub_ex_txt_or') %>
+                        "<%= t('about_you.sub_ex_txt_tosel') %>"</p>
+                    </div>
+
+                    <div class="degree_port_rht_col">
+                      <%= text_field 'user_details', '[education][][title]', :value => record["title"].blank? ? nil : record["title"] %>
+                    </div>
+
+                  </div>
+
+
+                  <div class="degree_port_rht_col">
+                    <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();$('#add_deg').show();"><%= t('remove') %></a>
+              
+                  </div>
+
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="degree_col">
+      <div class="degree_rht_col">
+        <% if @user_detail.education.blank? %>
+            <%= render :partial => "add_more_degree" %>
+        <% end %>
+        <div id="degrees_portion_partial"></div>
+
+        <div class="degree_col">
+          <%= link_to "#{t('about_you.add_more_degree')}", :controller =>'user_details', :action=> 'add_more_degree', :remote => true, :id=>"add_deg" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('about_you.exp') %>
+      </div>
+
+      <div class="degree_rht_col">
+        <div class="degree_col">
+          <div class="degree_port_left_col" style="font-size:x-small;">
+            <%= t('about_you.write_about') %>:<br/>
+            -<%= t('about_you.quali_sub_txt1') %>
+            <br/>
+            -<%= t('about_you.quali_sub_txt2') %>
+            <br/>
+            -<%= t('about_you.quali_sub_txt3') %>
+            <br/>
+            -<%= t('about_you.quali_sub_txt4') %>
+            <br/>
+            -<%= t('about_you.quali_sub_txt5') %>
+            <br/>
+          </div>
+
+          <div class="degree_port_rht_col">
+            <%= f.text_area :experience, :value => @user_detail.experience ? @user_detail.experience : nil , :required => true %>
+
+          <span id="user_details_experience_error" class="err_msg"></span>            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('about_you.hobbies') %>:
+      </div>
+
+      <div class="degree_rht_col">
+        <div class="degree_col">
+          <div class="degree_port_left_col" style="font-size:x-small;">
+            <%= t('about_you.hobbies_sub_txt1') %>
+            <br/>
+            <%= t('about_you.hobbies_sub_txt2') %>
+          </div>
+
+          <div class="degree_port_rht_col">
+            <%= f.text_area :hobbies, :value => @user_detail.hobbies ? @user_detail.hobbies : nil , :required => true%>
+            <span id="user_details_hobbies_error" class="err_msg"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="degree_col">
+      <% @lang_spoken_arr = (@user_detail.user.user_language && @user_detail.user.user_language.lang_spoken) ? @user_detail.user.user_language.lang_spoken : nil %>
+
+      <div class="degree_lft_col">
+        <%= t('about_you.language') %>:
+      </div>
+      
+      <div class="degree_port_left_col spoke_lang">
+        <span style='width: 185px;display: block;'><%= t('about_you.select_lang') %> »</span>
+        <select id="lang_spoken_list" onchange="set_language(this);" name="lang_list" require="true">
+          <option value=""></option>
+          <optgroup label='<%= t "languages.Popular Languages" %>'>
+            <option value='<%= t "languages.Chinese (Mandarin)" %>'><%= t "languages.Chinese (Mandarin)" %></option>
+            <option value='<%= t "languages.Chinese (Cantonese)" %>'><%= t "languages.Chinese (Cantonese)" %></option>
+            <option value='<%= t "languages.English" %>'><%= t "languages.English" %></option>
+            <option value='<%= t "languages.French" %>'><%= t "languages.French" %></option>
+            <option value='<%= t "languages.German" %>'><%= t "languages.German" %></option>
+            <option value='<%= t "languages.Japanese" %>'><%= t "languages.Japanese" %></option>
+            <option value='<%= t "languages.Korean" %>'><%= t "languages.Korean" %></option>
+            <option value='<%= t "languages.Spanish" %>'><%= t "languages.Spanish" %></option>
+          </optgroup>
+          <optgroup label='<%= t "languages.Other languages" %>'>
+            <%= render :partial => "list_of_spoken_languages" %>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="degree_rht_col">
+        <div class="degree_col">
+          <div class="degree_port_rht_col spek_lang">
+            <ul id='lang_list' class='list-panel lang-list'>
+	    <%if @lang_spoken_arr.present? %>
+	      <%- @lang_spoken_arr.split(',').each do |item| -%>
+                <%unless item.strip.blank? %>
+                    <li>
+                      <%=t("languages.#{item.strip}")%>
+                      
+                      <a href="javascript:void(0)" onclick="removeLangItem(this)" data-text='<%=t("languages.#{item.strip}")%>' data-remove-text='<%=item.strip %>'>X</a>
+                    </li>
+                <%end %>
+	      <%end %>
+	    <%end%>  
+            </ul>
+            <textarea style="overflow:hidden;display: none;" id="user_language_lang_spoken" name="user_language[lang_spoken]"><%= @lang_spoken_arr %></textarea>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('about_you.eng_lang_ability') %>:
+      </div>
+
+      <div class="degree_rht_col">
+        <% @eng_rate = (@user_detail.user.user_language && @user_detail.user.user_language.english_rate) ? @user_detail.user.user_language.english_rate : 0 %>
+        <div class="degree_col lang_select">
+          <select id="user_language_english_rate" name="user_language[english_rate]">
+            <option value="0" <%= 'selected' if @eng_rate == 0 %>><%= t('about_you.none') %></option>
+            <option value="1" <%= 'selected' if @eng_rate == 1 %>><%= t('about_you.some') %></option>
+            <option value="2" <%= 'selected' if @eng_rate == 2 %>><%= t('about_you.good') %></option>
+            <option value="3" <%= 'selected' if @eng_rate == 3 %>><%= t('about_you.very_good') %></option>
+            <option value="4" <%= 'selected' if @eng_rate == 4 %>><%= t('about_you.fluent') %></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="degree_col">
+      <div class="degree_lft_col">
+        <%= t('about_you.chinese_lang_ability') %>:
+      </div>
+
+      <div class="degree_rht_col ">
+        <% @chinese_rate = (@user_detail.user.user_language && @user_detail.user.user_language.chinese_rate) ? @user_detail.user.user_language.chinese_rate : 0 %>
+        <div class="degree_col lang_select">
+
+          <select id="user_language_chinese_rate" name="user_language[chinese_rate]">
+            <option value="0" <%= 'selected' if @chinese_rate == 0 %>><%= t('about_you.none') %></option>
+            <option value="1" <%= 'selected' if @chinese_rate == 1 %>><%= t('about_you.some') %></option>
+            <option value="2" <%= 'selected' if @chinese_rate == 2 %>><%= t('about_you.good') %></option>
+            <option value="3" <%= 'selected' if @chinese_rate == 3 %>><%= t('about_you.very_good') %></option>
+            <option value="4" <%= 'selected' if @chinese_rate == 4 %>><%= t('about_you.fluent') %></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="profilesubmit fl_none">
+      <input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_basic_info" name="commit"/>
+    </div>
+<% end %>
+<script type="text/javascript">
+    function set_language(sel) {
+        var d = sel.options[sel.selectedIndex].value;
+        var text_data = $("#user_language_lang_spoken").val();   
+        console.log(text_data.trim() != "[]")   
+          if(text_data.indexOf(d) == -1)
+  	         {
+              if (!text_data.trim() || text_data.trim() == "[]" || text_data.trim() == ',') {
+                  $("#user_language_lang_spoken").val(d);
+                  $("#lang_list").append('<li>'+d+'<a href="javascript:void(0)" onclick="removeLangItem(this)" data-text="'+ d +'" data-remove-text="'+ d +'">X</a></li>');
+              } else {
+                  var updated_data = text_data + ", " + d;
+                  $("#user_language_lang_spoken").val(updated_data).trigger('autosize.resize');
+                  $("#lang_list").append('<li>'+d+'<a href="javascript:void(0)" onclick="removeLangItem(this)" data-text="'+ d +'" data-remove-text="'+ d +'">X</a></li>');
+              }
+          }  
+         
+        //$("#user_language_lang_spoken").autosize();
+    }
+
+
+    $(document).ready(function() {
+        $('#user_language_lang_spoken').autosize();
+
+$('#about_you_form').validate(
+    {
+
+      rules: {
+        "user_details[experience]":{
+          required: true
+        },
+        "user_details[hobbies]":{
+          required: true
+        }
+      },
+
+      messages: {
+        "user_details[experience]":{
+          required: "<%= t('signup.enter_value')%>",
+        },
+        "user_details[hobbies]":{
+          required: "<%= t('signup.enter_value')%>",
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");                      
+        });
+
+      }      
+    });        
+    });
+    
+    function removeLangItem(item)
+    {
+      
+      remove_text = $(item).attr('data-remove-text');
+      console.log(remove_text)
+      if($('#user_language_lang_spoken').val().indexOf(remove_text) != -1)
+      {
+        $(item).parent().remove()
+        removed_val = $('#user_language_lang_spoken').val().replace(remove_text ,'');
+        removed_val = removed_val.replace(", ," ,',');
+        removed_val = removed_val.replace(/(^\s*,)|(,\s*$)/g, '');
+        $("#user_language_lang_spoken").val( removed_val );
+      }
+
+    }
+</script>
+

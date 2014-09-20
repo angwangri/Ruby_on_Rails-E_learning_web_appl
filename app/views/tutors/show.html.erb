@@ -1,0 +1,227 @@
+<% title = t "subjects.#{@tutor.subjects.first}" %>
+<% tutor = t "title.tutor" %>
+<% title "#{title}#{tutor} #{@tutor.user_detail.city}, #{@tutor.user_detail.country}" %>
+<% data_to_share_to_fb = "#{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}" %>
+<% data_to_share_to_twitter = "Found a great #{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}!" %>
+<% share_title = "#{@tutor.subjects.first} Tutor #{@tutor.user_detail.city}, #{@tutor.user_detail.country}" %>
+
+<div id="tutor_top">
+  <div class="wrapper">
+
+    <div id="tutor_top_table">
+      <div class="tutor_profile_row">
+        <div class="profile-photo">
+          <%= image_tag(@tutor.user_detail.get_user_avatar) %>
+        </div>
+
+        <div class="profile_info">
+          <h2 class="fn">
+            <% if session[:locale] == 'cn' %>
+                <%= @tutor.last_name %> <%= @tutor.first_name %>
+            <% else %>
+                <%= @tutor.abbreviated_name if @tutor %>
+            <% end %>
+          </h2>
+
+          <% if !@tutor.user_detail.listing_type %>
+              <a class="lbOn featured" title="Featured Tutor" style="position: relative; top: -4px; left: 4px;" rel="featured" href="#myModal" data-toggle="modal" data-target="#myModal"><img src="/assets/vip.png"></a>
+          <% end %>
+          <div class="clear"></div>
+          <table id="tutor_summary">
+            <tr>
+              <td class="data"><img src="/assets/flags/<%=@tutor.nationality%>.png"/></td>
+              <td class="data"><span class="adr"><%= t "nationality.#{@tutor.nationality}" %></span></td>
+              <td class="data"><%= t "tutor.#{@tutor.gender}" %></td>
+              <td class="data"><%= (Date.today().year - @tutor.user_detail.age.year).to_i unless @tutor.user_detail.age.blank? %><%= '岁' if session[:locale] == 'cn' %></td>
+            </tr>
+            <tr>
+              <td colspan='3' class="label2">
+                <% if session[:locale] == 'cn' %>
+                    <%= @tutor.user_detail.country %> <%= @tutor.user_detail.city %>
+                <% else %>
+                    <%= @tutor.short_address %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+
+
+        </div>
+
+      </div>
+
+      <div class="tutor_profile_row tut_border">
+        <div id="tutor_subjects">
+          <div class="tutor_sub_list">
+            <% for i in 0..3 %>
+                <% if @tutor.subjects[i + i] %>
+
+                    <li><%= t "subjects.#{@tutor.subjects[i + i].lstrip}" %></li>
+                    <% unless @tutor.subjects[i + i +1].blank? %>
+                        <li><%= t "subjects.#{@tutor.subjects[i + i +1].lstrip}" %></li>
+                    <% end %>
+
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tutor_profile_row wd20">
+        <div id="tutor_rate_and_ratings">
+          <div class="tutor_rate_col">
+
+            <div class="data price txt_gren">
+              <%= t "rate_sym.#{@tutor.currency}" unless session[:locale] == 'cn' %> <%= @tutor.price %> <%= t "rate_short.#{@tutor.currency}" %>
+              <span class="per-hour"><%= t 'rate.per hr' %></span>
+              <% if @tutor.availability.is_first_session_free %>
+                  <br/>
+              <span class="first_free_ses">
+               <%= t('tutor.first_sess_free') %>
+              </span>
+              <% end %>
+            </div>
+
+          </div>
+
+          <div class="tutor_rate_col">
+
+            <div class="data" style="padding-top:2px;">
+              <% unless @tutor.tutor_review.blank? %>
+                  <div class="star-ratings-block-medium">
+                    <ul class="star-rating-small" style="margin-top:5px;float:left;">
+                      <li class="current-rating stars_<%= get_rating_class(@tutor.tutor_review[0].rate) %>">
+                        Currently <span class="rating">4.0</span>/4 Stars.
+                      </li>
+                    </ul>
+                    <% txt = (@tutor.tutor_review.count == 1) ? t("tutor.review") : t("tutor.reviews") %>
+                    <b style="padding-left:3px;"><a href="#">(<%= @tutor.tutor_review.count %> <%= txt %>)</a></b>
+                  </div>
+              <% else %>
+                  <span class="no-rating" style="margin-left: 0px;"><%= t 'tutor.no_review' %></span>
+              <% end %>
+            </div>
+            <%= t('member_since') %>  :
+            <%= @tutor.created_at.strftime("%Y/%m") %>
+            <br/>
+            <%= t('last_login')%> :                                      
+                      <% if session[:locale] == 'cn' %>
+                          <%= timeago_tag @tutor.last_sign_in_at, :nojs => true, :limit => 10.days.ago, :lang => 'zh-CN' %>
+                      <% else %>
+                          <%= timeago_tag @tutor.last_sign_in_at, :nojs => true, :limit => 10.days.ago %>
+                      <% end %>                    
+          </div>
+          <!--
+            <tr>
+                <td class="data">
+                  <spa n class='st_facebook' st_url="<%#= request.original_url %>"></span>
+                  <span class='st_twitter' st_title="<%#= data_to_share_to_twitter %>" st_url="<%= request.original_url %>" st_via="<%#= request.host_with_port %>"></span>
+                  <span class='st_linkedin' st_title="<%#= share_title %>" st_url="<%= request.original_url %>"></span>
+                  <span class='st_googleplus' st_url="<%#= request.original_url %>"></span>
+                  <a href="mailto:?subject=<%= data_to_share_to_fb %>&body=<%= request.url %>"><%#= image_tag("/assets/email.png")%></a>
+                </td>
+            </tr>
+            -->
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="full_wht_bg user_profile_page">
+  <div class="wdt100">
+    <p id="back_to_search_results">
+      <a href="/">« <%= t 'tutor.back_to_search' %></a>
+    </p>
+  </div>
+
+  <div class="wdt100">
+    <div class="tutor_prof_lft">
+      <%= render :partial => "tutor_profile" %>
+    </div>
+    <div id="sidebar" class="tutor_prof_rht">
+      <%= render :partial => "tutor_location" %>
+    </div>
+  </div>
+
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        initMap(<%= @tutor.user_detail.longitude %>,<%= @tutor.user_detail.latitude %>)
+        addMarker(<%= @tutor.user_detail.longitude %>, <%= @tutor.user_detail.latitude%>,"<%= @tutor.abbreviated_name %>", "<%= @tutor.available_distance_first %>", "<%= @tutor.price %>","<%= @tutor.currency %>" ,"<%= @tutor.user_detail.get_user_avatar %>", "<%= @tutor.id %>");
+
+
+        $.validator.addMethod("CustomEmailFormat", function(value, element) {
+            return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+        }, "<%= t('tutor.email_format_err')%>");
+
+        $('#tutor_contact_form').validate(
+                {
+
+                    rules: {
+                        "user_messages[sender_phone]":{
+                            required: true
+                        },
+                        "user_messages[sender_name]":{
+                            required: true
+                        },
+                        "user_messages[sender_email]": {
+                            required: true,
+                            CustomEmailFormat: true
+                        },
+                        "user_messages[message]": {
+                            required: true
+                        }
+                    },
+
+                    messages: {
+                        "user_messages[sender_phone]":{
+                            required: "<%= t('tutor.phone_err')%>"
+                        },
+                        "user_messages[sender_name]":{
+                            required: "<%= t('tutor.name_err')%>"
+                        },
+                        "user_messages[sender_email]":{
+                            required: "<%= t('tutor.email_reqd_err')%>",
+                            email: "<%= t('tutor.email_format_err')%>"
+                        },
+                        "user_messages[message]":{
+                            required: "<%= t('tutor.message_err')%>"
+                        }
+                    },
+
+                    showErrors: function (errorMap, errorList) {
+
+                        $.each(this.successList, function (index, value) {
+                            //console.log(value.id)
+                            $("#" + value.id + "_error").html(" ");
+                            $("#" + value.id).css("border", "1px solid #CCCCCC");
+                        });
+
+
+                        $.each(errorList, function (index, value) {
+                            //console.log(value.element.id);
+                            //console.log(value.message);
+                            $("#" + value.element.id + "_error").html(value.message);
+                            $("#" + value.element.id).css("border", "1px solid red");
+                        });
+
+                    }
+                });
+
+    });
+</script>
+
+<div class="wdt100">
+  <%= render :partial => "/home/featured" %>
+</div>

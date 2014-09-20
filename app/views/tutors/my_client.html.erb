@@ -1,0 +1,70 @@
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2>My Account</h2>
+    <ul id="tabs" class="account">
+      <li class="">
+        <a href="/tutors/settings/<%= @user_detail.id %>">Settings</a>
+      </li>
+      <li class="">
+        <a href="/tutors/upgrade/<%= @user_detail.id %>">Upgrade</a>
+      </li>
+      <li class="">
+        <a href="/tutors/my_messages/<%= @user_detail.id %>">My Messages</a>
+      </li>       
+      <!--li class="active">
+        <a href="/tutors/my_client/<%= @user_detail.id %>">My Clients</a>
+      </li-->
+      <li class="">
+        <a href="/user_details/my_account/<%= @user_detail.id %>">My Profile</a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="fullscreen profile" id="content">
+
+  <h2>Clients Who Have Contacted You</h2>
+
+  <div id="message2s_div">
+    <table cellpadding="0" border="0" cellspacing="0" style="width:100%;">
+  <tbody><tr>
+    <td class="invoice_header">Date</td>
+    <td class="invoice_header">Client</td>
+    <td class="invoice_header">Phone</td>
+    <td class="invoice_header">Email</td>
+    <td class="invoice_header">Message</td>
+  </tr>
+  
+<% unless @tutor_messages.blank? %>
+    <% @tutor_messages.each do |msg|%>
+      <tr>
+      <% t = msg.created_at %>
+        <td class="invoice"><%= t.strftime("%b %d, %Y")%></td>
+        <td class="invoice"><%= msg.sender_name %></td>
+        <td class="invoice"><%= msg.sender_phone %></td>
+        <td class="invoice"><%= msg.sender_email %></td>
+        <td style="white-space:normal;" class="invoice"><%= msg.message %></td>
+      </tr>
+    <% end %>
+
+    <%= paginate @tutor_messages %>
+
+<% else %>
+    <tr>
+      <td colspan="6" class="invoice_footer"> <%= t('student_account.no_msg')%> </td>
+    </tr>
+
+<% end %>
+    <tr>
+      <td colspan="6" class="invoice_footer"></td>
+    </tr>
+  
+</tbody></table>
+<div style="float:right;">
+  
+</div>
+  </div>
+</div>
+</div>

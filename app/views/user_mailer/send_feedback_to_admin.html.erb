@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<p>Dear Admin,</p>
+
+	<p>You have received feedback from user <%= @name %>:</p>
+  <p>
+  Email:- <%= @email %>
+  </p>
+	<p>
+	<%= @message %>
+	</p>
+
+    <%= render :partial => "bottom_logo" %>  
+    </body>
+</html>

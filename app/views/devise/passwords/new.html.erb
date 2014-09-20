@@ -1,0 +1,73 @@
+<div class="wrapper" >
+  <div class="full_wht_bg wdth40">
+    <div class="login_box_1" id="login">
+      <div class="login_header">
+
+      <h2><%= t('forget_pass.headline') %></h2>
+      </div>
+      <div class="body">
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post,:id=>"retrieve_pass" }) do |f| %>
+      <%= devise_error_messages! %>
+      <div>
+      <label for="user_email"><%= t('forget_pass.sub_heading') %></label>
+      <br/>
+      <input id="user_email" type="email" value="" name="user[email]" autofocus="autofocus" class="text-field"/>
+      </div>
+
+      <div style="margin-bottom:10px;text-align:center;"><%= f.submit "#{t('forget_pass.btn_text')}",:class => "btn-orange" %></div>
+      <% end %>
+
+      <%#= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#retrieve_pass').validate(
+    {
+      rules: {
+        "user[email]": {
+          required: true,
+          email: true
+        }
+      },
+
+      messages: {
+        "user[email]":{
+          required: "Please enter an email address",
+          email: "Please provide a correct email address"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          $(value).popover('hide');
+        });
+
+
+        $.each(errorList, function (index, value) {
+
+          console.log(value.message);
+
+          var _popover = $(value.element).popover({
+            trigger: 'manual',
+            placement: 'right',
+            content: value.message
+          });
+
+          _popover.data('popover').options.content = value.message;
+          $(value.element).popover('show');
+
+        });
+
+      }
+    });
+  }); // end document.ready
+</script>
+
+
+
+

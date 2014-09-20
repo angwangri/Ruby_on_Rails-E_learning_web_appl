@@ -1,0 +1,31 @@
+<div id="student_sign_in" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:400px;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h2 id="myModalLabel"><%= t 'sign_in.please_sign_in'%></h2>
+  </div>
+    <div class="modal-body">
+        <div class="body">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html=>{:id=>"sign_in_form"}, :remote => :true, :format => :json) do |f| %>
+          <div><label><%= t 'sign_in.email' %></label>
+            <%= f.email_field :email, :readonly => true, :class => "text-field" %></div>
+
+          <div><label style = "float:left;"><%= t 'sign_in.password'%></label>
+           <a style="float:right;" href="/users/password/new"><%= t 'sign_in.forget_pass' %></a>
+            <%= f.password_field :password, :class => "text-field" %></div>
+            <span id="sign_in_password_error" style="color:red;"></span>
+          <div>
+          <input class="btn-orange" type="submit" value="<%= t 'sign_in.login_btn_txt' %>" style="float:left;width:30%;" name="commit">
+        </div>
+          <% if devise_mapping.rememberable? -%>
+            <div style="float:right;">
+              <label class="checkbox">
+                <%= f.check_box :remember_me %><%= t 'sign_in.remember' %>
+              </label>
+            </div>
+          <% end -%>          
+        <% end %>
+        <br/>
+       
+  </div>
+    </div> 
+</div>

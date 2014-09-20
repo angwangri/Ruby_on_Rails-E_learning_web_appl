@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @paypal_payment.user_id %>
+</p>
+
+<p>
+  <strong>Payer:</strong>
+  <%= @paypal_payment.payer_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @paypal_payment.token %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @paypal_payment.profile_id %>
+</p>
+
+<%= link_to 'Edit', edit_paypal_payment_path(@paypal_payment) %> |
+<%= link_to 'Back', paypal_payments_path %>

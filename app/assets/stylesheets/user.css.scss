@@ -1,0 +1,99 @@
+// Place all the styles related to the user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.box {
+    margin: 15px auto;
+    width: 385px;
+}
+
+.box .header {
+    background: url("login-header.png") repeat-x scroll 0 0 #D3EBFF;
+    border: 1px solid #B8D7F0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 47px;
+}
+
+
+.box .header h2 {
+    color: #467195;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 0 0 15px;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    text-transform: uppercase;
+}
+
+
+
+.box .body, .login_box_1 .body {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D8E6F1;
+    border-image: none;
+    border-right: 1px solid #D8E6F1;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    padding: 15px 15px 0px;
+    float: left;
+    margin-bottom: 15px;
+width: 100%;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+  .login_sig_btn{margin-left:37%;}
+  .login_sig_btn .btn-orange{margin-top:10px;}
+#login .body label, .login_box_1 .body label {
+    display: block;
+
+
+    font-size: 14px;
+
+    padding-bottom: 4px;
+}
+
+.login_box_1 .body input[type="email"], .login_box_1 .body input[type="password"]{height: 28px;}
+
+
+.text-field {
+    width: 95%;
+}
+
+.login_box_1{margin: 15px auto;
+width:100%;}
+
+.login_box_1 a {
+color: #3b3b3b;
+
+text-decoration: none;
+}
+.login_box_1 a:hover{color: #f26722;
+text-decoration: underline;}
+
+.login_box_1 .login_header{ background:#46c7f4;
+    border: 1px solid #B8D7F0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 47px;}
+
+.login_box_1 .login_header h2{color: #fff;
+font-size: 20px;
+font-weight: normal;
+padding: 0 0 0 15px;
+/* text-shadow: 1px 1px 1px #FFFFFF; */
+text-transform: uppercase;
+margin: 4px 0px 0px 0px;}
+
+.login_box_1 form{ margin-bottom:0}
+
+.regsiter_txt_col{margin: 15px auto;
+width:100%;     color: #7c7974;
+font-size: 14px;}
+
+.regsiter_txt_col a{color: #3b3b3b;
+text-decoration: none;}
+.regsiter_txt_col a:hover{color: #f26722;
+text-decoration: underline;}
+

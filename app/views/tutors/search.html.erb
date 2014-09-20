@@ -1,0 +1,161 @@
+<div id="top2">
+  <div class="map_wrapper">
+    <h1 id="map_search_heading">
+      <% if session[:locale] == 'cn' %>
+        在 <b><%= params[:city].blank? ? t('search.Anywhere') : params[:city] %> <%= t 'search.Tutors' %></b> <%= t 'search.near' %> <b><%= (params[:subject] == '' || params[:subject].nil?) ? t('subjects.Any Subject') : t('subjects.'+params[:subject].titleize) %> </b> 老师
+        <% else %>
+        <b><%= params[:subject] ? params[:subject] : t('subjects.Any Subject') %> <%= t 'search.Tutors' %></b> <%= t 'search.near' %>  <b> <%= params[:city].blank? ? t('search.Anywhere') : params[:city] %></b>
+      <% end %>
+    </h1>
+
+    <div class="inner_search_col" >
+
+      <form action="/tutors/search" method="post">
+
+        <div class="inner_search">
+          <div class="inner_search_field" style="width:25%;">
+            <label class="subhead">
+              <%= t 'search.subject' %>
+            </label>
+
+            <div class="styled-select">
+              <%= render 'home/select_list_subjects' %>
+            </div>
+          </div>
+
+          <div class="inner_search_field" style="width:23%;">
+            <label class="subhead">
+              <%= t 'search.City' %>
+            </label> 
+              <div class="styled-select">
+                <select name="city" id="city_select">                
+                  <%= render :partial => 'user_details/cities'%>
+                </select>               
+              </div>
+          </div>
+
+          <div class="inner_search_field" style="width:25%;">
+            <label class="subhead">
+              <%= t 'search.District' %>
+            </label>        
+              <div class="styled-select">
+                <select name="district" id="district_select">                 
+                  <%= render :partial => 'user_details/districts'%>
+                </select>
+              </div>
+            <%#= text_field_tag :location, params[:location], :class => 'text_field', :placeholder => 'eg. city,state,zip' %>
+          </div>
+
+          <div class="inner_Search_btn">
+            <button type="submit" class="btn-orange find-a-tutor" id="submit_link" ><%= t('search.search_btn')%></button>
+          </div>
+
+           <div style="width:16px;padding-left:7px;">
+               <img alt="Spinner2" id="spinner" src="http://www.universitytutor.com/images/spinner2.gif?1385110395" style="display: none;">
+           </div>
+
+
+        </div>
+
+       </form>
+
+
+    </div>
+
+
+
+
+        <div class="search_tab_col" >
+          <ul id="tabs">
+              <li><a href="/tutors/search_list_view?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>" class="list-view"><%= t 'search.list_view' %></a></li>
+              <li class="active"><span class="map-view"><%= t 'search.map_view' %></span></li>
+          </ul>
+        </div>
+
+
+
+  </div>
+</div>
+
+
+<!-- Map tabs -->
+
+
+    <div class="wrapper pt34" >
+
+
+
+        <div id="page_numbers">
+                        <%= render :partial => 'page_numbers' %>
+                        </div>
+
+      <div id="right_map_column" class="search_map_right">
+        <div id="map_div" >
+            <div style='width: 100%;'>
+              <div id="map"></div>
+            </div>
+        </div>
+        <% unless session[:locale] == 'cn' %>
+        Have a VPN? Check out <a href="https://www.google.com/maps/place/<%= params[:city] %>" target="_blank">Google maps</a> as an English reference
+        <% end %>
+      </div>
+
+       <div id="left_column" class="search_map_left">
+
+            <div id="left_search_column">
+                    <div id="map_search_controls">
+
+
+                                <ul class="map_dis">
+                                  <li><%= t('search.sort_by')%>: </li>
+                                   <li><a href="/tutors/search?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=distance"><%= t 'search.distance' %></a> </li>
+
+                                   <li><a href="/tutors/search?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=rating"><%= t 'search.rating' %></a></li>
+
+                                   <li> <a href="/tutors/search?city=<%= params[:city] ? params[:city] : nil %>&subject=<%= params[:subject] %>&sort=price"><%= t 'search.price' %></a></li>
+
+                                </ul>
+
+
+
+                    </div>
+
+                    <div class="pagination">
+                      <%= paginate @user_details, :remote => true %>
+                    </div>
+
+                    <div class="map" id="search_result_container">
+                         <% if @user_details.empty? %>
+                            <%= t 'search.no_result' %>
+                         <% else %>
+                            <%= render :partial => "map_view_list"%>
+                        <% end %>
+                     </div>
+
+                    <div class="pagination">
+                      <%= paginate @user_details, :remote => true %>
+                    </div>
+            </div>
+       </div>
+
+
+
+
+    </div>
+
+
+
+<div>
+  <%= render :partial => "/home/featured"%>
+</div>
+
+<script type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+  initMap(<%= current_user.user_detail.longitude %>,<%= current_user.user_detail.latitude %>)
+  <% @user_details.each do |user_detail| %>
+    addMarker(<%= user_detail.longitude %>, <%= user_detail.latitude%>,"<%= user_detail.user.abbreviated_name %>", "<%= user_detail.user.available_distance_first %>", "<%= user_detail.user.price %> <%= user_detail.user.currency %>" ,"<%= user_detail.get_user_avatar %>", "<%= user_detail.user_id %>", "<%= t 'map.Availability' %>","<%= t 'map.Price' %>", "<%= t 'map.Read More or Contact This Tutor' %>","<%= user_detail.listing_type %>")
+      
+  <% end %>
+
+});
+</script>

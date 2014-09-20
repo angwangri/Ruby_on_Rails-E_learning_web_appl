@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: MyText
+  distance: MyText
+
+two:
+  time: MyText
+  distance: MyText

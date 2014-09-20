@@ -1,0 +1,58 @@
+<div class="wrapper">
+   <% unless @user_details.blank? %>
+
+
+        <div class="heading_line">
+            <h3><%= t('featured_tutors') %> <span><%= t('near_you') %>:</span></h3>
+          <a class="view_all" href="/tutors/search"><%= t('view_all') %></a>
+        </div>
+        <div class="clear"></div>
+        <div class="tutor_col">
+            <div class="prod_main_slider1">
+                <% count = 0 %>
+                <% @user_details.each do |user_d| %>
+                    <% classN = count % 2 == 0 ? "" : "tutor_col_m" %>
+                     <% if count % 2 == 0 %>  <ul class="<%= classN %>"> <% end %>
+
+
+                        <li>
+                            <span class="profile_pic">
+                                <a href="/tutors/<%= user_d.user_id %>">
+                                  <%= image_tag(user_d.get_user_avatar) %>
+                                </a>
+                            </span>
+                            <span class="profile_detail">
+                                <h4>
+                                    <a class="tutor" href="/tutors/<%= user_d.user_id %>">
+                                        <%= user_d.user.abbreviated_name %>
+                                    </a>
+                                </h4>
+                                <span class="review_col">
+                                    <div class="star-rating-small">
+                                      <span class="current-rating stars_<%= average_rating(user_d.user_id) %>"></span>
+                                    </div>
+                                    <div class="reviw_star">
+                                      <a class="tutor" href="/tutors/<%= user_d.user_id %>">
+                                        <%= user_d.user.tutor_review.count %>  <%= (user_d.user.tutor_review.count == 1) ? "#{t('review')}" : "#{t('reviews')}" %>
+                                      </a>
+                                    </div>
+                                </span>
+                                <ol class="sub_list">
+                                    <% unless user_d.user.subjects.blank? %>
+                                        <% user_d.user.subjects.take(3).each do |sub| %>
+                                            <li><span class="bull_icon"> &bull; </span> <%= t "subjects.#{sub.lstrip}" %></li>
+                                        <% end %>
+                                    <% end %>
+                                </ol>
+                            </span>
+                        </li>
+                    <% if count % 2 != 0 || @user_details.count == count + 1%>  </ul> <% end %>
+                    <% count += 1 %>
+                <% end %>
+            </div>
+        </div>
+
+
+      <% end %>
+    </div>
+

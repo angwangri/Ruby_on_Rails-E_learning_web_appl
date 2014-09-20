@@ -1,0 +1,27 @@
+
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2><%= t('my_acc') %></h2>
+    <ul id="tabs" class="account">
+     <li class="">
+        <a href="/tutors/invite_students_friend/<%= @user.id %>" class="menu" id="tab_4"><%= t('student_account.tell_a_frend') %></a>
+      </li>    
+      <li class="">
+        <a href="/tutors/student_setting/<%= @user.id %>" class="menu" id="tab_3"><%= t('student_account.settings') %></a>
+      </li>
+      <li class="">
+        <a href="/tutors/student/<%= @user.id %>" class="menu" id="tab_2"><%= t('student_account.ratings') %></a>      
+      </li>  
+      <li class="">
+        <a href="/tutors/student_messages/<%= @user.id %>" class="menu" id="tab_1"><%= t('student_account.my_messages') %></a>
+      </li>           
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+$('a.menu').click(function(){
+    $('a.menu').parent().removeClass("active");
+    $(this).parent().addClass("active");
+});
+</script>

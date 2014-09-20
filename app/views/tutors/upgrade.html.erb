@@ -1,0 +1,150 @@
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2><%= t('my_acc') %></h2>
+    <ul id="tabs" class="account">
+      <li class="">
+        <a href="/tutors/settings/<%= @user_detail.id %>"><%= t 'my_account.setting' %></a>
+      </li>
+      <li class="active">
+        <a href="/tutors/upgrade/<%= @user_detail.id %>"><%= t 'my_account.upgrade' %></a>
+      </li>
+      <li class="">
+        <a href="/tutors/my_messages/<%= @user_detail.id %>"><%= t 'my_account.my_messages' %></a>
+      </li>       
+      <!--li class="">
+        <a href="/tutors/my_client/<%= @user_detail.id %>">My Clients</a>
+      </li-->
+      <li class="">
+        <a href="/user_details/my_account/<%= @user_detail.id %>"><%= t 'my_account.my_profile'%></a>
+      </li> 
+    </ul>
+  </div>
+</div>
+
+<% @user_payment = PaypalPayment.all.where(:user_id => @user_detail.user_id).last %>
+<!--
+<div class="wrapper">
+<div class="profile" id="content">
+    <h2 style="font-size:20px;">Earn More With A Featured Listing On TutorApp!</h2>
+    Every tutor gets a free listing with unlimited contacts and reviews from students.  But if you'd like to get more tutoring work, a featured listing is a great way to increase your visibility on the site.  On average, featured listings receive four times as many inquiries as free listings!
+      <div class="callout" id="tutor_upgrade">
+      <%# if free listing users or featured listing users those having profile status as "cancelled"%>
+      <%# if (@user_detail.listing_type || (@user_payment && @user_payment.profile_status == PaypalPayment::CANCEL)) %>
+        <table>
+          <tbody><tr>
+            <td>
+              <h2>Monthly</h2><span>$10/month</span><br>
+              <div style="margin-top:10px;">
+              <%#= link_to "Get Started Now", {:controller=> "paypal_payments", :action=>"featured_payment_monthly", :id=> @user_detail.user_id}, {:class=> "clean-green", :style => "width:150px;"} %>
+              </div>
+            </td>
+            <td>
+              <h2>Yearly</h2><span>$82/year</span><br>
+              <div style="margin-top:10px;">
+                <%#= link_to "Get Started Now", {:controller=> "paypal_payments", :action=>"featured_payment_yearly", :id=> @user_detail.user_id},{:class=> "clean-green", :style => "width:150px;" }%>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%# else %>
+        <table>
+          <tbody>
+            <tr>
+            <td>
+              <h2>Cancel Recurring Payment</h2><br>
+              <div style="margin-top:10px;">
+              <%#= link_to "Cancel", {:controller=> "paypal_payments", :action=>"cancel_recurring", :id=> @user_detail.user_id}, {:class=> "clean-green", :style => "width:150px;"} %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%# end %>
+      </div>
+      <br>
+    <table>
+      <tbody><tr>
+        <td>
+          <h3>All Featured Listings Include The Following</h3>
+          
+            <ul class="upgrade-benefits">
+              <li>Top placement in search results (above free listings)</li>
+              <li>A "Featured Tutor" listing on the homepage</li>
+              <li>Phone number included on your profile to get in touch with clients faster</li>
+              <li><span class="featured">Featured</span> badge shown on your profile</li>
+              <li>Ads removed from your profile</li>
+            </ul>
+          
+        </td>
+        <td style="text-align:center;padding:10px;">
+          <img width="100" height="100" src="http://www.paypal.com/en_US/i/icon/verification_seal.gif" alt="Verification_seal">
+        </td>
+      </tr>
+    </tbody></table>
+  
+</div>
+
+<div style="margin-top: 70px;" class="gray profile" id="sidebar">
+  All payments are handled securely through Paypal.com and prices are in USD.  If you move or change cities you can keep the same featured listing with no interruption of service.
+  <br><br>
+  Got a question about upgrading?  <a href="/contact">Send us a note</a>.
+  <br><br>
+  To increase your visibility on the site you can also share your profile</a>.
+
+</div>
+</div>
+-->
+
+<div class="wrapper">
+
+    <div class="full_wht_bg account_bg min_h300">
+
+      <div class="profile wdt644 msg_pt10">
+      <%# if free listing users or featured listing users those having profile status as "cancelled"%>
+      <% if (@user_detail.listing_type || (@user_payment && @user_payment.profile_status == PaypalPayment::CANCEL)) %>
+
+            <div class="featured-vs-free">
+                <div class="wdt100">
+                  <div id="choose_listing_container" >
+                    <%= render :partial => "premium_payment"%>
+                  </div>
+            <br/>
+            <h5 style="text-align:center;"><p>
+            <%= t('upgrade.que')%>
+            <a href="/contact"><%= t('here')%>. </p></h5>
+
+                </div>
+
+            </div>
+             <% else %>
+      <div style="padding-top:60px;text-align:center;">
+        <div class="callout" style="width:350px;">
+          <table class="featured-benefits">
+            <tbody>
+            <tr>
+            <td style="text-align:center;">
+            <% if session[:locale] == 'cn' %>
+              <h3>VIP账户</h3>
+              <div style="margin-top:10px;text-align:center;">
+              您的VIP账户将于<%= @user_detail.user.subscription_end_date.to_date %>到期
+              </div>              
+            <% else %>
+              <h3>Premium Account</h3>
+              <div style="margin-top:10px;text-align:center;">
+              Your subscription will end on <%= @user_detail.user.subscription_end_date.to_date %>
+              </div>
+            <% end %>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <% end %>
+
+
+</div>
+</div>
+  </div>

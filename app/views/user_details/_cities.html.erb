@@ -1,0 +1,8 @@
+<% if params[:city] 
+    city_param = params[:city] 
+else
+	city_param = @user_detail ? @user_detail.city : ' '
+end %>
+<% @cities.each do |city| %>
+	<option value="<%= city %>" <%= "selected" if city_param == city %>  ><%= t("cities.#{city}") %></option>
+<% end %>

@@ -1,0 +1,121 @@
+<div id="top">
+  <div class="wrapper" data-no-turbolink>
+    <h2>My Account</h2>
+    <ul id="tabs" class="account">
+      <li class="">
+        <a href="/tutors/settings/<%= @user_detail.id %>">Settings</a>
+      </li>
+      <li class="">
+        <a href="/tutors/upgrade/<%= @user_detail.id %>">Upgrade</a>
+      </li>
+      <li class="active">
+        <a href="/tutors/my_messages/<%= @user_detail.id %>">My Messages</a>
+      </li>           
+      <!--li class="">
+        <a href="/tutors/my_client/<%= @user_detail.id %>">My Clients</a>
+      </li-->
+      <li class="">
+        <a href="/user_details/my_account/<%= @user_detail.id %>">My Profile</a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<% other_user = UserMessage.where("student_id = #{params[:other_user_id]}").first %>
+<div class="wrapper">
+  <div class="profile" id="content">
+  <a href="/tutors/my_messages/<%= @user_detail.id%>">Back to Messages</a><br/>
+  <div class="row">
+    <div class="span8">
+		  <%= form_for(:user_messages, :url => {:controller=> "tutors",:action=>"send_message_via_ajax"}, :html => {:id=>"tutor_ajax_contact_form", :method => :post, :remote => true}) do |f| %>
+        <%= f.hidden_field :user_id, :value => params[:other_user_id] %>
+        <%= f.hidden_field :student_id, :value =>  @user_detail.user_id %>
+        <%= f.hidden_field :sender_phone, :value => (other_user.blank? ? "" : other_user.sender_phone) %>
+        <%= f.hidden_field :sender_name, :value => (other_user.blank? ? "" : other_user.sender_name) %>
+        <%= f.hidden_field :sender_email, :value => (other_user.blank? ? "" : other_user.sender_email) %>
+        <%= f.label "Enter message to student below:"%>        
+        <%= f.text_area :message, :style =>"width:100%;" %>
+        <span id="user_messages_message_error" style="color:red;"></span>
+    </div>
+    <div class="span4">
+      <div class="profilesubmit">
+        <input class="btn btn-medium btn-success" type="submit" value="Post Message" style="width:40%;" name="commit">        
+      </div>
+      <% end%>
+    </div>
+  </div>          
+
+
+<br/>
+<div id="scroll_to_div">
+  <div id="success_box"></div>
+    <table cellspacing="0" cellpadding="0" border="0" class="table table-striped" id="tbldata">
+      <tbody>
+      <tr>
+        <td class="invoice_header">Sender</td>
+        <td class="invoice_header">Message</td>
+        <td class="invoice_header">Date/Time</td>
+      </tr>
+
+<% unless @all_msgs.blank? %>
+    <% @all_msgs.each do |msg|%>
+        <tr>
+          <td>
+            <%= User.find(msg.student_id).first_name %>
+          </td>
+          <td>
+            <%= msg.message %>
+          </td>
+          <td>
+            <%= msg.created_at %>
+          </td>          
+        </tr>
+    <% end %>
+<% else %>
+        <tr>
+          <td colspan="6" class="invoice_footer"> <%= t('student_account.no_msg')%> </td>
+          </tr>
+<% end %>    
+      </tbody>
+    </table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+    $('#tutor_ajax_contact_form').validate(
+    {
+
+      rules: {
+        "user_messages[message]": {
+          required: true
+        }
+      },
+
+      messages: {
+        "user_messages[message]":{
+          required: "不能发送空留言 / Please enter a message"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+
+
+</script>

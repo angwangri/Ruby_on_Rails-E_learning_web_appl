@@ -1,0 +1,256 @@
+<%= form_for(:user_details, :url => {:action=>:update_user_details}, :html => {:id=>"basic_info_form", :method => :post, :remote => true}) do |f| %>
+  <% if @user_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_detail.errors.count, "error") %> prohibited this user_detail from being saved:</h2>
+        <ul>
+          <% @user_detail.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+     </div>
+  <% end %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+    <div class="account_col">
+
+      <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+            <%= f.label "#{t('basic_info.first_name')}" %>
+            </div>
+
+            <div class="profileRight2 fl_left">
+            <%= f.text_field :first_name, :value => @user.first_name ?  @user.first_name : nil %><br/>
+            <span id="user_details_first_name_error" class="err_msg"></span>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft">
+             <%= f.label "#{t('basic_info.last_name')}" %>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                 <%= f.text_field :last_name, :value => @user.last_name ?   @user.last_name : nil %>
+                 <span id="user_details_last_name_error" class="err_msg"></span>
+              </div>
+        </div>
+
+      </div>
+
+
+
+
+      <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+             <%= f.label "#{t('basic_info.email')}" %>
+            </div>
+
+            <div class="profileRight2 fl_left">
+             <%= f.text_field :email, :value => @user.email ?  @user.email : nil %>
+             <span id="user_details_email_error" class="err_msg"></span>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft">
+            <%= f.label "#{t('basic_info.password')}" %>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                <%= link_to "#{t('basic_info.change_pass')}", edit_user_registration_path %>
+              </div>
+        </div>
+
+      </div>
+
+
+
+       <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+             <%= f.label "#{t('basic_info.nationality')}" %>
+            </div>
+
+            <div class="profileRight2 fl_left">
+            <%= render :partial=>"list_of_nationalities"%>
+            </div>
+
+        </div>
+        <div class="account_rht_col">
+            <div class="profileLeft">
+            <%= f.label "#{t('basic_info.gender')}" %>
+             </div>
+
+              <div class="profileRight2 fl_left">
+                <span class="gender_col">
+               <%= f.radio_button :gender, "male", :checked => (@user_detail.gender == "male") ? "checked" : "unchecked" %>&nbsp;&nbsp;<%= t('basic_info.gender_m') %> </span>
+         <span class="gender_col">  <%= f.radio_button :gender, "female",:checked => (@user_detail.gender == "female") ? "checked" : "unchecked" %>&nbsp;&nbsp;<%= t('basic_info.gender_f') %>  </span>
+
+              </div>
+        </div>
+
+      </div>
+
+
+       <div class="account_fild_col">
+        <div class="account_lft_col">
+
+           <div class="profileLeft">
+            <%= f.label "#{t('basic_info.dob')}",:style=>"margin-bottom:0px;" %>
+                <p style="font-size:x-small;">(<%= t('optional')%>)</p>
+            </div>
+
+            <div class="profileRight2 dob_col fl_left">
+            <% if @user_detail.age.blank? %>
+          <%= f.date_select :age, start_year: 1940, end_year: Date.today().year - 18, prompt: { day: "#{t('basic_info.select_day')}", month: "#{t('basic_info.select_month')}", year: "#{t('basic_info.select_year')}" } %>
+        <% else %>
+          <%= f.date_select :age, start_year: 1940, end_year: Date.today().year - 18, selected: @user_detail.age  %>
+        <% end %>
+          <br/><span id="age_error" class="err_msg"></span><br/>
+          <span id="user_details_age_2i_error" class="err_msg"></span><br/>
+          <span id="user_details_age_3i_error" class="err_msg"></span>
+            </div>
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+<!--
+
+      <tr>
+        <td class="profileLeft">
+          <%#= f.label "Street Address" %>
+        </td>
+        <td class="profileRight2">
+          <%#= f.text_field :street_add, :value => @user_detail.street_add ?  @user_detail.street_add : nil %>
+        </td>
+        <td class="profileLeft">
+          <%#= f.label :city %>
+        </td>
+        <td class="profileRight2">
+          <%#= f.text_field :city, :value => @user_detail.city ?   @user_detail.city : nil %>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td class="profileLeft">
+          <%#= f.label "State/Region" %>
+        </td>
+        <td class="profileRight2">
+          <%#= f.text_field :state, :value => @user_detail.state ?  @user_detail.state : nil %>
+        </td>
+        <td class="profileLeft">
+          <%#= f.label :country %>
+        </td>
+        <td class="profileRight2">
+          <%#= f.text_field :country, :value => @user_detail.country ?  @user_detail.country : nil %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="profileLeft">
+          <%#= f.label :zip_code %>
+        </td>
+        <td class="profileRight2">
+          <%#= f.text_field :zip_code, :value => @user_detail.zip_code ?  @user_detail.zip_code : nil %>
+        </td>
+        <td class="profileLeft">
+          <%#= f.label :gender %>
+        </td>
+        <td class="profileRight2" style="padding-top:0px;">
+          <%#= f.radio_button :gender, "Male", :checked => (@user_detail.gender == "Male") ? "checked" : "unchecked", :style => "margin-top:0px;" %>&nbsp;&nbsp;Male &nbsp;&nbsp;
+          <%#= f.radio_button :gender, "Female",:checked => (@user_detail.gender == "Female") ? "checked" : "unchecked", :style => "margin-top:0px;" %>&nbsp;&nbsp;Female
+        </td>
+      </tr>
+
+-->
+    </tbody>
+  </table>
+  <div class="profilesubmit fl_none">
+    <input type="submit" value="<%= t('save_changes_btn_txt') %>" id="post_basic_info" name="commit"/>
+  </div>
+<% end %>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $.validator.addMethod("CustomEmailFormat", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+    },"Please provide correct email address!");
+
+    $('#basic_info_form').validate(
+    {
+
+      rules: {
+        "user_details[first_name]":{
+          required: true,
+          minlength: 1,
+          maxlength: 20
+        },
+        "user_details[last_name]":{
+          required: true,
+          minlength: 1,
+          maxlength: 20
+        },
+        "user_details[email]": {
+          required: true,
+          CustomEmailFormat: true
+        }
+      },
+
+      messages: {
+        "user_details[first_name]":{
+          required: "<%= t('signup.first_name')%>",
+          minlength: "<%= t('signup.first_name_min_length') %>",
+          maxlength: "<%= t('signup.first_name_max_length') %>"
+        },
+        "user_details[last_name]":{
+          required: "<%= t('signup.last_name')%>",
+          minlength: "<%= t('signup.last_name_min_length')%>",
+          maxlength: "<%= t('signup.last_name_max_length')%>"
+        },
+        "user_details[email]":{
+          required: "<%= t('signup.email')%>",
+          email: "<%= t('signup.email_format')%>"
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+            $("#"+value.element.id+"_error").html(value.message);
+            $("#"+value.element.id).css("border","1px solid red");                      
+        });
+
+      }      
+    });
+  }); // end document.ready
+</script>

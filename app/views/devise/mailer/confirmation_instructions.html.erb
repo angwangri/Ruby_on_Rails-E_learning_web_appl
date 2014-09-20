@@ -1,0 +1,17 @@
+<p>欢迎 <%= @resource.first_name %></p>
+
+<p>通过如下链接来确认账户邮箱</p>
+<br/>
+<p><%= link_to '确认我的账户', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<br/>
+<br/>
+<p>Welcome <%= @resource.first_name %>!</p>
+
+<p>You can confirm your account email through the link below:</p>
+<br/>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<br/>
+<br/>
+<p><img src="<%= ActionMailer::Base.default_url_options[:host] %>/assets/soufudao2.png" /></p>
+
+

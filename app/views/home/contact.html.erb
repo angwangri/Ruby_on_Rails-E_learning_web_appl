@@ -1,0 +1,113 @@
+
+
+
+    <div class="wrapper">
+      <div class="full_wht_bg wdth40">
+  <div class="teachers_page">
+
+      <p> <%= t('question_comment_porblem') %></p>
+
+      <div class="row" style="margin-left: 0">
+        <div class="well">
+
+    <form method="post" action="/home/save_contact" id="contact_form">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+
+        <table>
+                <tr>
+                  <th><label for="message_name"><%= t :name %>:</label></label>
+                  </th>
+                  <td> <input type="text" size="30" name="message[name]" id="message_name">
+                         <span id="message_name_error" class="err_msg" ></span>
+                  </td>
+                </tr>
+
+           <tr>
+                  <th><label for="message_email"><%= t :email %>:</label></label>
+                  </th>
+                  <td> <input type="text" size="30" name="message[email]" id="message_email">
+        <span id="message_email_error" class="err_msg" ></span></span>
+                  </td>
+                </tr>
+
+           <tr>
+                  <th><label for="message_message"><%= t :message %>:</label></label>
+                  </th>
+                  <td><textarea rows="5" name="message[message]" id="message_message" cols="40"></textarea>
+        <span id="message_message_error" class="err_msg" ></span>
+                  </td>
+                </tr>
+
+        </table>
+
+
+
+
+      <div class="send_msg_btn_1">
+        <%= t 'send_message_button.html' %>
+      </div>
+    </form>
+        </div>
+      </div>
+  </div>
+       </div>
+       </div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $.validator.addMethod("CustomEmailFormat", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/i.test(value);
+    },"Please provide correct email address!");
+
+    $('#contact_form').validate(
+    {
+
+      rules: {
+        "message[email]": {
+          required: true,
+          CustomEmailFormat: true
+        },
+        "message[message]":{
+          required: true
+        },
+        "message[name]":{
+          required: true
+        }
+      },
+
+      messages: {
+        "message[email]":{
+          required: "<%= t('signup.email')%>",
+          email: "<%= t('signup.email_format')%>"
+        },
+        "message[message]":{
+         required: "<%= t('signup.message')%>", 
+        },
+        "message[name]":{
+         required: "<%= t('signup.msg_name')%>", 
+        }
+      },
+
+      showErrors: function (errorMap, errorList) {
+
+        $.each(this.successList, function (index, value) {
+          //console.log(value.id)
+          $("#"+value.id+"_error").html(" ");
+          $("#"+value.id).css("border","1px solid #CCCCCC");
+
+        });
+
+
+        $.each(errorList, function (index, value) {
+          //console.log(value.element.id);
+          //console.log(value.message);
+          $("#"+value.element.id+"_error").html(value.message);
+          $("#"+value.element.id).css("border","1px solid red");
+        });
+
+      }      
+    });
+  });
+  </script>

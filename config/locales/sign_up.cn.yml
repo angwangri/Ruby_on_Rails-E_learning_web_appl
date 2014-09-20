@@ -1,0 +1,26 @@
+cn:
+  sign_up:
+    create_profile: "只需几秒钟，动动手指，免费发布老师信息，开启您的老师之旅。"
+    first_name: "名字"
+    last_name: "姓氏"
+    email: "邮件"
+    password: "密码"    
+    i_agree: "同意并遵守网站"
+    terms_and_conditions: "规则条款"
+    submit:
+      html: "<input type='submit' value='免费注册' class='btn-orange'>"
+    already_sign_in: "已经有了账户？"
+    already_sign_in_here: "在这里登陆."
+    teacher_search_txt: "找老师？"
+    teacher_search_txt_here: "请点此进行搜索."
+    create_acc_txt: "联系老师时，我们会帮您创立账户."
+    5_sections_warning: "请至少完成前五项。"
+
+  profile_completion_2:
+    create_acc: "创建一个帐户" 
+    fill_prof: "填写您的信息"
+    choose_listing: "选择帐户类型"     
+    acc_notice_1: "您的账户已建立，请填写您的信息。"
+    acc_notice_2: "请填写以下信息，并点击“保存更改”，在继续下一步之前，请至少完成前五项。"
+    continue: "继续"
+    5_sections_warning: "请至少完成前五项。"
